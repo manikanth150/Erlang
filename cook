@@ -1,0 +1,140 @@
+#!/usr/bin/perl -w
+use strict;
+use File::Basename;
+use File::Spec;
+
+-d '.git' or die "$0: Not a Git repository";
+
+my $root = dirname($0);
+my $last = `(cd $root; git ls-files "whats" | tail -1)`;
+@ARGV = ("$root/$last");
+
+my $date;
+my $output_file;
+{
+    my($sec,$min,$h,$mday,$month,$year) = localtime(time);
+    $year += 1900;
+    $month++;
+    $date = sprintf("%04d-%02d-%02d", $year, $month, $mday);
+    my $dir = sprintf("$root/whats/cooking/%04d/%02d", $year, $month);
+    system "mkdir -p $dir";
+    $output_file = sprintf("$dir/%02d.txt", $mday);
+    $output_file = File::Spec->rel2abs($output_file);
+    open STDOUT, ">", $output_file or
+	die "$0: Failed to open $output_file for writing: $!\n";
+}
+
+my $title = "What's cooking in erlang/otp ($date)";
+print "To: erlang patches <erlang-patches\@erlang.org>\n";
+print "Subject: $title\n";
+print "X-dev-at: ", `git rev-parse dev`;
+
+my %cooking;
+my $current;
+my $prev_dev = 'master';
+if (@ARGV) {
+    my $state = 'header';
+    while (<>) {
+	$prev_dev = $1 if /^X-dev-at: ([\da-f]{40})/;
+	next if /^-------/;
+	$state = 'intro' if $state eq 'header' && /^\s*$/;
+	if (m/^\[([^\]]*)\]/) {
+	    my $group = $1;
+	    if  ($group =~ /^Graduated/) {
+		$state = 'skip';
+	    } else {
+		$state = 'cooking';
+	    }
+	    next;
+	}
+	print if $state eq 'intro';
+
+	if ($state eq 'cooking') {
+	    if (/^[*] (\S+)/) {
+		$current = $1;
+		$cooking{$current} = "";
+		next;
+	    }
+	    next if /^ [+-]/;
+	    next unless $current;
+	    $cooking{$current} .= $_
+		unless /^\s*$/ && $cooking{$current} eq '';
+	}
+    }
+}
+
+my @old_in_dev = `git branch --merged $prev_dev`;
+chomp @old_in_dev;
+map { s/^\s*// } @old_in_dev;
+@old_in_dev = grep { m@^[^/]{2,4}/[^/]*@ } @old_in_dev;
+my %old_in_dev = map { $_ => 1 } @old_in_dev;
+
+my @in_dev = `git branch --merged dev`;
+chomp @in_dev;
+map { s/^\s*// } @in_dev;
+@in_dev = grep { m@^[^/]{2,4}/[^/]*@  && !exists $old_in_dev{$_} } @in_dev;
+my %in_dev = map { $_ => 1 } @in_dev;
+
+my @in_pu = `git branch --merged pu`;
+chomp @in_pu;
+map { s/^\s*// } @in_pu;
+@in_pu = grep { m@^[^/]{2,4}/[^/]*@ } @in_pu;
+@in_pu = grep { !exists $in_dev{$_} && !exists $old_in_dev{$_} } @in_pu;
+
+my %child;
+foreach (`git rev-list --no-merges --children master..dev`) {
+    chomp;
+    my($ref,$child) = split ' ';
+    $child{$ref} = $child;
+}
+
+if (@in_dev) {
+    header("[Graduated]");
+    foreach (@in_dev) {
+	describe_graduated($_);
+    }
+}
+
+header("[New topics]");
+foreach (@in_pu) {
+    describe($_, '') unless defined $cooking{$_};
+}
+
+header("[Cooking]");
+foreach (@in_pu) {
+    my $text =  $cooking{$_};
+    describe($_, $text) if defined $text;
+}
+
+close STDOUT;
+system qq(cd $root; git add $output_file >/dev/null; git commit -m "Add $title" >/dev/null);
+
+sub header {
+    print '-' x 60, "\n";
+    print $_[0], "\n\n";
+}
+
+sub describe {
+    my($topic,$text) = @_;
+    print_commits($topic, "dev..$topic");
+    print "\n$text" if $text ne '';
+    print "\n";
+}
+
+sub describe_graduated {
+    my($topic) = @_;
+    my $id = `git rev-parse $topic`;
+    chomp $id;
+    print_commits($topic, "$child{$id}^1..$id");
+    print "\n";
+}
+
+sub print_commits {
+    my($topic,$range) = @_;
+    my(@revs) = `git rev-list $range`;
+    my $commits = @revs == 1 ? "1 commit" : scalar(@revs) . " commits";
+    my $max = 12;
+    system qq[git show -s --date=short --format="* $topic (%ad) $commits" $topic];
+    system qq[git --no-pager log -n $max --format=" - %s (%h)" $range];
+    print ".\n.\n\.\n" if @revs > $max;
+}
