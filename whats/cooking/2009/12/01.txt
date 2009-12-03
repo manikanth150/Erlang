@@ -1,0 +1,84 @@
+To: erlang patches <erlang-patches@erlang.org>
+Subject: What's cooking in erlang/otp (#2)
+X-dev-at: 7a75e61f847c0dd7a97e38b433fd15cedbb50860
+
+This is the second in the What's cooking in erlang/otp
+series of emails.
+
+Since the last email there have been some substantial
+updates to the wiki at http://wiki.github.com/erlang/otp
+
+Thanks to everyone that have helped editing the pages
+(and even created new pages)!
+
+I would want to write about how patches can be refined
+using "git rebase -i" and other powerful git commands,
+but I realize that I will not have time to do that in
+the foreseeable future. So instead I created a placeholder
+page:
+
+http://wiki.github.com/erlang/otp/refining-patches-using-git
+
+Feel free to go there and do something great!
+
+------------------------------------------------------------
+[Graduated to ccase/r13b04_dev]
+
+* ng/readme (2009-11-25) 1 commit
+ + Clean up formatting issues in the README
+
+I combined the original two commits to one.
+
+* egil/readme-debug-emulator (2009-11-25) 1 commit:
+ + README: Add build instructions for a debug-enabled emulator
+
+I amended his commit to correct a few grammos/typos.
+
+* bg/on_load-types (2009-11-27) 1 commit:
+ + Add type information for on_load
+
+* ks/dialyzer-wx-fix (2009-11-28) 1 commit:
+ + dialyzer: make -wx always start the SMP emulator
+
+* bg/make_stub_module-fix (2009-11-29) 1 commit:
+ + Fix glitches when native code modules are used
+
+------------------------------------------------------------
+[New topics]
+
+* as/c_nc-fix (2009-11-29) 1 commit:
+ - Fix c:nc to use outdir or cwd to find compiled object file
+
+* mh/to_erl-error-messages (2009-11-27) 1 commit:
+ - to_erl: Include strerror(errno) in error messages
+
+------------------------------------------------------------
+[Cooking]
+
+* sv/sys_get_status (2009-11-27) 2 commits:
+ - Teach sys:get_status/0 to call Mod:format_status/2
+ - gen_fsm: Fix format_status/2 to handle Pids
+
+Steve fixed the documentation and found and fixed an
+independent bug in gen_fsm that caused a gen_fsm test
+case to fail.
+
+Except that it would be nice with a test case that would
+verify that Mod:format_status/2 really gets called
+(to ensure that the feature doesn't get broken again
+in the future), this branch should be ready for
+graduation.
+
+* bd/http_chunk_fix (2009-11-27) 1 commit:
+ - http_chunk data handling/passing improvement.
+
+* po/odbc-update-delete-no-rows (2009-11-26) 1 commit:
+ - SQL_NO_DATA and SQLSTATE 00000 indicate success for updates/deletes that affect no rows
+
+* egil/misc-egd (2009-11-26) 3 commits:
+ - re-added egd color specs and removed commented code
+ - added test cases for egd_primitives
+ - egd speed optimizations and code reduction
+
+Waiting for Björn-Egil to squeeze the series down to one or
+two commits and revise the commit messages.

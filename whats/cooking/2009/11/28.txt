@@ -1,0 +1,77 @@
+To: erlang patches <erlang-patches@erlang.org>
+Subject: What's cooking in erlang/otp
+X-dev-at: 6448c56ecc7c6584a983c5173fd0748068820698
+
+This is the first in a series of emails that will be sent
+approximately twice a week to erlang-patches@erlang.org.
+
+This first email is also sent to erlang-questions. If you
+don't already subscribe to erlang-patches, and want to
+be informed about what new features and bug fixes that
+may make it into the next release, or to take part in the
+discussion, make sure that you subscribe to erlang-patches.
+
+Below you'll find a list of the proposed updates that
+have currently been merged to the 'pu' branch in the
+erlang/otp repository at github.
+
+To avoid having patches falling to the floor, as have
+unfortunately frequently happened in the past, we will now
+either merge proposed updates that are not
+obviously wrong or inappropriate to the 'pu' branch, or
+we will tell you what the problem is. Typically, one of
+those things should happen within a workday.
+
+There some is information about patch submitting on the
+wiki pages for erlang/otp at github
+(http://wiki.github.com/erlang/otp) and we will continue
+to update and improve that information.
+
+Here is the list:
+
+* ks/dialyzer-wx-fix (2009-11-28) 1 commit:
+- dialyzer: make -wx always start the SMP emulator
+
+Will soon be graduated to ccase/r13b04.
+
+* sv/sys_get_status (2009-11-27) 1 commit:
+- This change restores the ability for gen_server and gen_fsm callback
+modules to format their own state for display under the
+sys:get_status/0 call. This ability is extremely useful for new
+behavior modules based on gen_server or gen_fsm, so that they can
+display their status in a more meaningful way than just dumping the
+state record. It is also generally useful for applications wanting to
+display their gen_server or gen_fsm callback module state in something
+other than the default manner.
+
+Steve is working on documentation and test cases.
+
+* bg/on_load-types (2009-11-27) 1 commit:
+- Add type information for on_load
+
+Confirmed by Kostis that it is OK, so it will soon be graduated to
+ccase/r13b04_dev.
+
+* egil/readme-debug-emulator (2009-11-27) 2 commits:
+- Fix grammar
+- added runtime system debug build notes
+
+Will soon be graduated to ccase/r13b04.
+
+* bd/http_chunk_fix (2009-11-27) 1 commit:
+- http_chunk data handling/passing improvement.
+
+* ng/readme (2009-11-26) 2 commits:
+- Adding back the copyright markers.
+- Cleaning up some small formatting issues in the README.
+
+Will soon be graduated to ccase/r13b04_dev.
+
+* po/odbc-update-delete-no-rows (2009-11-26) 1 commit:
+- SQL_NO_DATA and SQLSTATE 00000 indicate success for updates/deletes
+that affect no rows
+
+* egil/misc-egd (2009-11-26) 3 commits:
+- re-added egd color specs and removed commented code
+- added test cases for egd_primitives
+- egd speed optimizations and code reduction
