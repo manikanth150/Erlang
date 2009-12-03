@@ -1,0 +1,10 @@
+#!/usr/bin/perl -w
+use strict;
+
+my $range = "";
+$range = shift if @ARGV;
+
+foreach (`git log --oneline --first-parent $range`) {
+    next unless /^([\da-f]+) Merge branch '([^\']*)'/;
+    print "git branch $2 $1^2\n";
+}
