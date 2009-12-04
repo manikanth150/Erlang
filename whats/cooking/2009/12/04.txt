@@ -1,0 +1,108 @@
+To: erlang patches <erlang-patches@erlang.org>
+Subject: What's cooking in erlang/otp (2009-12-04)
+X-dev-at: 7457122ad3aa8dccb5439d3e430c93fe6ca2654e
+
+Thanks, noss, for filling the placeholder page I
+mentioned in the previous email. Now real information
+can be found at:
+
+http://wiki.github.com/erlang/otp/refining-patches-using-git
+
+------------------------------------------------------------
+[Graduated]
+
+* egil/misc-egd (2009-11-26) 2 commits
+ - Add test cases for egd_primitives (998ccfc)
+ - Optimize egd render speed and reduce code size (8d2bc78)
+
+* mh/to_erl-error-messages (2009-11-27) 1 commit
+ - to_erl: Include strerror(errno) in error messages (ace6e42)
+
+* sv/sys_get_status (2009-11-27) 2 commits
+ - Teach sys:get_status/1,2 to call Mod:format_status/2 (88b530e)
+ - gen_fsm: Fix format_status/2 to handle Pids (2a9b7a1)
+
+------------------------------------------------------------
+[New topics]
+
+* at/odbc_osx_fix (2009-11-30) 1 commit
+ - Workaround broken ODBC implementation on OSX 10.5 (88c71c9)
+
+* bg/otp_build-improvements (2009-12-02) 3 commits
+ - Support updating the primary bootstrap in a git repository (d6a3861)
+ - Determine which VCS is being used (c16fcaf)
+ - .gitignore: Don't ignore script/boot files in bootstrap/bin (2bcfe0d)
+
+* bg/slimmer-history (2009-12-02) 2 commits
+ - beam_makepos: Do not put any dates in generated files (a910f28)
+ - compiler: Teach 'slim' to omit compilation info (2c76865)
+
+We don't want the compiler to put the date/time or the compiler's version
+numbers into the beam files in the checked-in bootstrap, because
+then all beam files in the bootstrap will have to be replaced every
+time the primary bootstrap is updated.
+
+The only potential problem this might cause is *if* the primary
+bootstrap should need to be native-code compiled (the hipe compiler
+checks the version number to make sure that the beam file was
+compiled by a supported compiler, I think).
+
+* db/tv_nthtail_fix (2009-12-01) 1 commit
+ - Fix for tv which restarts while trying to open a table (bfc18a8)
+
+We will cook this topic for a while and include it in the next
+release unless someone finds a problem with it or a better fix.
+
+* dh/doc-fixes (2009-12-01) 1 commit
+ - fix for minor documentation xml issues (185bb92)
+
+The problems were in two XML files that are not currently used
+and will soon be removed. The third file (in wx) is not a complete
+XML, but merely a template. It should have another extension.
+
+We will keep this branch as a reminder until the real problems
+has been fixed.
+
+* po/blowfish_ecb_cbc_ofb (2009-12-03) 2 commits
+ - Add Blowfish tests (24300da)
+ - Add Blowfish ECB, CBC and OFB modes (b120895)
+
+The crypto test suite is now included in ccase/r13b04_dev, so
+I have rebased this branch and resolved the conflicts in
+Makefile and crypto.spec.
+
+* sc/sctp_connect_enhancement (2009-12-02) 2 commits
+ - Implement a non-blocking gen_sctp:connect (92f3cee)
+ - Correctly type sctp_assoc_id as signed, not unsigned (2666b68)
+
+Raimo (the maintainer of the sctp code in OTP) is quite busy
+with the new erlang.org site (demo.erlang.org), so there might
+be a while before he will look at this branch, but it will
+definitely happend before the next release.
+
+* sc/ssl_pkix_extensions (2009-12-02) 1 commit
+ - Fix crash when decoding commercial certificates (31ccb1d)
+
+Dan G says that the pkix stuff is deprecated, but that doesn't
+seem to be documented and the replacement application public_key
+is not documented either. We should probably include this
+correction anyway.
+
+We will keep this branch until some sort of decision has
+been made.
+
+------------------------------------------------------------
+[Cooking]
+
+* as/c_nc-fix (2009-11-29) 1 commit
+ - Fix c:nc to use outdir or cwd to find compiled object file (0d4f83c)
+
+I think there should be a test case before we graduate this topic,
+so that we'll know that it will continue to work.
+
+* bd/http_chunk_fix (2009-11-27) 1 commit
+ - http_chunk data handling/passing improvement. (c2553be)
+
+* po/odbc-update-delete-no-rows (2009-11-26) 1 commit
+ - SQL_NO_DATA and SQLSTATE 00000 indicate success for updates/deletes that affect no rows (1a564f8)
+
