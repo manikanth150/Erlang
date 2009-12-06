@@ -1,0 +1,80 @@
+#!/usr/bin/perl -w
+use strict;
+use File::Basename;
+use File::Spec;
+
+-d '.git' or die "$0: Not a Git repository";
+
+my $root = dirname($0);
+my $last = `(cd $root; git ls-files "whats" | tail -1)`;
+@ARGV = ("$root/$last");
+
+my $output_file = "GH-PAGES/index.html";
+open STDOUT, ">", $output_file or
+    die "$0: Failed to open $output_file for writing: $!\n";
+
+my %cooking;
+my $current;
+if (@ARGV) {
+    while (<>) {
+	next if /^-------/;
+	next if m/^\[([^\]]*)\]/;
+
+	if (/^[*] (\S+)/) {
+	    $current = $1;
+	    $cooking{$current} = "";
+	    next;
+	}
+	next if /^ [+-]/;
+	next unless $current;
+	$cooking{$current} .= $_
+	    unless /^\s*$/ && $cooking{$current} eq '';
+    }
+}
+
+my $title = "Currently in the 'pu' branch";
+print <<"END";
+<html>
+<title>$title</title>
+<style type="text/css" media="all">
+    body {
+      width: 600px;
+    }
+</style>
+<body>
+<h1>$title</h1>
+<ul>
+END
+
+my $root_url = "http://github.com/erlang/otp/commit";
+foreach (`git log --oneline --first-parent dev..pu`) {
+    if (/^([\da-f]*) Merge branch '([^\']*)'/) {
+	my($child,$topic) = ($1,$2);
+	my $range = "$child^1..$child^2";
+	my(@revs) = `git rev-list $range`;
+	my $commits = @revs == 1 ? "1 commit" : scalar(@revs) . " commits";
+	my $max = 12;
+	system "git", "show", "-s", "--date=short",
+	qq[--format=<li><a href="$root_url/%H">$topic</a>:], "$child";
+	print "<ul>\n";
+	my $format = qq[<li><a href="$root_url/%H">%s</a></li>];
+	system "git",  "--no-pager", "log", "-n", $max,
+	"--format=$format", $range;
+	print ".\n.\n\.\n" if @revs > $max;
+	print "</ul>\n";
+
+	my $text = $cooking{$topic};
+	$text =~ s/\n\n/$&<p>/g;
+	print "<p>$text\n" if $text ne '';
+	print "<p>" if $text eq '';
+
+	print "</li>\n";
+    }
+}
+print "</ul>\n";
+print "</body>\n";
+print "</html>\n";
+
+close STDOUT;
+
+system qq(cd GH-PAGES; git commit --amend -m "Update index.html" index.html >/dev/null);
