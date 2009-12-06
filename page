@@ -43,6 +43,9 @@ print <<"END";
 </style>
 <body>
 <h1>$title</h1>
+<p>The comment about each topic branch is taken from the latest
+<em>What\'s cooking in erlang/otp</em> email and may no longer apply if
+the topic branch has been updated.
 <ul>
 END
 
@@ -64,9 +67,13 @@ foreach (`git log --oneline --first-parent dev..pu`) {
 	print "</ul>\n";
 
 	my $text = $cooking{$topic};
-	$text =~ s/\n\n/$&<p>/g;
-	print "<p>$text\n" if $text ne '';
-	print "<p>" if $text eq '';
+	unless (defined $text) {
+	    print "<p><i>New topic branch</i>\n";
+	} else {
+	    $text =~ s/\n\n/$&<p>/g;
+	    print "<p>$text\n" if $text ne '';
+	    print "<p>" if $text eq '';
+	}
 
 	print "</li>\n";
     }
