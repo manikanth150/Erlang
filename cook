@@ -6,8 +6,10 @@ use File::Spec;
 -d '.git' or die "$0: Not a Git repository";
 
 my $root = dirname($0);
+my $application = "$root/application";
 my $last = `(cd $root; git ls-files "whats" | tail -1)`;
 @ARGV = ("$root/$last");
+
 
 my $date;
 my $output_file;
@@ -134,7 +136,11 @@ sub print_commits {
     my(@revs) = `git rev-list $range`;
     my $commits = @revs == 1 ? "1 commit" : scalar(@revs) . " commits";
     my $max = 12;
-    system qq[git show -s --date=short --format="* $topic (%ad) $commits" $topic];
+    my $diff_range = $range;
+    $diff_range =~ s/[.][.]/.../;
+    my $apps = `$application $diff_range`;
+    chomp $apps;
+    system qq[git show -s --date=short --format="* $topic ($apps) (%ad) $commits" $topic];
     system qq[git --no-pager log -n $max --format=" - %s (%h)" $range];
     print ".\n.\n\.\n" if @revs > $max;
 }

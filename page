@@ -6,8 +6,10 @@ use File::Spec;
 -d '.git' or die "$0: Not a Git repository";
 
 my $root = dirname($0);
+my $application = "$root/application";
 my $last = `(cd $root; git ls-files "whats" | tail -1)`;
 @ARGV = ("$root/$last");
+
 
 my $output_file = "GH-PAGES/index.html";
 open STDOUT, ">", $output_file or
@@ -57,8 +59,13 @@ foreach (`git log --oneline --first-parent dev..pu`) {
 	my(@revs) = `git rev-list $range`;
 	my $commits = @revs == 1 ? "1 commit" : scalar(@revs) . " commits";
 	my $max = 12;
+	my $apps = `$application $child^1...$child^2`;
+	chomp $apps;
+
 	system "git", "show", "-s", "--date=short",
-	qq[--format=<li><a href="$root_url/%H">$topic</a>:], "$child";
+	qq[--format=<li><a href="$root_url/%H">$topic</a> ($apps):],
+	"$child";
+
 	print "<ul>\n";
 	my $format = qq[<li><a href="$root_url/%H">%s</a></li>];
 	system "git",  "--no-pager", "log", "-n", $max,
