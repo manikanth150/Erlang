@@ -75,7 +75,7 @@ foreach (`git log --oneline --first-parent dev..pu`) {
 
 	my $text = $cooking{$topic};
 	unless (defined $text) {
-	    print "<p><i>New topic branch</i>\n";
+	    print "<p><i>New topic branch</i>\n<p>\n";
 	} else {
 	    $text =~ s/\n\n/$&<p>/g;
 	    print "<p>$text\n" if $text ne '';
