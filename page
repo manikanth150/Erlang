@@ -5,6 +5,9 @@ use File::Spec;
 
 -d '.git' or die "$0: Not a Git repository";
 
+my $no_push = 0;
+$no_push = @ARGV && $ARGV[0] eq '-n';
+
 my $root = dirname($0);
 my $application = "$root/application";
 my $last = `(cd $root; git ls-files "whats" | tail -1)`;
@@ -92,3 +95,6 @@ print "</html>\n";
 close STDOUT;
 
 system qq(cd GH-PAGES; git commit --amend -m "Update index.html" index.html >/dev/null);
+
+system qq(cd GH-PAGES; git push erlang +gh-pages)
+    unless $no_push;
