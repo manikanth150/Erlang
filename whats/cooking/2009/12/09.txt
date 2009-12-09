@@ -1,0 +1,136 @@
+To: erlang patches <erlang-patches@erlang.org>
+Subject: What's cooking in erlang/otp (2009-12-09)
+X-dev-at: 2ff9f0148d4f75990105946eab359074aa83a52d
+
+There is now an HTML page with an overview of what's
+in the 'pu' branch:
+
+   http://erlang.github.com/otp/
+
+The comments about the branches on that page will be
+taken from the latest What's cooking email.
+
+------------------------------------------------------------
+[Graduated]
+
+* ay/split_binary_docfix (erts) (2009-12-08) 1 commit
+ + documentation: Fix erlang:split_binary/2 Pos argument (1556a6a)
+
+------------------------------------------------------------
+[New topics]
+
+* cf/epp-macro-overloading (stdlib) (2009-12-07) 3 commits
+ - epp: change rules to choose the right version of a macro (8dcc9f8)
+ - epp: Add support of macros overloading (f7a8959)
+ - epp: fix bug in the function scan_undef (52543e0)
+
+Extend the pre-processor to allow overloading of macros with
+the same name but different arities.
+
+* tc/premodern-fpe (erts) (2009-12-08) 2 commits
+ - Add -D_XOPEN_SOURCE to CPPFLAGS on Darwin platforms (ea2fae6)
+ - Test for reliable fpes on Darwin platforms without DARWIN_MODERN_MCONTEXT (b95cf92)
+
+Reliable floating point exceptions is necessary for hipe to
+be enabled. I can confirm that hipe can now be enabled on
+Snow Leopard (10.6) and that it speeds up building of the
+Dialyzer PLT.
+
+This branch depends on functionality that is deprecated
+in Mac OS 10.6, so it might be necessary to find another solution
+when 10.7 will be released (in case it removes the deprecated
+functionality).
+
+We would like to hear about how this patch works on older versions
+of Mac OS X. Is it still possible to enable hipe on PPC macs?
+
+------------------------------------------------------------
+[Cooking]
+
+* as/c_nc-fix (stdlib) (2009-11-29) 1 commit
+ - Fix c:nc to use outdir or cwd to find compiled object file (0d4f83c)
+
+I think there should be a test case before we graduate this topic,
+so that we'll know that it will continue to work.
+
+
+* at/odbc_osx_fix (odbc) (2009-11-30) 1 commit
+ - Workaround broken ODBC implementation on OSX 10.5 (88c71c9)
+
+* bd/http_chunk_fix (inets) (2009-11-27) 1 commit
+ - http_chunk data handling/passing improvement. (c2553be)
+
+* bg/otp_build-improvements (otp) (2009-12-02) 3 commits
+ - Support updating the primary bootstrap in a git repository (d6a3861)
+ - Determine which VCS is being used (c16fcaf)
+ - .gitignore: Don't ignore script/boot files in bootstrap/bin (2bcfe0d)
+
+* bg/slimmer-history (compiler, erts) (2009-12-02) 2 commits
+ - beam_makepos: Do not put any dates in generated files (a910f28)
+ - compiler: Teach 'slim' to omit compilation info (2c76865)
+
+We don't want the compiler to put the date/time or the compiler's version
+numbers into the beam files in the checked-in bootstrap, because
+then all beam files in the bootstrap will have to be replaced every
+time the primary bootstrap is updated.
+
+The only potential problem this might cause is *if* the primary
+bootstrap should need to be native-code compiled (the hipe compiler
+checks the version number to make sure that the beam file was
+compiled by a supported compiler, I think).
+
+
+* db/tv_nthtail_fix (tv) (2009-12-01) 1 commit
+ - Fix for tv which restarts while trying to open a table (bfc18a8)
+
+We will cook this topic for a while and include it in the next
+release unless someone finds a problem with it or a better fix.
+
+
+* po/blowfish_ecb_cbc_ofb (crypto) (2009-12-08) 3 commits
+ - Eliminate signed/unsigned compiler warnings (5747f67)
+ - Add Blowfish tests (24300da)
+ - Add Blowfish ECB, CBC and OFB modes (b120895)
+
+This branch is currently being tested in our daily builds
+and if no problems turns up this branch will likely be
+graduated soon.
+
+I eliminated some warnings in a separate commit; I intend
+to squash those changes into commit b120895 before graduation.
+
+* po/odbc-update-delete-no-rows (odbc) (2009-11-26) 1 commit
+ - SQL_NO_DATA and SQLSTATE 00000 indicate success for updates/deletes that affect no rows (1a564f8)
+
+* sc/sctp_connect_enhancement (erts, kernel) (2009-12-02) 2 commits
+ - Implement a non-blocking gen_sctp:connect (92f3cee)
+ - Correctly type sctp_assoc_id as signed, not unsigned (2666b68)
+
+Raimo (the maintainer of the sctp code in OTP) is quite busy
+with the new erlang.org site (demo.erlang.org), so there might
+be a while before he will look at this branch, but it will
+definitely happen before the next release.
+
+* sc/ssl_pkix_extensions (ssl) (2009-12-02) 1 commit
+ - Fix crash when decoding commercial certificates (31ccb1d)
+
+The pkix stuff is in the ssl application is deprecated and has
+been replaced with public key application. That functionality
+in public_key is also documented.
+
+It seems unlikely that we include this branch in OTP, but we will
+keep it in 'pu' for a little bit longer.
+
+------------------------------------------------------------
+[Dropped]
+
+* dh/doc-fixes (asn1, debugger, wx) (2009-12-01) 1 commit
+ . fix for minor documentation xml issues (7e10c60)
+
+Thanks for noticing those issues. Two problems were in XML
+files that were not used; they have now been removed.
+
+Another problem was in a template file (intentionally 
+containing incomplete XML cod); that file has now
+been renamed to have the extension .xml.src instead of
+.src.xml.
