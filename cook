@@ -82,6 +82,15 @@ chomp @in_pu;
 map { s/^\s*// } @in_pu;
 @in_pu = grep { m@^[^/]{2,4}/[^/]*@ } @in_pu;
 @in_pu = grep { !exists $in_dev{$_} && !exists $old_in_dev{$_} } @in_pu;
+my %in_pu = map { $_ => 1 } @in_pu;
+
+my @dropped = `git for-each-ref --format='%(refname)' refs/heads/??*/*`;
+chomp @dropped;
+map { s@^refs/heads/@@ } @dropped;
+@dropped = grep { m@^[^/]{2,4}/[^/]*@ } @dropped;
+@dropped = grep { !exists $in_dev{$_} &&
+		      !exists $old_in_dev{$_} &&
+		      !exists $in_pu{$_} } @dropped;
 
 my %child;
 foreach (`git rev-list --no-merges --children master..dev`) {
@@ -99,13 +108,20 @@ if (@in_dev) {
 
 header("[New topics]");
 foreach (@in_pu) {
-    describe($_, '') unless defined $cooking{$_};
+    describe('-', $_, '') unless defined $cooking{$_};
 }
 
 header("[Cooking]");
 foreach (@in_pu) {
     my $text =  $cooking{$_};
-    describe($_, $text) if defined $text;
+    describe('-', $_, $text) if defined $text;
+}
+
+if (@dropped) {
+    header("[Dropped]");
+    foreach (@dropped) {
+	describe('.', $_, '');
+    }
 }
 
 close STDOUT;
@@ -117,8 +133,8 @@ sub header {
 }
 
 sub describe {
-    my($topic,$text) = @_;
-    print_commits($topic, "dev..$topic");
+    my($marker,$topic,$text) = @_;
+    print_commits($topic, "dev..$topic", $marker);
     print "\n$text" if $text ne '';
     print "\n";
 }
@@ -127,12 +143,12 @@ sub describe_graduated {
     my($topic) = @_;
     my $id = `git rev-parse $topic`;
     chomp $id;
-    print_commits($topic, "$child{$id}^1..$id");
+    print_commits($topic, "$child{$id}^1..$id", '+');
     print "\n";
 }
 
 sub print_commits {
-    my($topic,$range) = @_;
+    my($topic,$range,$marker) = @_;
     my(@revs) = `git rev-list $range`;
     my $commits = @revs == 1 ? "1 commit" : scalar(@revs) . " commits";
     my $max = 12;
@@ -141,6 +157,6 @@ sub print_commits {
     my $apps = `$application $diff_range`;
     chomp $apps;
     system qq[git show -s --date=short --format="* $topic ($apps) (%ad) $commits" $topic];
-    system qq[git --no-pager log -n $max --format=" - %s (%h)" $range];
+    system qq[git --no-pager log -n $max --format=" $marker %s (%h)" $range];
     print ".\n.\n\.\n" if @revs > $max;
 }
