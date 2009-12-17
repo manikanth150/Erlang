@@ -1,0 +1,137 @@
+To: erlang patches <erlang-patches@erlang.org>
+Subject: What's cooking in erlang/otp (2009-12-17)
+X-dev-at: ebaa01050deb2bbc4cf4e1279e3d8ffe220080d9
+
+There might be one more issue of "What's cooking in erlang/otp"
+in the beginning of next week. After that, there will
+be no more updates of the 'pu' branch until Jan 7, 2010.
+
+------------------------------------------------------------
+[Graduated]
+
+* at/windows_build_fixes (erts, otp) (2009-12-15) 2 commits
+ + Updated README.win32 for compiling with VS2008 and issues with mc.exe (346b530)
+ + Allow mc.sh and rc.sh to work when path to mc/rc.exe has spaces (98751d5)
+
+* sc/darwin_build_rm_dSYMN (erts) (2009-12-14) 1 commit
+ + Fix 'make clean' in erts with debug builds under Darwin (2468a47)
+
+* sc/ei_decode_skip_fun (erl_interface) (2009-12-14) 1 commit
+ + Fix ei_skip_term() handling of funs encoded as NEW_FUN_EXT (d0db866)
+
+------------------------------------------------------------
+[New topics]
+
+* aq/asn1-incomplete-packet (asn1) (2009-12-16) 1 commit
+ - Change asn1 : generated decode/2 functions return {error,incomplete}  when argument packet is incomplete. (59d7f7f)
+
+* cf/compile_warning_as_error (compiler, erts) (2009-12-15) 3 commits
+ - Add option -Werror in erlc(1) (d29a335)
+ - compile: add flag warnings_as_errors to treat warnings as errors (13124f5)
+ - compile.erl: remove trailing whitespace (8a944af)
+
+* dgud/dbg_mac_menu (debugger) (2009-12-16) 4 commits
+ - Dbg: Expand the module listbox when window grows. (25c200b)
+ - Dbg: Cut variable bindings after 80 chars. (a488613)
+ - Dbg: Fixed documentation links to the new index.html (776ab02)
+ - Dbg Fixed mac gui issues (b7c6db6)
+
+* jp/dependencies_makefile (compiler, erts) (2009-12-14) 1 commit
+ - Add dependencies Makefile generation to erlc(1) and compile(3) (c0734e8)
+
+* jp/gcc-detection-in-makefiles (Makefile.in
+, asn1, crypto, erts, ic, orber, os_mon, runtime_tools, ssl, tools) (2009-12-16) 2 commits
+ - Replace the $(CC_IS_GCC) flag by more generic $(CC_NAME) variable (51be25f)
+ - Fix GCC detection in ERTS configure script and Makefiles (34fb108)
+
+This seems to be a worthwhile change, but only Makefiles that
+can actually gain anything should be updated. Also there does
+not seem to be any reason that there are two commits rather
+than just one.
+
+------------------------------------------------------------
+[Cooking]
+
+* at/odbc_osx_fix (odbc) (2009-11-30) 1 commit
+ - Workaround broken ODBC implementation on OSX 10.5 (88c71c9)
+
+* bd/http_chunk_fix (inets) (2009-11-27) 1 commit
+ - http_chunk data handling/passing improvement. (c2553be)
+
+* bg/otp_build-improvements (otp, stdlib) (2009-12-02) 3 commits
+ - Support updating the primary bootstrap in a git repository (6840b32)
+ - Determine which VCS is being used (5770b7b)
+ - stdlib makefile: Add explicit rule (b197d92)
+
+* bw/win32-address-space-fix (erts) (2009-12-10) 1 commit
+ -  win32 mmap emulation for mseg support + largeaddressaware linking (357167e)
+
+The branch in its current shape cannot be included in OTP because
+it includes copyrighted code with an unknown license. It is also
+overkill to emulate mmap() (and it could cause other problems in
+the future); the easiest and most straightforward solution is to
+implement mseg_create()/mseg_destroy() (in erl_mseg.c) using
+VirtualAlloc()/VirtualFree().
+
+
+* cf/epp-macro-overloading (otp, stdlib) (2009-12-10) 4 commits
+ - update the documentation on preprocessor in the reference manual (162ec27)
+ - epp: change rules to choose the right version of a macro (8dcc9f8)
+ - epp: Add support of macros overloading (f7a8959)
+ - epp: fix bug in the function scan_undef (52543e0)
+
+Extend the pre-processor to allow overloading of macros with
+the same name but different arities. Now with documentation.
+
+
+* db/tv_nthtail_fix (tv) (2009-12-01) 1 commit
+ - Fix for tv which restarts while trying to open a table (bfc18a8)
+
+We will cook this topic for a while and include it in the next
+release unless someone finds a problem with it or a better fix.
+
+* po/odbc-update-delete-no-rows (odbc) (2009-11-26) 1 commit
+ - SQL_NO_DATA and SQLSTATE 00000 indicate success for updates/deletes that affect no rows (1a564f8)
+
+* tc/premodern-fpe (erts) (2009-12-08) 2 commits
+ - Add -D_XOPEN_SOURCE to CPPFLAGS on Darwin platforms (ea2fae6)
+ - Test for reliable fpes on Darwin platforms without DARWIN_MODERN_MCONTEXT (b95cf92)
+
+Reliable floating point exceptions is necessary for hipe to
+be enabled. I can confirm that hipe can now be enabled on
+Snow Leopard (10.6) and that it speeds up building of the
+Dialyzer PLT.
+
+This branch depends on functionality that is deprecated
+in Mac OS 10.6, so it might be necessary to find another solution
+when 10.7 will be released (in case it removes the deprecated
+functionality).
+
+We would like to hear about how this patch works on older versions
+of Mac OS X. It is known to work on Tiger/PPC.
+
+------------------------------------------------------------
+[Dropped]
+
+* sc/sctp_connect_enhancement (erts, kernel) (2009-12-02) 2 commits
+ . Implement a non-blocking gen_sctp:connect (92f3cee)
+ . Correctly type sctp_assoc_id as signed, not unsigned (2666b68)
+
+We have solved "Correctly type sctp_assoc_id..." in a different
+way (now included in the development branch).
+
+We are waiting for a replacement for "Implement a non-blocking
+gen_sctp:connect".
+
+* sc/ssl_pkix_extensions (ssl) (2009-12-02) 1 commit
+ . Fix crash when decoding commercial certificates (31ccb1d)
+
+The pkix stuff is in the ssl application is deprecated and has
+been replaced with public key application. That functionality
+in public_key is also documented.
+
+* vd/eep8_doc (otp) (2009-12-14) 1 commit
+ . add reference to EEP8 (36d251b)
+
+Replaced by a revised version now included in the development
+branch.
