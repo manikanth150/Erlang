@@ -62,7 +62,8 @@ foreach (`git log --oneline --first-parent dev..pu`) {
 	my(@revs) = `git rev-list $range`;
 	my $commits = @revs == 1 ? "1 commit" : scalar(@revs) . " commits";
 	my $max = 12;
-	my $apps = `$application $child^1...$child^2`;
+	my $diff_range = "$child^1...$child^2";
+	my $apps = `$application $diff_range`;
 	chomp $apps;
 
 	system "git", "show", "-s", "--date=short",
@@ -75,6 +76,19 @@ foreach (`git log --oneline --first-parent dev..pu`) {
 	"--format=$format", $range;
 	print ".\n.\n\.\n" if @revs > $max;
 	print "</ul>\n";
+
+	my @ws = `git diff --check $diff_range`;
+	if (@ws) {
+	    my $n = @ws / 2;
+	    print "<p>\n";
+	    print qq[<font color="red">This topic branch introduces ];
+	    if ($n == 1) {
+		print "1 line ";
+	    } else {
+		print "$n lines ";
+	    }
+	    print "with whitespace errors.</font>\n";
+	}
 
 	my $text = $cooking{$topic};
 	unless (defined $text) {
