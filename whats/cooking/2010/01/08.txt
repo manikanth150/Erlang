@@ -1,0 +1,151 @@
+To: erlang patches <erlang-patches@erlang.org>
+Subject: What's cooking in erlang/otp (2010-01-08)
+X-dev-at: 36c0041ea56d915ba9a2259cc918fca76b8c08f9
+
+There are no graduations this time, but we expect there
+will be a few next week.
+
+We have just got automatic builds and tests based on the
+'pu' branch running. That means that in the future,
+we can give quicker feedback on branches that does not
+build on all platforms.
+
+This time, three branches have been dropped because of
+problems found by the automatic tests.
+
+------------------------------------------------------------
+[New topics]
+
+* egil/binary-gc (erts) (2010-01-07) 4 commits
+ - Add documentation for binary heap size settings. (bcd0b64)
+ - Add tracing capabilities for binary virtual heap (33a2f7a)
+ - Add min heap size start options to beam and erl (bfe4308)
+ - Improve binary garbage collection (94f7a20)
+
+* jv/binary_to_term-opts (erts) (2010-01-08) 2 commits
+ - document ErtsExternalDist flags and CON_ID mask (be22f53)
+ - add options to binary_to_term (77ce185)
+
+Will probably graduate soon.
+
+* wt/ssl-resume-session (ssl) (2010-01-07) 1 commit
+ - new_ssl fix session reuse (3918e9c)
+
+* wt/ssl_certreq_send_ca_list (public_key, ssl) (2010-01-06) 1 commit
+ - Send CA list during Certificate Request in new_ssl (638ad46)
+
+* yh/fix-re-run-corruption (erts) (2010-01-07) 1 commit
+ - Fix re:run/3 sometimes executes on corrupted data by garbage collection (eed3903)
+
+------------------------------------------------------------
+[Cooking]
+
+* at/odbc_osx_fix (odbc) (2009-11-30) 1 commit
+ - Workaround broken ODBC implementation on OSX 10.5 (88c71c9)
+
+* bd/http_chunk_fix (inets) (2009-11-27) 1 commit
+ - http_chunk data handling/passing improvement. (c2553be)
+
+* bg/otp_build-improvements (otp, stdlib) (2010-01-06) 5 commits
+ - Fix spelling, remove obsolete command (74b56ab)
+ - Support updating preloaded files in a git repository (bb8cf9b)
+ - Support updating the primary bootstrap in a git repository (86e14df)
+ - Determine which VCS is being used (12839e1)
+ - stdlib makefile: Add explicit rule (b197d92)
+
+* cf/compile_warning_as_error (compiler, erts) (2009-12-15) 3 commits
+ - Add option -Werror in erlc(1) (d29a335)
+ - compile: add flag warnings_as_errors to treat warnings as errors (13124f5)
+ - compile.erl: remove trailing whitespace (8a944af)
+
+* cf/epp-macro-overloading (otp, stdlib) (2009-12-10) 4 commits
+ - update the documentation on preprocessor in the reference manual (162ec27)
+ - epp: change rules to choose the right version of a macro (8dcc9f8)
+ - epp: Add support of macros overloading (f7a8959)
+ - epp: fix bug in the function scan_undef (52543e0)
+
+Extend the pre-processor to allow overloading of macros with
+the same name but different arities. Now with documentation.
+
+* db/tv_nthtail_fix (tv) (2009-12-01) 1 commit
+ - Fix for tv which restarts while trying to open a table (abe0759)
+
+We will cook this topic for a while and include it in the next
+release unless someone finds a problem with it or a better fix.
+
+* dgud/dbg_mac_menu (debugger) (2009-12-16) 4 commits
+ - Dbg: Expand the module listbox when window grows. (85f849c)
+ - Dbg: Cut variable bindings after 80 chars. (87f6e4c)
+ - Dbg: Fixed documentation links to the new index.html (e27e41b)
+ - Dbg Fixed mac gui issues (438d778)
+
+* jp/dependencies_makefile (compiler, erts) (2009-12-14) 1 commit
+ - Add dependencies Makefile generation to erlc(1) and compile(3) (c0734e8)
+
+* jp/gcc-detection-in-makefiles (erts) (2009-12-16) 1 commit
+ - Fix GCC detection in ERTS configure script and Makefiles (84e0caf)
+
+Corrected by me since it did not work on all versions of autoconf
+and/or shells. Will probably graduate soon.
+
+* kj/epmd-port2resp-trunc-extra (erts) (2009-12-20) 1 commit
+ - Handle "extra" field according to specs in ALIVE2_REQ and PORT2_RESP. (a841673)
+
+Will probably graduate soon.
+
+* km/http-host-header-fix (inets) (2009-12-21) 1 commit
+ - Fix inets HTTP client bug crafting Host header when port is not 80 (75a3f7c)
+
+* po/odbc-update-delete-no-rows (odbc) (2009-11-26) 1 commit
+ - SQL_NO_DATA and SQLSTATE 00000 indicate success for updates/deletes that affect no rows (1a564f8)
+
+* sc/sctp-connect-nowait (kernel) (2009-12-21) 1 commit
+ - Implement a non-blocking SCTP connect (ae3d819)
+
+* tc/premodern-fpe (erts) (2009-12-08) 2 commits
+ - Add -D_XOPEN_SOURCE to CPPFLAGS on Darwin platforms (6e60658)
+ - Test for reliable fpes on Darwin platforms without DARWIN_MODERN_MCONTEXT (4160466)
+
+Reliable floating point exceptions is necessary for hipe to
+be enabled. I can confirm that hipe can now be enabled on
+Snow Leopard (10.6) and that it speeds up building of the
+Dialyzer PLT.
+
+This branch depends on functionality that is deprecated
+in Mac OS 10.6, so it might be necessary to find another solution
+when 10.7 will be released (in case it removes the deprecated
+functionality).
+
+We would like to hear about how this patch works on older versions
+of Mac OS X. It is known to work on Tiger/PPC.
+
+* uw/shell-tab-completion (stdlib) (2009-12-17) 1 commit
+ - Shell tab completion now works for quoted module and function names (1c3a6c8)
+
+* va/rb-improvements (sasl) (2009-12-25) 4 commits
+ - New function to filter reports by date (5391383)
+ - New rb:filter/1 function to ease report filtering (ed28348)
+ - Add rb:re/1 to grep reports using the re module (e5bd091)
+ - Fix minor typo in read_report/1 (07c6ad4)
+
+------------------------------------------------------------
+[Dropped]
+
+* aq/asn1-incomplete-packet (asn1) (2009-12-16) 1 commit
+ . asn1: let decode/2 functions handle incomplete packets (5dbde5a)
+
+Breaks the test test suite for the public_key application.
+
+* fh/common_test-includes (common_test) (2009-12-24) 2 commits
+ . change the examples' -include to -include_lib with ct.hrl (3a991e2)
+ . change -include for -include_lib to avoid compile errors (48420a4)
+
+The system does not build from scratch when this branch is
+included because the common_test application is not included
+in the bootstrap.
+
+* jb/atom-table-size-env (erts, otp) (2009-12-21) 1 commit
+ . Added ERL_ATOM_TABLE_SIZE environment variable (f1bf944)
+
+Does not build on Windows. (MIN and MAX macros are not defined
+on Windows.)
