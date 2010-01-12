@@ -6,5 +6,5 @@ $range = shift if @ARGV;
 
 foreach (`git log --oneline --first-parent $range`) {
     next unless /^([\da-f]+) Merge branch '([^\']*)'/;
-    print "git branch $2 $1^2\n";
+    print "git branch -f $2 $1^2\n";
 }
