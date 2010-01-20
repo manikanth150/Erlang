@@ -1,0 +1,120 @@
+To: erlang patches <erlang-patches@erlang.org>
+Subject: What's cooking in erlang/otp (2010-01-20)
+X-dev-at: fcff652f0fc9d19157e6f72f2c864533bf0c0d28
+
+------------------------------------------------------------
+[Included in ccase/r13b04]
+
+* wt/ssl-resume-session (ssl) (2010-01-07) 1 commit
+ . new_ssl fix session reuse (f8358aa)
+
+* wt/ssl_certreq_send_ca_list (public_key, ssl) (2010-01-06) 1 commit
+ . Send CA list during Certificate Request in new_ssl (638ad46)
+
+Both of those commits have been included in ccase/r13b04 along
+with some minor clean-ups.
+
+[Graduated]
+
+* bg/compiler-beam_validator (compiler, erts) (2010-01-15) 1 commit
+ + beam_validator: fix incorrect assumptions about GC guard BIFs (31e231d)
+
+* cf/compile_warning_as_error (compiler, erts) (2009-12-15) 3 commits
+ + Add option -Werror in erlc(1) (96773eb)
+ + compile: add flag warnings_as_errors to treat warnings as errors (5fdb43e)
+ + compile.erl: remove trailing whitespace (fb499f1)
+
+* fh/common_test-includes (common_test, otp) (2009-12-24) 2 commits
+ + make it possible to include ct.hrl using include_lib (f229496)
+ + Include test_servers's include files in the bootstrap (4bcf607)
+
+* uw/shell-tab-completion (stdlib) (2009-12-17) 1 commit
+ + Shell tab completion now works for quoted module and function names (1c3a6c8)
+
+------------------------------------------------------------
+[New topics]
+
+* bg/avoid-etop-in-include (erts) (2010-01-20) 1 commit
+ - system test: fix build of test suites on Windows (7a4cf4b)
+
+* bg/public_key-include_lib (public_key) (2010-01-19) 1 commit
+ - public_key: fix build of test suites on Windows (2c6d9b5)
+
+* rb/stdlib_re_unicode_fixes (stdlib) (2010-01-16) 4 commits
+ - Refactor out repeated block in re module (8642f80)
+ - Fix re:replace/4 to handle unicode charlist Replacement argument (5f413fe)
+ - Fix re:replace/4 to handle unicode charlist RE argument (92c5849)
+ - Fix re:replace/4 to handle binary unicode output when nothing replaced (dcabe28)
+
+* ta/ensure_dir_eexist (stdlib) (2010-01-15) 1 commit
+ - Don't return a false {error,eexist} in filelib:ensure_dir/1 (ecd339d)
+
+------------------------------------------------------------
+[Cooking]
+
+* at/odbc_osx_fix (odbc) (2009-11-30) 1 commit
+ - Workaround broken ODBC implementation on OSX 10.5 (88c71c9)
+
+* cf/epp-macro-overloading (otp, stdlib) (2009-12-10) 4 commits
+ - update the documentation on preprocessor in the reference manual (162ec27)
+ - epp: change rules to choose the right version of a macro (8dcc9f8)
+ - epp: Add support of macros overloading (f7a8959)
+ - epp: fix bug in the function scan_undef (52543e0)
+
+Extend the pre-processor to allow overloading of macros with
+the same name but different arities.
+
+
+* db/tv_nthtail_fix (tv) (2009-12-01) 1 commit
+ - Fix for tv which restarts while trying to open a table (abe0759)
+
+The author of this topic branch has found the real reason for
+the problem and has made some progress in resolving it.
+
+
+* gc/hipe_darwin_amd64 (erts) (2010-01-12) 4 commits
+ - Fix hipe memory allocation problems on darwin/amd64. (32ca14f)
+ - Porting x86 darwin fixes to amd64 darwin hipe asm/m4 code. (427f1db)
+ - Automatically enable hipe for darwin/amd64 builds. (43ae4b7)
+ - Allow configure to enable_hipe for darwin/amd64 builds. (733ce7a)
+
+* is/mnesia-send-compressed (mnesia) (2010-01-11) 2 commits
+ - Update documentation to describe the new Mnesia option "send_compressed" (583d00b)
+ - Add option to compress data when copying tables between Mnesia nodes (86f786e)
+
+* jb/atom_table_size_env (erts, otp) (2009-12-21) 1 commit
+ - Added ERL_ATOM_TABLE_SIZE environment variable (ca57c14)
+
+* jp/dependencies_makefile (compiler, erts) (2010-01-12) 2 commits
+ - squash! fix snprintf for Windows (bf2708d)
+ - Add dependencies Makefile generation to erlc(1) and compile(3) (7cbc437)
+
+Now also builds on Windows.
+
+
+* pan/enable_m32_build (erts, otp) (2009-12-08) 1 commit
+ - Teach configure --enable-m32-build for forcing a 32-bit build (15c7817)
+
+* po/odbc-update-delete-no-rows (odbc) (2009-11-26) 1 commit
+ - SQL_NO_DATA and SQLSTATE 00000 indicate success for updates/deletes that affect no rows (1a564f8)
+
+* sc/sctp-connect-nowait (kernel) (2009-12-21) 1 commit
+ - Implement a non-blocking SCTP connect (ae3d819)
+
+* va/rb-improvements (sasl) (2009-12-25) 4 commits
+ - New function to filter reports by date (5391383)
+ - New rb:filter/1 function to ease report filtering (ed28348)
+ - Add rb:re/1 to grep reports using the re module (e5bd091)
+ - Fix minor typo in read_report/1 (07c6ad4)
+
+* yh/fix-re-run-corruption (erts) (2010-01-07) 1 commit
+ - Fix re:run/3 sometimes executes on corrupted data by garbage collection (9ac35e8)
+
+------------------------------------------------------------
+[Dropped]
+
+* jp/gcc-detection-in-makefiles (erts) (2009-12-16) 1 commit
+ . Fix GCC detection in ERTS configure script and Makefiles (84e0caf)
+
+This feature has now been implemented in a slightly different
+way in commit 9ef7d5424fee7cd703f6fad30786358ec36a3749.
