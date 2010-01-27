@@ -32,6 +32,7 @@ print "Subject: $title\n";
 print "X-dev-at: ", `git rev-parse dev`;
 
 my %cooking;
+my %stalled;
 my $current;
 my $prev_dev = 'master';
 if (@ARGV) {
@@ -44,9 +45,12 @@ if (@ARGV) {
 	    my $group = $1;
 	    if  ($group =~ /^Graduated/) {
 		$state = 'skip';
+	    } elsif  ($group =~ /^Stalled/) {
+		$state = 'stalled';
 	    } else {
 		$state = 'cooking';
 	    }
+	    $current = '';
 	    next;
 	}
 	print if $state eq 'intro';
@@ -62,6 +66,19 @@ if (@ARGV) {
 	    $cooking{$current} .= $_
 		unless /^\s*$/ && $cooking{$current} eq '';
 	}
+
+	if ($state eq 'stalled') {
+	    if (/^[*] (\S+)/) {
+		$current = $1;
+		$stalled{$current} = "";
+		next;
+	    }
+	    next if /^ [+-]/;
+	    next unless $current;
+	    $stalled{$current} .= $_
+		unless /^\s*$/ && $stalled{$current} eq '';
+	}
+
     }
 }
 
@@ -108,7 +125,14 @@ if (@in_dev) {
 
 header("[New topics]");
 foreach (@in_pu) {
-    describe('-', $_, '') unless defined $cooking{$_};
+    describe('-', $_, '') unless defined $cooking{$_} or
+	defined $stalled{$_}
+}
+
+header("[Stalled]");
+foreach (@in_pu) {
+    my $text =  $stalled{$_};
+    describe('-', $_, $text) if defined $text;
 }
 
 header("[Cooking]");
@@ -135,7 +159,8 @@ sub header {
 sub describe {
     my($marker,$topic,$text) = @_;
     print_commits($topic, "dev..$topic", $marker);
-    print "\n$text" if $text ne '';
+    $text =~ s/\n*$//g;
+    print "\n$text\n" if $text ne '';
     print "\n";
 }
 
