@@ -1,0 +1,157 @@
+To: erlang patches <erlang-patches@erlang.org>
+Subject: What's cooking in erlang/otp (2010-02-02)
+X-dev-at: 153e2047d734297df3c55b6fa8bda83fb33c72bd
+
+Provided you have the latest development branch
+(ccase/r13b04) it should now be possible to build the
+documentation. (Topic branches based on earlier revisions
+of the development branch need to be rebased.)
+
+The description for building the documentation can
+be found here:
+
+  http://wiki.github.com/erlang/otp/documentation
+
+R13B04 will be released at the end of February. There
+will be a feature freeze for the erts, kernel, stdlib,
+and compiler applications on February 10. After that,
+only bug fixes will be included in those applications.
+
+------------------------------------------------------------
+[Graduated]
+
+* bg/cleanup-tests (eunit, kernel, stdlib) (2010-01-24) 5 commits
+ + file_SUITE: eliminate a warning for an unused variable (a656a27)
+ + kernel tests: modernize guard tests (fc1ddbb)
+ + unicode_SUITE: replace deprecated concat_binary/1 with list_to_binary/1 (0cd1623)
+ + stdlib tests: modernize guard tests (ac3d53f)
+ + Test suites: fix creation of Emakefiles (b8b3a8c)
+
+* bg/hipe-fixes (compiler, stdlib) (2010-01-25) 3 commits
+ + compiler: make ignore_native_errors also handle internal hipe errors (9e2ac0d)
+ + re tests: disable native-code compilation for huge modules (24e2773)
+ + Teach the compiler the no_native option (fe14832)
+
+* cf/epp-macro-overloading (otp, parsetools, stdlib) (2010-02-01) 8 commits
+ + yecc_SUITE: Adjustment for modified error tuple (1ab56cb)
+ + epp_SUITE: Increase code coverage (77a1272)
+ + Minor corrections and clean-ups (ec618ee)
+ + documentation: Macros overloading partly rewritten (c416896)
+ + update the documentation on preprocessor in the reference manual (4c18274)
+ + epp: change rules to choose the right version of a macro (27d7ca0)
+ + epp: Add support of macros overloading (5023556)
+ + epp: fix bug in the function scan_undef (0d15f8a)
+
+* sf/erl_match-longlong (erl_interface) (2010-01-20) 1 commit
+ + erl_interface: Allow erl_match() to match ERL_LONGLONG and ERL_U_LONGLONG terms (938ccfe)
+
+------------------------------------------------------------
+[New topics]
+
+* bg/erl_bif_types (hipe) (2010-01-31) 1 commit
+ - erl_bif_types: add 'http_bin' as a valid packet option (7c72a77)
+
+* bg/temp-hipe-fixes (compiler, hipe, kernel) (2010-01-31) 4 commits
+ - Crudely fix return type for the lists:key{search,find,member}/3 (5c9a017)
+ - seq_trace_SUITE: Don't native-compile (c569f85)
+ - Disable native code if on_load is used (101dcc8)
+ - andor_SUITE: Don't native-compile (cb44959)
+
+This branch contains temporary workarounds to avoid failing test
+cases and is never intended to graduate.
+
+* dgud/wx_list_ctrl (wx) (2010-02-02) 5 commits
+ - Generate without trailing spaces (cfd2ba4)
+ - Fix correct starting copyright year (5b585a4)
+ - Do not emit trailing whitespace (ce3cd31)
+ - Added tests for wxListCtrl:getItem/2. (aa17e2b)
+ - Added wxListCtrl:getEditCtrl (not available on Mac) (e6433fc)
+
+* egil/lcnt (erts, tools) (2010-02-01) 6 commits
+ - Add test suite for lcnt in tools (e26bedd)
+ - Add lcnt:rt_opt/1 bindings to erts_debug (c24d153)
+ - Add runtime option to enable/disable lcnt stats (dd665ed)
+ - Add auto width on string output (12990af)
+ - Add lcnt documentation (41d4913)
+ - Add lock profiling tool (c41fa05)
+
+* rani/inet_gethostbyname_fixes (erts, kernel) (2010-01-28) 1 commit
+ - inet:gethostbyname improved to parse IP strings and look up own hostname (3fbd6e6)
+
+------------------------------------------------------------
+[Stalled]
+
+* sc/sctp-connect-nowait (kernel) (2009-12-21) 1 commit
+ - Implement a non-blocking SCTP connect (ae3d819)
+
+Approved in principle, but the implementation needs some
+finish touches as pointed out by Raimo, and also
+documentation and test cases.
+
+* jn/supervisor_child_count_only (stdlib) (2010-01-25) 1 commit
+ - Add count_children/1 to supervisor.erl to determine the number of children being managed without the memory impact of which_children/1 (10ef53f)
+
+Test cases fail when the emulator has been started with the +Meamin
+option.
+
+* va/rb-improvements (sasl) (2009-12-25) 4 commits
+ - New function to filter reports by date (5391383)
+ - New rb:filter/1 function to ease report filtering (ed28348)
+ - Add rb:re/1 to grep reports using the re module (e5bd091)
+ - Fix minor typo in read_report/1 (07c6ad4)
+
+There is no need to introduce a new function rb:re/1, but
+rb:grep/1 can be modified to use the 're' module. Also,
+it should not be necessary to compile the regular expression
+beforehand.
+
+------------------------------------------------------------
+[Cooking]
+
+* at/odbc_osx_fix (odbc) (2009-11-30) 1 commit
+ - Workaround broken ODBC implementation on OSX 10.5 (88c71c9)
+
+* db/tv_nthtail_fix (tv) (2009-12-01) 1 commit
+ - Fix for tv which restarts while trying to open a table (abe0759)
+
+The author of this topic branch has found the real reason for
+the problem and has made some progress in resolving it.
+
+* dgud/emacs-mode (tools) (2010-01-26) 2 commits
+ - Added the old style skeletons, and a variable to change. (2cbe853)
+ - Move code skeletons to a separate file. Use the updated skeletons from the Erlware Mode. (b4fd161)
+
+* gc/hipe_darwin_amd64 (erts) (2010-01-12) 4 commits
+ - Fix hipe memory allocation problems on darwin/amd64. (32ca14f)
+ - Porting x86 darwin fixes to amd64 darwin hipe asm/m4 code. (427f1db)
+ - Automatically enable hipe for darwin/amd64 builds. (43ae4b7)
+ - Allow configure to enable_hipe for darwin/amd64 builds. (733ce7a)
+
+* is/mnesia-send-compressed (mnesia) (2010-01-10) 1 commit
+ - Add option to compress data when copying tables between Mnesia nodes (3757d8f)
+
+Should graduate soon.
+
+* jb/atom-table-size (erts) (2010-01-29) 1 commit
+ - Add the +t emulator option to change the maximum number of atoms (4895776)
+
+Should graduate soon.
+
+* jn/sasl-format_report (sasl) (2010-01-27) 1 commit
+ - Added sasl_report:format_report/3 to return a string rather than send an io (ee8f29f)
+
+* jp/dependencies_makefile (compiler, erts) (2010-01-12) 2 commits
+ - squash! fix snprintf for Windows (bf2708d)
+ - Add dependencies Makefile generation to erlc(1) and compile(3) (7cbc437)
+
+Approved in principle by the OTP Technical Board; now awaits a closer
+review of the implementation.
+
+* ks/bsl_system_limit (hipe) (2010-01-26) 1 commit
+ - Fix a HiPE compiler bug evaluating an expression that throws system_limit. (dcada69)
+
+* pan/enable_m32_build (erts, otp) (2009-12-08) 1 commit
+ - Teach configure --enable-m32-build for forcing a 32-bit build (15c7817)
+
+* po/odbc-update-delete-no-rows (odbc) (2009-11-26) 1 commit
+ - SQL_NO_DATA and SQLSTATE 00000 indicate success for updates/deletes that affect no rows (1a564f8)
