@@ -1,0 +1,141 @@
+To: erlang patches <erlang-patches@erlang.org>
+Subject: What's cooking in erlang/otp (2010-02-12)
+X-dev-at: ba3758531a0b6dc6797457279e1ce0f99d282d20
+
+------------------------------------------------------------
+[Graduated]
+
+* bd/doc-fixes (erts, mnesia, stdlib) (2010-02-10) 1 commit
+ + Fix minor documentation errors (3cb8a87)
+
+* kr/crypto_makefile (crypto) (2010-02-10) 1 commit
+ + Fix Makefile permission problem of crypto library on FreeBSD Erlang/OTP building (a7491f2)
+
+* ks/erts (erts) (2010-02-05) 2 commits
+ + hipe_bif0.c: Remove $Id$ (5cd9121)
+ + erts/preloaded: Add types and specs (f28ac67)
+
+* ks/stdlib-cleanups (stdlib) (2010-02-08) 1 commit
+ + stdlib: clean up as suggested by tidier (48654b0)
+
+* mp/et-app-file (et) (2010-02-11) 1 commit
+ + unbreak event tracer's app.src (c3faaf4)
+
+* ms/pcre-security (erts, stdlib) (2010-02-10) 1 commit
+ + Fix CVE-2008-2371 (outer level option with alternatives caused crash). (bb6370a)
+
+* yh/packet_option_for_new_ssl_send (ssl) (2010-02-11) 4 commits
+ + Fixed ssl:setopts(Socket, binary) which was didn't work for 'new' ssl. (464f2ba)
+ + Fixed bug file cache bug and improved the error messages. (a39cf4a)
+ + Allow <c>ssl:listen/2</c> to be called with option {ssl_imp, old}. (590a061)
+ + prepend packet size bytes in ssl:send() in new_ssl implementation (f435df0)
+
+Dan Gudmundsson corrected error handling and added a test case
+to the original commit, and also added three independent bug fixes
+to the same branch (for convenience).
+
+------------------------------------------------------------
+[New topics]
+
+* bd/mnesia-activity-subscription (mnesia) (2010-02-12) 1 commit
+ - Add mnesia activity subscription message (69816f8)
+
+* ks/cleanups-after-r13b04 (kernel, stdlib) (2010-02-10) 4 commits
+ - stdlib: Use fun object instead of {M,F} tuple (9825e53)
+ - ets: Cleanup as suggested by tidier (4d656fd)
+ - kernel: Add types and specs + cleanup (f1c6d01)
+ - kernel: Clean up as suggested by tidier (c695f3f)
+
+* ks/hipe (dialyzer, hipe, typer) (2010-02-10) 4 commits
+ - dialyzer: New version for the R13B04 release (49d7f36)
+ - hipe: Miscellaneous additions (6049203)
+ - typer: New version for the R13B04 release (6d1f40f)
+ - Fix a HiPE compiler bug evaluating an expression that throws system_limit (665bcd7)
+
+To be included in R13B04.
+
+------------------------------------------------------------
+[Stalled]
+
+* kr/gs-browser (gs) (2010-02-10) 1 commit
+ - Change lib/gs/src/tool_utils.erl to select multiple browsers other than Netscape (802d159)
+
+This topic branch introduces a new call to the deprecated regexp module.
+
+------------------------------------------------------------
+[Cooking]
+
+* at/odbc_osx_fix (odbc) (2009-11-30) 1 commit
+ - Workaround broken ODBC implementation on OSX 10.5 (88c71c9)
+
+Being reviewed.
+
+* bg/erl_bif_types (hipe) (2010-02-03) 2 commits
+ - Add types for erts_debug:dist_ext_to_term/2 (249f73a)
+ - erl_bif_types: add 'http_bin' as a valid packet option (7c72a77)
+
+* bg/safer-local_to_univ (erts) (2010-02-11) 1 commit
+ - erl_time_sup.c: test for error return from mktime() (0f62f0b)
+
+* bg/temp-hipe-fixes (compiler, hipe, kernel) (2010-01-31) 4 commits
+ - Crudely fix return type for the lists:key{search,find,member}/3 (0e3ab3e)
+ - seq_trace_SUITE: Don't native-compile (c9fc04b)
+ - Disable native code if on_load is used (bd4fe28)
+ - andor_SUITE: Don't native-compile (8aadc4c)
+
+This branch contains temporary workarounds to avoid failing test
+cases and is never intended to graduate.
+
+* db/tv_nthtail_fix (tv) (2009-12-01) 1 commit
+ - Fix for tv which restarts while trying to open a table (abe0759)
+
+The author of this topic branch has found the real reason for
+the problem and has made some progress in resolving it.
+
+* dgud/emacs-mode (tools) (2010-01-26) 2 commits
+ - Added the old style skeletons, and a variable to change. (2cbe853)
+ - Move code skeletons to a separate file. Use the updated skeletons from the Erlware Mode. (b4fd161)
+
+* jn/sasl-format_report (sasl) (2010-01-27) 1 commit
+ - Added sasl_report:format_report/3 to return a string rather than send an io (ee8f29f)
+
+* jp/dependencies_makefile (compiler, erts) (2010-01-12) 2 commits
+ - squash! fix snprintf for Windows (bf2708d)
+ - Add dependencies Makefile generation to erlc(1) and compile(3) (7cbc437)
+
+Approved in principle by the OTP Technical Board; now awaits a closer
+review of the implementation. Unfortunately, will not make it for R13B04.
+
+* kl/extensibility-implied (asn1) (2010-02-05) 3 commits
+ - Updated ticket reference (a1a09bc)
+ - Add support for EXTENSIBILITY IMPLIED, SET/SEQ OF NamedType (debc35b)
+ - Updated version number for the next version of ASN1 (48d0efe)
+
+* kr/odbc-netinet (odbc) (2010-02-10) 1 commit
+ - Fix ODBC compilation error on FreeBSD by adding netinet/in.h to #include macros (5c6be09)
+
+* kr/sasl-typo-fix (sasl) (2010-02-10) 1 commit
+ - sasl: Fix typo (b798e9b)
+
+* ks/cleanups (asn1, debugger, docbuilder, gs, os_mon, parsetools, percept, runtime_tools, sasl, wx) (2010-02-07) 11 commits
+ - percept: Modernize types and specs and clean up as suggested by tidier (10422fb)
+ - debugger: Clean up as suggested by tidier (cf178ed)
+ - docbuilder: Clean up as suggested by tidier (222ae3f)
+ - parsetools: Modernize types and specs + cleanup by tidier (5659cd0)
+ - runtime_tools: Modernize specs (774e7fd)
+ - sasl: Eliminate tuple used as fun (f48ed8b)
+ - sasl: Add missing modules to app file (45a39a2)
+ - asn1: Clean up as suggested by tidier (405578b)
+ - os_mon: Modernize types and specs (7b7f8b7)
+ - wx: Clean up as suggested by tidier (9b79d9b)
+ - gs: Clean up as suggested by tidier (afd194b)
+
+* tj/asn1_macro_prefix (asn1) (2010-02-04) 1 commit
+ - Add support for prefixing macro names generated by the compiler (e88fa38)
+
+* va/rb-improvements (sasl) (2010-02-06) 5 commits
+ - uses module re for regular expressions (f15b05a)
+ - New function to filter reports by date (58f4cd1)
+ - New rb:filter/1 function to ease report filtering (55eccfa)
+ - Add rb:re/1 to grep reports using the re module (202d6ac)
+ - Fix minor typo in read_report/1 (7d645b7)
