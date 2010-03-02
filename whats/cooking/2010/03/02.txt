@@ -1,0 +1,197 @@
+To: erlang patches <erlang-patches@erlang.org>
+Subject: What's cooking in erlang/otp (2010-03-02)
+X-dev-at: 72fbfd173f2f60bb1b12f826adf41ad9f8fa255e
+
+We are back with the first What's cooking after R13B04
+release. The next release will be R14A.
+
+There is a new wiki page about how to write good commit
+messages:
+
+http://wiki.github.com/erlang/otp/writing-good-commit-messages
+
+There is also new page with some guidelines about what
+sort of patches that are likely to be approved:
+
+http://wiki.github.com/erlang/otp/faq-what-kind-of-patches-will-be-approved
+
+------------------------------------------------------------
+[New topics]
+
+* am/kernel-stops (kernel) (2010-02-21) 1 commit
+ - Change restart behavior of network apps from permanent to transient (397343b)
+
+* am/net_kernel_catchall (kernel) (2010-02-20) 1 commit
+ - Add catch all handle_call to net_kernel (77ee109)
+
+* au/crypto (crypto) (2010-03-01) 2 commits
+ - Add missing docs for crypto:md4/1 (b869aef)
+ - Add des_ecb_encrypt/2 and des_ecb_decrypt/2 to crypto module (544ed56)
+
+* bg/efficiency-guide (otp) (2010-02-28) 3 commits
+ - Efficiency Guide: Recommend external funs over tuple funs (5a662ce)
+ - Efficiency Guide: The maximum number of atoms can be configured (cedee54)
+ - Efficiency Guide: Fix typos (a0fc666)
+
+* dgud/emacs-bugfixes (tools) (2010-02-25) 2 commits
+ - Added erlang-skels to release target (ddcad46)
+ - Fixed electric semi-colon and tuples inside lists. (cfde62b)
+
+* jl/windows-file-share-delete (erts) (2010-02-22) 1 commit
+ - Windows: Open files with FILE_SHARE_DELETE to get closer to UNIX semantics (e5e5597)
+
+* jv/update-rpccall-to-use-try (kernel) (2010-02-24) 1 commit
+ - fix rpc handling of uncaught throws (99b7776)
+
+* sv/format_status_error_info (stdlib) (2010-02-28) 2 commits
+ - Add support for the format_status callback to gen_event (fd9abcb)
+ - Extend format_status for gen_server/gen_fsm termination error logging (3d06952)
+
+------------------------------------------------------------
+[Stalled]
+
+* am/spawn-rpc (erts, kernel) (2010-02-28) 3 commits
+ . Update preloaded modules (457abb4)
+ . Add filtering of remote spawn and rpc calls (17f1f44)
+ . Move remote spawning from net_kernel to rpc (rex) (47fe61b)
+
+This topic branch introduce an mechanism to filter spawn
+requests and rpc calls from other nodes, as an incremental
+first step to have additional security besides the cookie.
+(It is still possible to send messages to any process on
+another node, as well as overflow the atom table on the
+other node, so it is still not safe.)
+
+We think the Erlang distribution protocol should only be
+used between trusted nodes. Adding security afterwards
+is a very difficult task and I don't think it should
+be done incrementally, because "almost secure" is worse
+than "definitely not secure". If you need to talk with
+untrusted nodes, use your own protocol over a socket.
+
+I have dropped this branch from 'pu' for now because it
+introduces a backwards incompatibility when there are nodes
+of diffent versions. (We don't recommend permanently running
+nodes of different version, but it is necessary when upgrading
+a live system.)
+
+If that compability issue is fixed, the OTP Technical Board
+will have to decide whether the topic branch can be accepted,
+since it touches sensitive code paths, and is likely to
+decrease performance even it the new filtering features
+are not used.
+
+* at/odbc_osx_fix (odbc) (2009-11-30) 1 commit
+ - Workaround broken ODBC implementation on OSX 10.5 (88c71c9)
+
+The patch in itself is good. It solves the problem on Mac OS X
+in the only way that seems possible. Unfortunately, our
+test cases fail on Linux, and fixing it seems to require a
+backward-incompatible change to the API of the odbc module or
+ugly workarounds. The reviewer (Jakob Cederlund) will email
+the details and suggest and/or implement a solution.
+
+Action expected from: OTP/Jakob Cederlund
+
+* bg/safer-local_to_univ (erts) (2010-02-11) 1 commit
+ - erl_time_sup.c: test for error return from mktime() (0f62f0b)
+
+We will not include this branch in R13B04 for two reasons:
+
+  o We are not 100% sure that this change is harmless on all
+    platforms in all timezones.
+  o We have an idea how the underlying problem can be fixed in
+    the calendar module (only) and I plan to try it out after the
+    release. We will keep this branch in pu as a reminder.
+
+Action expected from: Björn Gustavsson
+
+* db/tv_nthtail_fix (tv) (2009-12-01) 1 commit
+ - Fix for tv which restarts while trying to open a table (abe0759)
+
+I should have put this into the stalled state earlier.
+
+Since our long-term goal is to migrate from gs towards wx,
+maintaining the old gs applications has a low priority for
+the Erlang/OTP team. Therefore, we will accept patches that
+seem sound, but we are unlikely to spend much of our own time
+fixing bugs.
+
+The author of this topic branch has found the real reason for
+the problem, but uncovered additional issues.
+
+Action expected from: The topic author - to decide whether to
+include the topic branch (which is a workaround, but does eliminate
+the crash) or to wait for a better fix from himself or someone else
+with an interest to advance the topic.
+
+* jp/dependencies_makefile (compiler, erts) (2010-02-14) 3 commits
+ - squash! eliminate dialyzer warning (434e2ca)
+ - squash! fix snprintf for Windows (bf2708d)
+ - Add dependencies Makefile generation to erlc(1) and compile(3) (7cbc437)
+
+Approved in principle by the OTP Technical Board; now awaits a closer
+review of the implementation.
+
+Action expected from: Björn Gustavsson (the reviewer)
+
+* kr/gs-browser (gs) (2010-02-10) 1 commit
+ - Change lib/gs/src/tool_utils.erl to select multiple browsers other than Netscape (802d159)
+
+This topic branch introduces a new call to the deprecated regexp module.
+
+Action expected from: Topic author or anyone else with an interest to
+advance the topic
+
+------------------------------------------------------------
+[Cooking]
+
+* bd/mnesia-activity-subscription (mnesia) (2010-02-12) 1 commit
+ - Add mnesia activity subscription message (a564dd3)
+
+* bg/compiler-bugs (otp) (2010-02-16) 1 commit
+ - bug: inlining a module causes an internal compiler error (f77e8aa)
+
+Reminder for a (low priority) bug to fix after the R13B04 release.
+
+* bg/temp-hipe-fixes (compiler, hipe, kernel) (2010-01-31) 4 commits
+ - Crudely fix return type for the lists:key{search,find,member}/3 (0e3ab3e)
+ - seq_trace_SUITE: Don't native-compile (c9fc04b)
+ - Disable native code if on_load is used (bd4fe28)
+ - andor_SUITE: Don't native-compile (8aadc4c)
+
+This branch contains temporary workarounds to avoid failing test
+cases and is never intended to graduate.
+
+* gl/jinterface-pom (jinterface, otp) (2010-02-15) 2 commits
+ - Exclude jinterface build artifact from git (5acf5fa)
+ - Add pom.xml for jinterface build (aa68190)
+
+* ks/cleanups (cosNotification, debugger, docbuilder, gs, kernel, orber, stdlib) (2010-02-23) 9 commits
+ - Add right parentheses to defines ending without them (3338f8c)
+ - debugger: Clean up as suggested by tidier (a9d454b)
+ - docbuilder: Clean up as suggested by tidier (20d6b5e)
+ - gs: Clean up as suggested by tidier (b3453b5)
+ - Take out type declarations from file.hrl. (1f81c55)
+ - stdlib: Use fun object instead of {M,F} tuple (cafe3a0)
+ - ets: Cleanup as suggested by tidier (932ec62)
+ - kernel: Add types and specs + cleanup (098f321)
+ - kernel: Clean up as suggested by tidier (f71b7f2)
+
+Was formerly called ks/cleanups-after-r13b04.
+
+* mh/ssh_channel-init-no-catch (ssh) (2010-01-25) 1 commit
+ - Remove pointless catch from ssh_channel:init/1. (bb7eaa5)
+
+* ra/include-public_key-in-ssh (ssh) (2010-01-20) 1 commit
+ - Added public_key among ssh applications. (3a0c2c5)
+
+------------------------------------------------------------
+[Dropped]
+
+
+* at/terminate-can-modify-state (stdlib) (2010-02-24) 1 commit
+ . Add ability for gen_(server|fsm):terminate to modify state sent to error_logger (aedff05)
+
+Replaced by sv/format_status_error_info.
+
