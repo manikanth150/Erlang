@@ -1,0 +1,269 @@
+To: erlang patches <erlang-patches@erlang.org>
+Subject: What's cooking in erlang/otp (2010-03-22)
+X-dev-at: 99101783758b3e4805284aaec16d34dc3597158e
+
+After a meeting of the OTP Technical Board, we have added one more
+entry to "FAQ: What kind of patches will be approved?":
+
+http://wiki.github.com/erlang/otp/faq-what-kind-of-patches-will-be-approved
+
+------------------------------------------------------------
+[Graduated]
+
+* bg/asn1-tests (asn1) (2010-03-11) 7 commits
+ + asn1 tests: Let ts:run() build the tests (878f36c)
+ + asn1 tests: No longer tolerate compilation warnings (c642415)
+ + asn1 tests: Eliminate use of deprecated concat_binary/1 (165f723)
+ + asn1 tests: Eliminate warning for an unused variable (e42725a)
+ + asn1 tests: Modernize guard tests (44cc5df)
+ + asn1 tests: Clean up comments (c5dff50)
+ + asn1 tests: Don't refer to $ERL_TOP in compiler options (dc1e683)
+
+* bg/efficiency-guide (otp) (2010-02-28) 3 commits
+ + Efficiency Guide: Recommend external funs over tuple funs (5a662ce)
+ + Efficiency Guide: The maximum number of atoms can be configured (cedee54)
+ + Efficiency Guide: Fix typos (a0fc666)
+
+* dgud/emacs-bugfixes (tools) (2010-03-15) 3 commits
+ + Fix another -spec() problem (228e1f0)
+ + Add missing elisp files to the the release target (bffb3a3)
+ + Fix electric semi-colon and tuples inside lists (824ba96)
+
+* hawk/escript-add-create-and-extract (erts, reltool, stdlib) (2010-03-05) 5 commits
+ + Add type info for record fields (d09c73a)
+ + Remove the undocumented function escript:foldl/3 (e774e56)
+ + Make reltool independent of the function escript:foldl/3 (26d609d)
+ + Add functions to create and extract escripts (31b790b)
+ + Add function zip:foldl/3 to iterate over zip archives (a20eb61)
+
+* ml/documentation_apostrophe_fix (appmon, erl_interface, erts, inets, kernel, megaco, otp, runtime_tools, snmp, stdlib, test_server, xmerl) (2010-03-15) 2 commits
+ + Correct grammatical problems in conjunction with 'its' (fa6853c)
+ + Change all incorrect occurrences of it's to its (bfd9a4f)
+
+------------------------------------------------------------
+[New topics]
+
+* bg/compiler (compiler, stdlib) (2010-03-12) 5 commits
+ - beam_peep: Remove optimization already done by beam_dead (fc83f83)
+ - beam_dead: Combine is_eq_exact instructions into select_val instructions (e2a19cf)
+ - Evaluate is_record/3 at compile-time using type information (c8777da)
+ - Evaluate element/2 at compile-time using type information (253e455)
+ - erl_expand_records: Replace is_record() with matching (f479d82)
+
+* bg/compiler-inliner (compiler, otp) (2010-03-19) 8 commits
+ - pmod_SUITE: Again test to inline parameterized modules (f4dc072)
+ - compiler tests: Cope with missing args in function_clause for native code (e7c4f54)
+ - compiler tests: Compile a few more modules with 'inline' (e3dac78)
+ - Consistently rewrite an inlined function_clause exception to case_clause (bc0a526)
+ - compiler tests: Test the 'inline' option better (9668443)
+ - compiler: Suppress bs_context_to_binary/1 for a literal operand (0772d1e)
+ - compiler: Fix binary matching bug in the inliner (1069279)
+ - sys_core_inline: Don't generated multiple compiler_generated annos (df7a975)
+
+* bg/compiler-remove-r11-support (compiler, erts, otp, test_server) (2010-03-16) 7 commits
+ - compiler: Don't support the no_binaries option (d179c15)
+ - erts: Don't support the put_string/3 instruction (bba6073)
+ - compiler: Don't support the no_constant_pool option (2dc5a17)
+ - compiler: Don't support the r11 option (eeff53b)
+ - test_server: Don't support communication with R11 nodes (2090739)
+ - binary_SUITE: Don't test bit-level binary roundtrips with R11 nodes (4767bed)
+ - erts: Test compatibility of funs with R12 instead of R11 (e188505)
+
+* hawk/wx-add-app-file (wx) (2010-03-15) 1 commit
+ - Add app and appup files to the wx application (00832cc)
+
+* ms/epmd-error-checking (erts) (2010-03-20) 1 commit
+ - Exit if an error occurs with the listening socket (a4882b4)
+
+* ms/pcre-compile-workspace-overrun (erts, stdlib) (2010-03-19) 2 commits
+ - re_SUITE: Add pcre_compile_workspace_overflow/1 (3efa1b8)
+ - Fix check for compile workspace overflow (272e106)
+
+* rb/ssl-fix-http-packet-decoding (ssl) (2010-03-16) 1 commit
+ - Fix ssl to decode http packets in the same way as gen_tcp (9e7178f)
+
+* rd/erlang-eunit (tools) (2010-03-22) 1 commit
+ - erlang-eunit.el: Require cl, as it is used (43ae537)
+
+------------------------------------------------------------
+[Stalled]
+
+* bg/safer-local_to_univ (erts) (2010-02-11) 1 commit
+ - erl_time_sup.c: test for error return from mktime() (0f62f0b)
+
+We will not include this branch in R13B04 for two reasons:
+
+  o We are not 100% sure that this change is harmless on all
+    platforms in all timezones.
+  o We have an idea how the underlying problem can be fixed in
+    the calendar module (only) and I plan to try it out after the
+    release. We will keep this branch in pu as a reminder.
+
+Action expected from: Björn Gustavsson
+
+* db/tv_nthtail_fix (tv) (2009-12-01) 1 commit
+ - Fix for tv which restarts while trying to open a table (abe0759)
+
+Since our long-term goal is to migrate from gs towards wx,
+maintaining the old gs applications has a low priority for
+the Erlang/OTP team. Therefore, we will accept patches that
+seem sound, but we are unlikely to spend much of our own time
+fixing bugs.
+
+The author of this topic branch has found the real reason for
+the problem, but uncovered additional issues.
+
+Action expected from: The topic author - to decide whether to
+include the topic branch (which is a workaround, but does eliminate
+the crash) or to wait for a better fix from himself or someone else
+with an interest to advance the topic.
+
+* jp/dependencies_makefile (compiler, erts) (2010-02-14) 3 commits
+ - squash! eliminate dialyzer warning (434e2ca)
+ - squash! fix snprintf for Windows (bf2708d)
+ - Add dependencies Makefile generation to erlc(1) and compile(3) (7cbc437)
+
+Approved in principle by the OTP Technical Board; now awaits a closer
+review of the implementation.
+
+Action expected from: Björn Gustavsson (the reviewer)
+
+* jv/update-rpccall-to-use-try (kernel) (2010-02-24) 1 commit
+ . fix rpc handling of uncaught throws (3f21ed7)
+
+The follow test cases fall when this topic branch is included:
+
+compiler:  inline_SUITE:barnes2/1
+kernel:    global_SUITE:simple_resolve/1
+           global_SUITE:simple_resolve2/1
+           rpc_SUITE:called_throws/1
+
+Action expected from: Topic author or anyone else with an interest to
+advance the topic
+
+* kr/gs-browser (gs) (2010-02-10) 1 commit
+ - Change lib/gs/src/tool_utils.erl to select multiple browsers other than Netscape (802d159)
+
+This topic branch introduces a new call to the deprecated regexp module.
+
+Action expected from: Topic author or anyone else with an interest to
+advance the topic
+
+------------------------------------------------------------
+[Cooking]
+
+* am/kernel-stops (kernel) (2010-02-21) 1 commit
+ - Change restart behavior of network apps from permanent to transient (397343b)
+
+* am/net_kernel_catchall (kernel) (2010-02-20) 1 commit
+ - Add catch all handle_call to net_kernel (77ee109)
+
+* au/crypto (crypto) (2010-03-01) 2 commits
+ - Add missing docs for crypto:md4/1 (b869aef)
+ - Add des_ecb_encrypt/2 and des_ecb_decrypt/2 to crypto module (544ed56)
+
+* bd/mnesia-activity-subscription (mnesia) (2010-02-12) 1 commit
+ - Add mnesia activity subscription message (a564dd3)
+
+* bg/temp-hipe-fixes (compiler, hipe, kernel) (2010-03-15) 6 commits
+ - Avoid crash by skipping compilation_SUITE:on_load/1 (234e13e)
+ - Inline less aggressively for native-code compilation (9fcb48b)
+ - Crudely fix return type for the lists:key{search,find,member}/3 (ef71597)
+ - seq_trace_SUITE: Don't native-compile (2a81b1a)
+ - Disable native code if on_load is used (3befa76)
+ - andor_SUITE: Don't native-compile (97aa2da)
+
+This branch contains temporary workarounds to avoid failing test
+cases and is never intended to graduate.
+
+* dgud/wx-new-doxygen (wx) (2010-03-10) 4 commits
+ - Added a non existing macro on windows. (3a4edf4)
+ - Commit of the generated code with previous commit. (dec7bba)
+ - Fixed code generation from newer doxygen versions. (556b7f0)
+ - Whitespace fixes (e68047c)
+
+* dp/shell-line-editing (kernel, stdlib) (2010-03-05) 1 commit
+ - Readline-style line edit history (91e912b)
+
+* er/ei-decode_msg (erl_interface) (2010-03-11) 1 commit
+ - Add function to decode distribution header (864091a)
+
+* gl/jinterface-pom (jinterface, otp) (2010-02-15) 2 commits
+ - Exclude jinterface build artifact from git (5acf5fa)
+ - Add pom.xml for jinterface build (aa68190)
+
+* jf/run_erl-disable-flow-control (erts) (2010-03-05) 1 commit
+ - Teach run_erl RUN_ERL_DISABLE_FLOWCNTRL for disabling flow control (d0775cd)
+
+* jl/windows-file-share-delete (erts) (2010-02-22) 1 commit
+ - Windows: Open files with FILE_SHARE_DELETE to get closer to UNIX semantics (e5e5597)
+
+* jn/ic-docs-without-java (ic) (2010-03-07) 1 commit
+ - Permit building and installing documentation without Java (2016a08)
+
+* ks/cleanups (debugger, docbuilder, gs, kernel, stdlib) (2010-03-21) 8 commits
+ - stdlib: Add types and specs (6a60c05)
+ - escript: Add more types to records (17655d0)
+ - kernel: Clean up as suggested by tidier (23063a5)
+ - debugger: Clean up as suggested by tidier (93e92a1)
+ - docbuilder: Clean up as suggested by tidier (59d0c74)
+ - gs: Clean up as suggested by tidier (02c9fa1)
+ - stdlib: Use fun object instead of {M,F} tuple (12bc861)
+ - ets: Cleanup as suggested by tidier (9a8bd8d)
+
+Was formerly called ks/cleanups-after-r13b04.
+
+* ks/export_type (compiler, dialyzer, hipe, kernel, stdlib, syntax_tools) (2010-03-22) 12 commits
+ - Minor fix in a print message (67699af)
+ - Add handling of unknown types (0a0e0f6)
+ - Add declaration for exported types (6d06913)
+ - Add types and specs; performed some cleanups also (7a01be9)
+ - erl_scan: Add declarations for exported types (35ad335)
+ - stdlib: Add declarations for exported types (85e206a)
+ - hipe: Add declarations for exported types (79c10da)
+ - compiler: Add declarations for exported types (2794783)
+ - syntax_tools: Add declarations for exported types (faab830)
+ - kernel: Add declaration for exported types (73b1b30)
+ - Support -export_type() in dialyzer and erl_types (f173fee)
+ - Add infrastructure for the -export_type() attribute (42c12b9)
+
+* mh/ssh_channel-init-no-catch (ssh) (2010-01-25) 1 commit
+ - Remove pointless catch from ssh_channel:init/1. (bb7eaa5)
+
+* ra/include-public_key-in-ssh (ssh) (2010-01-20) 1 commit
+ - Added public_key among ssh applications. (3a0c2c5)
+
+* sv/format_status_error_info (stdlib) (2010-02-28) 2 commits
+ - Add support for the format_status callback to gen_event (fd9abcb)
+ - Extend format_status for gen_server/gen_fsm termination error logging (3d06952)
+
+------------------------------------------------------------
+[Dropped]
+
+* am/restricted-port (erts) (2010-03-06) 5 commits
+ . Add unit test for 'restricted' flag to port_SUITE (837fdb1)
+ . Add enforcement of 'restricted' flag when using erlang:send (970aa8c)
+ . Add checks to port functions to enforce 'restricted' flag (6f3ec5b)
+ . Add 'restricted' option to opening ports (6a25251)
+ . Add 'restricted' as atom (d54ba70)
+
+Dropped after decision from the OTP Technical Board.
+
+* am/spawn_rpc (kernel) (2010-03-07) 2 commits
+ . Add filter to remote spawn (d84c5bb)
+ . Add filter to rpc (4a621c0)
+
+Dropped after decision from the OTP Technical Board.
+
+* at/odbc_osx_fix (odbc) (2009-11-30) 1 commit
+ . Workaround broken ODBC implementation on OSX 10.5 (88c71c9)
+
+The patch in itself is good. It solves the problem on Mac OS X
+(Leopard) in the only way that seems possible. Unfortunately, our
+test cases fail on Linux, and fixing it seems to require a
+backward-incompatible change to the API of the odbc module or
+ugly workarounds.
+
+Since the bug in the ODCB driver has been fixed in Mac OS X
+Snow Leopard and the topic author no longer have a use for
+the correction, the topic branch has been dropped.
