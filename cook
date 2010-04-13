@@ -27,6 +27,13 @@ my $output_file;
 }
 
 my $title = "What's cooking in erlang/otp ($date)";
+my $from = `git config imap.user`;
+my $header_date = gmtime(time);
+chomp $from;
+print "From - $header_date\n";
+print "From: $from\n"
+    if $from ne '';
+print "Date: $header_date\n";
 print "To: erlang patches <erlang-patches\@erlang.org>\n";
 print "Subject: $title\n";
 print "X-dev-at: ", `git rev-parse dev`;
