@@ -1,0 +1,239 @@
+From - Tue Apr 13 07:11:47 2010
+From: bgustavsson@gmail.com
+Date: Tue Apr 13 07:11:47 2010
+To: erlang patches <erlang-patches@erlang.org>
+Subject: What's cooking in erlang/otp (2010-04-13)
+X-dev-at: 84f2aeb0552a4d23f04ce340895ec17a3277ff8e
+
+------------------------------------------------------------
+[Graduated]
+
+* bg/ts_run (test_server) (2010-04-02) 1 commit
+ + ts_run: Don't run make:all/1 without a good reason (b42442e)
+
+* jb/pp_arm-imm-fix (hipe) (2010-04-05) 1 commit
+ + Modify pp_arm to decode imm8m constants (807ebc9)
+
+* rb/ssl-fix-http-packet-decoding (ssl) (2010-03-16) 1 commit
+ + Fix ssl to decode http packets in the same way as gen_tcp (b1d9fec)
+
+* rb/ssl-opts-fix (ssl) (2010-04-05) 2 commits
+ + Fix verification of ssl client when fail_if_no_peer_cert (16dafd1)
+ + Fix mishandling of valid ssl options (c754439)
+
+* rb/ssl-transport-accept-fix (ssl) (2010-03-28) 1 commit
+ + Fix ssl:transport_accept/2 to return properly when socket is closed (0e502e4)
+
+* sk/old_heap-unused (erts) (2010-04-08) 1 commit
+ + system_info(procs): Fix the value for "OldHeap unused" (ac8f094)
+
+* ta/asn1-verbose (asn1) (2010-04-08) 2 commits
+ + Add test for verbose option to asn1_SUITE (2afc5c0)
+ + Teach asn1ct verbose option (900ee73)
+
+* ta/doc-fakefop (erts, otp) (2010-03-29) 1 commit
+ + Build placeholder PDF files if FOP is not found (bdb41b9)
+
+* ta/nif-documentation (erts) (2010-04-03) 2 commits
+ + Fix typos in erl_nif.xml (f265f7d)
+ + Build erl_nif manpage (cba83b3)
+
+------------------------------------------------------------
+[New topics]
+
+* bg/deprecations (compiler, crypto, stdlib) (2010-04-08) 3 commits
+ - test suites: Remove incidental use of deprecated concat_binary/1 (1403571)
+ - Postpone removal of concat_binary/1 (ca2b31a)
+ - Remove deprecated lists:flat_length/1 (0c2be22)
+
+* bg/fconv (erts) (2010-04-07) 1 commit
+ - erts: Fix loading of modules with invalid floating point arithmetic (fd9bb9f)
+
+* bg/remove-stray-ose-support (erl_interface, erts, kernel, otp, test_server) (2010-04-13) 11 commits
+ - configure: Remove stray OSE/Delta support (734e7f7)
+ - Makefiles: Remove stray OSE/Delta support (8c55c15)
+ - kernel tests: Remove stray OSE/Delta support (954bddc)
+ - system tests: Remove stray OSE/Delta support (102566a)
+ - erl_interface tests: Remove stray OSE/Delta support (3f844ee)
+ - epmd: Remove stray OSE/Delta support (a1a3259)
+ - epmd: #ifdef out start_epmd() for other platforms than VxWorks (20d4049)
+ - emulator tests: Remove stray OSE/Delta support (62a5970)
+ - emulator: Remove stray OSE/Delta support (7e6b3b2)
+ - emulator: Eliminate #ifdef for sys_tty_reset() (5281c61)
+ - test_server: Remove stray support for OSE/Delta (7f85f02)
+
+* cf/timer_tc (stdlib) (2010-04-06) 1 commit
+ - Add timer:tc/2 to measure the elapsed time of anonymous functions (2cca650)
+
+* hb/edoc (edoc) (2010-04-01) 1 commit
+ - EDoc and Dialyzer specs and types (516e16c)
+
+* ks/stdlib (stdlib) (2010-04-10) 4 commits
+ - erl_parse.yrl: Add missing operator in type declaration (d1e8737)
+ - stdlib: Add types and specs (0ca1793)
+ - stdlib: Use fun object instead of {M,F} tuple (19babf5)
+ - ets: Cleanup as suggested by tidier (95c2c8f)
+
+* ms/inet_gethost-safe-debug-output (erts) (2010-04-12) 1 commit
+ - Truncate debug messages (c4c2067)
+
+* ta/asn1-gratuitous-output (asn1) (2010-04-10) 1 commit
+ - Remove gratuitous ok report in asn1ct (1eb1f13)
+
+------------------------------------------------------------
+[Stalled]
+
+* bg/safer-local_to_univ (erts) (2010-02-11) 1 commit
+ - erl_time_sup.c: test for error return from mktime() (0f62f0b)
+
+We will not include this branch in R13B04 for two reasons:
+
+  o We are not 100% sure that this change is harmless on all
+    platforms in all timezones.
+  o We have an idea how the underlying problem can be fixed in
+    the calendar module (only) and I plan to try it out after the
+    release. We will keep this branch in pu as a reminder.
+
+Action expected from: Björn Gustavsson
+
+* db/tv_nthtail_fix (tv) (2009-12-01) 1 commit
+ - Fix for tv which restarts while trying to open a table (abe0759)
+
+Since our long-term goal is to migrate from gs towards wx,
+maintaining the old gs applications has a low priority for
+the Erlang/OTP team. Therefore, we will accept patches that
+seem sound, but we are unlikely to spend much of our own time
+fixing bugs.
+
+The author of this topic branch has found the real reason for
+the problem, but uncovered additional issues.
+
+Action expected from: The topic author - to decide whether to
+include the topic branch (which is a workaround, but does eliminate
+the crash) or to wait for a better fix from himself or someone else
+with an interest to advance the topic.
+
+* er/ei-decode_msg (erl_interface) (2010-03-11) 1 commit
+ - Add function to decode distribution header (864091a)
+
+Needs documentation and test cases.
+
+Action expected from: Topic author
+
+* jp/dependencies_makefile (compiler, erts) (2010-02-14) 3 commits
+ - squash! eliminate dialyzer warning (434e2ca)
+ - squash! fix snprintf for Windows (bf2708d)
+ - Add dependencies Makefile generation to erlc(1) and compile(3) (7cbc437)
+
+Approved in principle by the OTP Technical Board; now awaits a closer
+review of the implementation.
+
+Action expected from: Björn Gustavsson (the reviewer)
+
+* kr/gs-browser (gs) (2010-02-10) 1 commit
+ - Change lib/gs/src/tool_utils.erl to select multiple browsers other than Netscape (802d159)
+
+This topic branch introduces a new call to the deprecated regexp module.
+
+Action expected from: Topic author or anyone else with an interest to
+advance the topic
+
+------------------------------------------------------------
+[Cooking]
+
+* am/kernel-stops (kernel) (2010-02-21) 1 commit
+ - Change restart behavior of network apps from permanent to transient (397343b)
+
+* am/net_kernel_catchall (kernel) (2010-02-20) 1 commit
+ - Add catch all handle_call to net_kernel (77ee109)
+
+* bg/compiler (compiler, stdlib) (2010-03-12) 5 commits
+ - beam_peep: Remove optimization already done by beam_dead (f4e3b6e)
+ - beam_dead: Combine is_eq_exact instructions into select_val instructions (c964f06)
+ - Evaluate is_record/3 at compile-time using type information (e54f3a3)
+ - Evaluate element/2 at compile-time using type information (01deb2c)
+ - erl_expand_records: Replace is_record() with matching (e95dcd6)
+
+* bg/temp-hipe-fixes (compiler, hipe, kernel) (2010-03-15) 6 commits
+ - Avoid crash by skipping compilation_SUITE:on_load/1 (234e13e)
+ - Inline less aggressively for native-code compilation (9fcb48b)
+ - Crudely fix return type for the lists:key{search,find,member}/3 (ef71597)
+ - seq_trace_SUITE: Don't native-compile (2a81b1a)
+ - Disable native code if on_load is used (3befa76)
+ - andor_SUITE: Don't native-compile (97aa2da)
+
+This branch contains temporary workarounds to avoid failing test
+cases and is never intended to graduate.
+
+* dp/shell-line-editing (kernel, stdlib) (2010-03-05) 1 commit
+ - Readline-style line edit history (91e912b)
+
+* gl/jinterface-pom (jinterface, otp) (2010-02-15) 2 commits
+ - Exclude jinterface build artifact from git (5acf5fa)
+ - Add pom.xml for jinterface build (aa68190)
+
+* jb/inet6-dist (erts, kernel) (2010-03-23) 3 commits
+ - Support IPv6 addresses in long host names (a1fb1dd)
+ - Fix implementation of IPv6 TCP distribution protocol (3c1f843)
+ - Fix compilation of epmd with IPv6 enabled (b39b8b7)
+
+* jf/run_erl-disable-flow-control (erts) (2010-03-05) 1 commit
+ - Teach run_erl RUN_ERL_DISABLE_FLOWCNTRL for disabling flow control (d0775cd)
+
+* jl/windows-file-share-delete (erts) (2010-02-22) 1 commit
+ - Windows: Open files with FILE_SHARE_DELETE to get closer to UNIX semantics (e5e5597)
+
+* jn/ic-docs-without-java (ic) (2010-03-07) 1 commit
+ - Permit building and installing documentation without Java (2016a08)
+
+* ks/cleanups (compiler, debugger, docbuilder, gs, kernel, stdlib) (2010-04-10) 6 commits
+ - compiler: Fix incorrect types and specs (fe8e26c)
+ - escript: Add more types to records (9510645)
+ - kernel: Clean up as suggested by tidier (1aa54a1)
+ - debugger: Clean up as suggested by tidier (bd4b8be)
+ - docbuilder: Clean up as suggested by tidier (8e534c7)
+ - gs: Clean up as suggested by tidier (7944862)
+
+Was formerly called ks/cleanups-after-r13b04.
+
+* ks/export_type (compiler, dialyzer, hipe, kernel, stdlib, syntax_tools) (2010-03-22) 12 commits
+ - Minor fix in a print message (358383d)
+ - Add handling of unknown types (86431df)
+ - Add declaration for exported types (3c33970)
+ - Add types and specs; performed some cleanups also (b9246e3)
+ - erl_scan: Add declarations for exported types (a5aecf9)
+ - stdlib: Add declarations for exported types (c99bb08)
+ - hipe: Add declarations for exported types (ccf4f09)
+ - compiler: Add declarations for exported types (dbb1e73)
+ - syntax_tools: Add declarations for exported types (bfbf202)
+ - kernel: Add declaration for exported types (e56ebd6)
+ - Support -export_type() in dialyzer and erl_types (704ae6f)
+ - Add infrastructure for the -export_type() attribute (8a3faa7)
+
+* mh/ssh_channel-init-no-catch (ssh) (2010-01-25) 1 commit
+ - Remove pointless catch from ssh_channel:init/1. (bb7eaa5)
+
+* ms/epmd-error-checking (erts) (2010-03-29) 2 commits
+ - fixup! Exit if an error occurs with the listening socket (c103599)
+ - Exit if an error occurs with the listening socket (a4882b4)
+
+* ms/pcre-compile-workspace-overrun (erts, stdlib) (2010-03-19) 2 commits
+ - re_SUITE: Add pcre_compile_workspace_overflow/1 (3efa1b8)
+ - Fix check for compile workspace overflow (272e106)
+
+* ra/include-public_key-in-ssh (ssh) (2010-01-20) 1 commit
+ - Added public_key among ssh applications. (3a0c2c5)
+
+* rd/erlang-eunit (tools) (2010-03-22) 1 commit
+ - erlang-eunit.el: Require cl, as it is used (43ae537)
+
+* sv/format_status_error_info (stdlib) (2010-02-28) 2 commits
+ - Add support for the format_status callback to gen_event (fd9abcb)
+ - Extend format_status for gen_server/gen_fsm termination error logging (3d06952)
+
+* sv/sasl-fix-get_status (sasl) (2010-03-26) 1 commit
+ - fix sys:get_status backward compatibility for sasl release_handler_1 (3cc2ceb)
+
+* ta/nested-records (compiler, stdlib) (2010-03-25) 1 commit
+ - Support nested record field access without parentheses (34053b5)
+
