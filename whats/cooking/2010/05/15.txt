@@ -1,0 +1,249 @@
+From - Sat May 15 08:42:25 2010
+From: bgustavsson@gmail.com
+Date: Sat May 15 08:42:25 2010
+To: erlang patches <erlang-patches@erlang.org>
+Subject: What's cooking in erlang/otp (2010-05-15)
+X-dev-at: 85ae127bea4098f4ca61b51e02fbc06ba50bdd34
+
+R14A is planned to be released on June 16. We haven't decided on
+an exact deadline for submissions yet, but the sooner you'll
+send in your submissions, the better chance it has to be
+considered for inclusion in the release.
+
+We will try to review most of the current branches in the 'pu'
+branch before the release.
+
+------------------------------------------------------------
+[Graduated]
+
+* bg/beam_lib (stdlib) (2010-05-06) 2 commits
+ + Remove redundant includes (a31b2b2)
+ + Make beam_lib:cmp/2 stricter (3f8f87e)
+
+* bg/compiler-attributes (compiler) (2010-05-05) 1 commit
+ + Remove opaque declarations from the attributes (36ad068)
+
+* bg/opt-receive (compiler, erts, hipe, kernel, otp, stdlib, test_server) (2010-04-23) 11 commits
+ + Test that gen_server:call/2,3 are fast even with a huge message queue (84f6523)
+ + erts: Add tests for the receive optimization (c8c736e)
+ + Update primary bootstrap (cdd4f99)
+ + erts: Implement recv_mark/1 and recv_set/1 for real (9c91901)
+ + compiler tests: Cover the error handling code in beam_receive (f7829c9)
+ + compiler test: Test optimization of receive statements (f39e0b6)
+ + Optimize selective receives in the presence of a large message queue (1d3148a)
+ + Introduce the new recv_mark/1 and recv_mark/1 instructions (d60f055)
+ + Compile tests that communicate with R12 nodes with the r12 option (ea0f50d)
+ + Move p_run/2 to test_lib (f0d8728)
+ + gen: Inline wait_resp_mon/2 to help the compiler optimize (23362ae)
+
+* dgud/emacs-21-fix (tools) (2010-05-03) 1 commit
+ + Remove usage of 'font-lock-preprocessor-face' if not available (5373c9c)
+
+* pl/fix-shared-lib-install (asn1, megaco, wx) (2010-04-15) 1 commit
+ + Fix shared libraries installation (7809f92)
+
+------------------------------------------------------------
+[New topics]
+
+* bg/wx_objects (wx) (2010-05-10) 1 commit
+ - wx_objects: Fix calls to unexported gen_server:print_event/3 (6bffafe)
+
+* mp/fix-erts_poll_info_kp-livelock (erts) (2010-05-12) 1 commit
+ - fix livelock in erts_poll_info_kp() (3e64542)
+
+* sv/socket-error-portability (erts) (2010-05-12) 1 commit
+ - use macro to portably test for socket system call errors (83aa099)
+
+------------------------------------------------------------
+[Stalled]
+
+* bg/safer-local_to_univ (erts) (2010-02-11) 1 commit
+ - erl_time_sup.c: test for error return from mktime() (0f62f0b)
+
+We will not include this branch in R13B04 for two reasons:
+
+  o We are not 100% sure that this change is harmless on all
+    platforms in all timezones.
+  o We have an idea how the underlying problem can be fixed in
+    the calendar module (only) and I plan to try it out after the
+    release. We will keep this branch in pu as a reminder.
+
+Action expected from: Björn Gustavsson
+
+* db/tv_nthtail_fix (tv) (2009-12-01) 1 commit
+ - Fix for tv which restarts while trying to open a table (abe0759)
+
+Since our long-term goal is to migrate from gs towards wx,
+maintaining the old gs applications has a low priority for
+the Erlang/OTP team. Therefore, we will accept patches that
+seem sound, but we are unlikely to spend much of our own time
+fixing bugs.
+
+The author of this topic branch has found the real reason for
+the problem, but uncovered additional issues.
+
+Action expected from: The topic author - to decide whether to
+include the topic branch (which is a workaround, but does eliminate
+the crash) or to wait for a better fix from himself or someone else
+with an interest to advance the topic.
+
+* er/ei-decode_msg (erl_interface) (2010-03-11) 1 commit
+ - Add function to decode distribution header (864091a)
+
+Needs documentation and test cases.
+
+Action expected from: Topic author
+
+* jp/dependencies_makefile (compiler, erts) (2010-02-14) 3 commits
+ - squash! eliminate dialyzer warning (434e2ca)
+ - squash! fix snprintf for Windows (bf2708d)
+ - Add dependencies Makefile generation to erlc(1) and compile(3) (7cbc437)
+
+Approved in principle by the OTP Technical Board; now awaits a closer
+review of the implementation.
+
+Action expected from: Björn Gustavsson (the reviewer)
+
+* kr/gs-browser (gs) (2010-02-10) 1 commit
+ - Change lib/gs/src/tool_utils.erl to select multiple browsers other than Netscape (802d159)
+
+This topic branch introduces a new call to the deprecated regexp module.
+
+Action expected from: Topic author or anyone else with an interest to
+advance the topic
+
+------------------------------------------------------------
+[Cooking]
+
+* am/kernel-stops (kernel) (2010-02-21) 1 commit
+ - Change restart behavior of network apps from permanent to transient (397343b)
+
+* am/net_kernel_catchall (kernel) (2010-02-20) 1 commit
+ - Add catch all handle_call to net_kernel (77ee109)
+
+* bg/compiler (compiler, stdlib) (2010-03-12) 5 commits
+ - beam_peep: Remove optimization already done by beam_dead (e9ee2f8)
+ - beam_dead: Combine is_eq_exact instructions into select_val instructions (3b530e8)
+ - Evaluate is_record/3 at compile-time using type information (d5685e3)
+ - Evaluate element/2 at compile-time using type information (f27015c)
+ - erl_expand_records: Replace is_record() with matching (7a463b6)
+
+* bg/compiler-cover-and-clean (compiler, erts, hipe) (2010-05-09) 19 commits
+ - v3_life: Remove clause that cannot match in match_fail/3 (8e0a5fa)
+ - v3_life tests: Cover exception handling code in v3_life:function/1 (69beb78)
+ - beam_type: Remove redundant clause (03aa2ea)
+ - v3_core tests: Cover make_bool_switch_guard/5 (5f6c7f8)
+ - v3_core tests: Cover handling of pattern aliases (a5fcd89)
+ - v3_core: Remove a clause in is_simple/1 that cannot match (3114064)
+ - v3_core: Remove unused support for generating compilation errors (ed1f37d)
+ - Remove stray support for the put_literal/2 instruction (5c3cf60)
+ - Remove stray support for the bs_bits_to_bytes2/2 instruction (a4efc76)
+ - Remove the bs_bits_to_bytes/3 instruction (f22f339)
+ - Cover handling of 'math' BIFs (e890deb)
+ - beam_bool: Remove a clause in live_regs/1 that cannot match (1fe4296)
+.
+.
+.
+
+* bg/temp-hipe-fixes (compiler, hipe, kernel) (2010-03-15) 6 commits
+ - Avoid crash by skipping compilation_SUITE:on_load/1 (234e13e)
+ - Inline less aggressively for native-code compilation (9fcb48b)
+ - Crudely fix return type for the lists:key{search,find,member}/3 (ef71597)
+ - seq_trace_SUITE: Don't native-compile (2a81b1a)
+ - Disable native code if on_load is used (3befa76)
+ - andor_SUITE: Don't native-compile (97aa2da)
+
+This branch contains temporary workarounds to avoid failing test
+cases and is never intended to graduate.
+
+* cf/timer_tc (stdlib) (2010-04-06) 1 commit
+ - Add timer:tc/2 to measure the elapsed time of anonymous functions (2cca650)
+
+* dp/shell-line-editing (kernel, stdlib) (2010-03-05) 1 commit
+ - Readline-style line edit history (91e912b)
+
+* fm/file-operations (erts, kernel) (2010-04-26) 3 commits
+ - Update preloaded modules (c2dbc5e)
+ - Add file:advise/4 - a wrapper to the POSIX syscall posix_fadvise (6fd827d)
+ - Add file:datasync/1 for syncing file contents only (d96666a)
+
+* gl/jinterface-pom (jinterface, otp) (2010-02-15) 2 commits
+ - Exclude jinterface build artifact from git (5acf5fa)
+ - Add pom.xml for jinterface build (aa68190)
+
+* hb/edoc (edoc) (2010-04-01) 1 commit
+ - EDoc and Dialyzer specs and types (516e16c)
+
+* jf/run_erl-disable-flow-control (erts) (2010-03-05) 1 commit
+ - Teach run_erl RUN_ERL_DISABLE_FLOWCNTRL for disabling flow control (d0775cd)
+
+* jl/windows-file-share-delete (erts) (2010-02-22) 1 commit
+ - Windows: Open files with FILE_SHARE_DELETE to get closer to UNIX semantics (0544a2c)
+
+* jn/ic-docs-without-java (ic) (2010-03-07) 1 commit
+ - Permit building and installing documentation without Java (2016a08)
+
+* jr/cover-src-path (tools) (2010-04-23) 1 commit
+ - Fix searching for source files in analyse_to_file/* (b9d5068)
+
+* ks/cleanups (compiler, debugger, docbuilder, gs, stdlib) (2010-04-10) 5 commits
+ - compiler: Fix incorrect types and specs (9021667)
+ - escript: Add more types to records (edfbc4b)
+ - debugger: Clean up as suggested by tidier (42c0c33)
+ - docbuilder: Clean up as suggested by tidier (c22830a)
+ - gs: Clean up as suggested by tidier (eda4f7a)
+
+Was formerly called ks/cleanups-after-r13b04.
+
+* ks/export_type (compiler, dialyzer, hipe, kernel, stdlib, syntax_tools) (2010-05-10) 13 commits
+ - erl_lint: Issue warnings for undefined exported types (8c22ad6)
+ - Minor fix in a print message (3ae85e9)
+ - Add handling of unknown types (0f9e42e)
+ - Add declaration for exported types (e71d8f6)
+ - Add types and specs; performed some cleanups also (b88e659)
+ - erl_scan: Add declarations for exported types (750f316)
+ - stdlib: Add declarations for exported types (7dcabb9)
+ - hipe: Add declarations for exported types (6a2cce2)
+ - compiler: Add declarations for exported types (a53c99e)
+ - syntax_tools: Add declarations for exported types (839cc84)
+ - kernel: Add declaration for exported types (5fdf89f)
+ - Support -export_type() in dialyzer and erl_types (ce76175)
+.
+.
+.
+
+* mh/ssh_channel-init-no-catch (ssh) (2010-01-25) 1 commit
+ - Remove pointless catch from ssh_channel:init/1. (bb7eaa5)
+
+* ms/file-exclusive-mode (erts, kernel) (2010-04-30) 1 commit
+ - Support opening files in exclusive mode (5d1253d)
+
+* ra/include-public_key-in-ssh (ssh) (2010-01-20) 1 commit
+ - Added public_key among ssh applications. (3a0c2c5)
+
+* se/spawn_drv_win_deadlock (erts) (2010-04-28) 1 commit
+ - Fix deadlock in spawn driver on windows (4fe6e7e)
+
+* sv/format_status-name-handling (stdlib, wx) (2010-05-09) 1 commit
+ - handle {global, term()} names in format_status/2 (8ca0aee)
+
+* sv/format_status_error_info (stdlib) (2010-02-28) 2 commits
+ - Add support for the format_status callback to gen_event (6281020)
+ - Extend format_status for gen_server/gen_fsm termination error logging (5ec0ade)
+
+* ta/asn1-reporting (asn1) (2010-04-23) 1 commit
+ - asn1ct: Make formatting of errors and warnings consistent (93face2)
+
+* ta/extend-nif-api (erts) (2010-05-07) 3 commits
+ - erl_nif: add make_atom_len, make_existing_atom_len and make_string_len (7ba3d59)
+ - erl_nif: add enif_get_atom_length and enif_get_list_length (855acf4)
+ - erl_nif: add enif_is_list and enif_is_tuple (8905503)
+
+* uw/epmd-fullnames (kernel) (2010-05-07) 1 commit
+ - Allow the erlang nodename host part to differ from the hostname (e0774be)
+
+* uw/mnesia-overload (mnesia) (2010-05-09) 1 commit
+ - Enable continuous monitoring of mnesia overload status (82c0904)
+
+* uw/mnesia-schema-merge (mnesia) (2010-05-09) 1 commit
+ - Allow a user_defined function to wrap mnesia_schema:merge_schema() (3f70f3d)
