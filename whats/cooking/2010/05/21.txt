@@ -1,0 +1,297 @@
+From - Fri May 21 08:47:42 2010
+Date: Fri May 21 08:47:42 2010
+To: erlang patches <erlang-patches@erlang.org>
+Subject: What's cooking in erlang/otp (2010-05-21)
+X-dev-at: f0286fc534e3905aba9b057b04fc73b3663dc77c
+
+R14A is planned to be released on June 16. Our internal
+feature freeze is June 2, and for any submission to be included
+in the release it must by then have been running in the 'pu'
+branch for a few days, without problems. You do the math.
+(Hint: a submission on May 31 will _not_ make it)
+
+And, of course we must have time to think about if we like
+the submission or not.
+
+------------------------------------------------------------
+[Graduated]
+
+* bg/compiler-cover-and-clean (compiler, erts, hipe) (2010-05-09) 19 commits
+ + v3_life: Remove clause that cannot match in match_fail/3 (953390b)
+ + v3_life tests: Cover exception handling code in v3_life:function/1 (c9461bb)
+ + beam_type: Remove redundant clause (5ab37cb)
+ + v3_core tests: Cover make_bool_switch_guard/5 (90c0611)
+ + v3_core tests: Cover handling of pattern aliases (3bac582)
+ + v3_core: Remove a clause in is_simple/1 that cannot match (f49f291)
+ + v3_core: Remove unused support for generating compilation errors (329f737)
+ + Remove stray support for the put_literal/2 instruction (0ebf768)
+ + Remove stray support for the bs_bits_to_bytes2/2 instruction (ed80dcf)
+ + Remove the bs_bits_to_bytes/3 instruction (ea404af)
+ + Cover handling of 'math' BIFs (9acf895)
+ + beam_bool: Remove a clause in live_regs/1 that cannot match (15ef8d6)
+.
+.
+.
+
+* dp/shell-line-editing (kernel, stdlib) (2010-03-05) 1 commit
+ + Readline-style line edit history (91e912b)
+
+* jn/ic-docs-without-java (ic) (2010-03-07) 1 commit
+ + Permit building and installing documentation without Java (2016a08)
+
+* mp/fix-erts_poll_info_kp-livelock (erts) (2010-05-12) 1 commit
+ + fix livelock in erts_poll_info_kp() (3e64542)
+
+* sv/format_status_error_info (stdlib) (2010-02-28) 2 commits
+ + Add support for the format_status callback to gen_event (6281020)
+ + Extend format_status for gen_server/gen_fsm termination error logging (5ec0ade)
+
+------------------------------------------------------------
+[New topics]
+
+* cb/emacs-eunit-run-current-test (tools) (2010-04-23) 1 commit
+ - Add Emacs EUnit utility feature: run current test function. (e946a61)
+
+* dp/emacs-flymake (tools) (2010-05-15) 1 commit
+ - Add optional Emacs flymake support (for unix systems) (1c99f24)
+
+* hm/reltool-find-regular (reltool) (2010-05-19) 1 commit
+ - Improve lookup of erl files (05e0238)
+
+* ks/cleanup-leex (parsetools) (2010-02-13) 1 commit
+ - leex: Clean up as suggested by tidier (f519ceb)
+
+* mh/erlang-mode-imenu-arity (tools) (2010-05-20) 1 commit
+ - Let imenu distinguish functions by arity (85d5b73)
+
+* mh/erlang-mode-map-init (tools) (2010-05-20) 1 commit
+ - Set erlang-mode-map when loading erlang.el (f0b3065)
+
+* mh/escript-erlang-mode (tools) (2010-05-18) 1 commit
+ - Associate files using interpreter "escript" with Erlang mode (9480662)
+
+* mh/fix-record-indentation (tools) (2010-05-18) 1 commit
+ - Fix indentation of records with line breaks inside lists (1f32cb4)
+
+* mh/inferior-erlang-cmd-uniq (tools) (2010-05-18) 1 commit
+ - inferior-erlang: specify command to run, uniquify buffer names (2c1dca7)
+
+* sb/make-files-like-erlc (tools) (2010-05-18) 1 commit
+ - Change make:files to behave more like erlc (5e9d051)
+
+------------------------------------------------------------
+[Stalled]
+
+* bg/safer-local_to_univ (erts) (2010-02-11) 1 commit
+ - erl_time_sup.c: test for error return from mktime() (0f62f0b)
+
+We will not include this branch in R13B04 for two reasons:
+
+  o We are not 100% sure that this change is harmless on all
+    platforms in all timezones.
+  o We have an idea how the underlying problem can be fixed in
+    the calendar module (only) and I plan to try it out after the
+    release. We will keep this branch in pu as a reminder.
+
+Action expected from: Björn Gustavsson
+
+* db/tv_nthtail_fix (tv) (2009-12-01) 1 commit
+ - Fix for tv which restarts while trying to open a table (abe0759)
+
+Since our long-term goal is to migrate from gs towards wx,
+maintaining the old gs applications has a low priority for
+the Erlang/OTP team. Therefore, we will accept patches that
+seem sound, but we are unlikely to spend much of our own time
+fixing bugs.
+
+The author of this topic branch has found the real reason for
+the problem, but uncovered additional issues.
+
+Action expected from: The topic author - to decide whether to
+include the topic branch (which is a workaround, but does eliminate
+the crash) or to wait for a better fix from himself or someone else
+with an interest to advance the topic.
+
+* er/ei-decode_msg (erl_interface) (2010-03-11) 1 commit
+ - Add function to decode distribution header (864091a)
+
+Needs documentation and test cases.
+
+Action expected from: Topic author
+
+* gl/jinterface-pom (jinterface, otp) (2010-02-15) 2 commits
+ - Exclude jinterface build artifact from git (5acf5fa)
+ - Add pom.xml for jinterface build (aa68190)
+
+The pom.xml file should be generated by the toplevel Makefile
+since it contains the version number of Jinterface. This is
+along the same line as the .app files are generated.
+There should be a pom.xml.src that Makefile sed's into
+pom.xml. See stdlib/src/Makefile.
+
+Action expected from: Topic author
+
+* jn/gen_stream (stdlib) (2010-05-17) 1 commit
+ - Add new gen_stream behaviour for efficiently consuming serial streams (540dbcc)
+
+This topic branch has failing test cases. 
+
+stdlib_suite:app_test;
+    gen_stream is not included in the stdlib.app file.
+
+shell_SUITE:start_restricted_from_shell;
+    Although the whole pu branch could be guilty
+    this topic branch is our prime suspect.
+
+Action expected from: Topic author
+
+* jp/dependencies_makefile (compiler, erts) (2010-02-14) 3 commits
+ - squash! eliminate dialyzer warning (434e2ca)
+ - squash! fix snprintf for Windows (bf2708d)
+ - Add dependencies Makefile generation to erlc(1) and compile(3) (7cbc437)
+
+Approved in principle by the OTP Technical Board; now awaits a closer
+review of the implementation.
+
+Action expected from: Björn Gustavsson (the reviewer)
+
+* kr/gs-browser (gs) (2010-02-10) 1 commit
+ - Change lib/gs/src/tool_utils.erl to select multiple browsers other than Netscape (802d159)
+
+This topic branch introduces a new call to the deprecated regexp module.
+
+Action expected from: Topic author or anyone else with an interest to
+advance the topic
+
+------------------------------------------------------------
+[Cooking]
+
+* am/kernel-stops (kernel) (2010-02-21) 1 commit
+ - Change restart behavior of network apps from permanent to transient (397343b)
+
+* am/net_kernel_catchall (kernel) (2010-02-20) 1 commit
+ - Add catch all handle_call to net_kernel (77ee109)
+
+* bg/compiler (compiler, stdlib) (2010-03-12) 5 commits
+ - beam_peep: Remove optimization already done by beam_dead (a3e54e8)
+ - beam_dead: Combine is_eq_exact instructions into select_val instructions (fc8f05e)
+ - Evaluate is_record/3 at compile-time using type information (1a23d96)
+ - Evaluate element/2 at compile-time using type information (d4474e9)
+ - erl_expand_records: Replace is_record() with matching (ae283f7)
+
+* bg/temp-hipe-fixes (compiler, hipe, kernel) (2010-03-15) 6 commits
+ - Avoid crash by skipping compilation_SUITE:on_load/1 (234e13e)
+ - Inline less aggressively for native-code compilation (9fcb48b)
+ - Crudely fix return type for the lists:key{search,find,member}/3 (ef71597)
+ - seq_trace_SUITE: Don't native-compile (2a81b1a)
+ - Disable native code if on_load is used (3befa76)
+ - andor_SUITE: Don't native-compile (97aa2da)
+
+This branch contains temporary workarounds to avoid failing test
+cases and is never intended to graduate.
+
+* bg/wx_objects (wx) (2010-05-10) 1 commit
+ - wx_objects: Fix calls to unexported gen_server:print_event/3 (89266f2)
+
+* cf/timer_tc (stdlib) (2010-04-06) 1 commit
+ - Add timer:tc/2 to measure the elapsed time of anonymous functions (2cca650)
+
+* fm/file-operations (erts, kernel) (2010-05-19) 4 commits
+ - Update preloaded modules (329aff8)
+ - Add file:advise/4 - a wrapper to the POSIX syscall posix_fadvise (21a67b7)
+ - Add file:datasync/1 for syncing file contents only (3f53a96)
+ - sys.h: Correct the get_int64() macro (80b231a)
+
+* hb/edoc (edoc) (2010-04-01) 1 commit
+ - EDoc and Dialyzer specs and types (516e16c)
+
+* jf/run_erl-disable-flow-control (erts) (2010-03-05) 1 commit
+ - Teach run_erl RUN_ERL_DISABLE_FLOWCNTRL for disabling flow control (d0775cd)
+
+* jl/windows-file-share-delete (erts) (2010-02-22) 1 commit
+ - Windows: Open files with FILE_SHARE_DELETE to get closer to UNIX semantics (0544a2c)
+
+* jr/cover-src-path (tools) (2010-04-23) 1 commit
+ - Fix searching for source files in analyse_to_file/* (b9d5068)
+
+* ks/cleanups (compiler, debugger, docbuilder, gs, stdlib) (2010-04-10) 5 commits
+ - compiler: Fix incorrect types and specs (9021667)
+ - escript: Add more types to records (edfbc4b)
+ - debugger: Clean up as suggested by tidier (42c0c33)
+ - docbuilder: Clean up as suggested by tidier (c22830a)
+ - gs: Clean up as suggested by tidier (eda4f7a)
+
+Was formerly called ks/cleanups-after-r13b04.
+
+* ks/export_type (compiler, dialyzer, hipe, kernel, stdlib, syntax_tools) (2010-05-10) 13 commits
+ - erl_lint: Issue warnings for undefined exported types (8c22ad6)
+ - Minor fix in a print message (3ae85e9)
+ - Add handling of unknown types (0f9e42e)
+ - Add declaration for exported types (e71d8f6)
+ - Add types and specs; performed some cleanups also (b88e659)
+ - erl_scan: Add declarations for exported types (750f316)
+ - stdlib: Add declarations for exported types (7dcabb9)
+ - hipe: Add declarations for exported types (6a2cce2)
+ - compiler: Add declarations for exported types (a53c99e)
+ - syntax_tools: Add declarations for exported types (839cc84)
+ - kernel: Add declaration for exported types (5fdf89f)
+ - Support -export_type() in dialyzer and erl_types (ce76175)
+.
+.
+.
+
+.
+.
+.
+
+* ms/file-exclusive-mode (erts, kernel) (2010-04-30) 1 commit
+ - Support opening files in exclusive mode (5d1253d)
+
+* se/spawn_drv_win_deadlock (erts) (2010-04-28) 1 commit
+ - Fix deadlock in spawn driver on windows (4fe6e7e)
+
+* sv/format_status-name-handling (stdlib, wx) (2010-05-09) 1 commit
+ - handle {global, term()} names in format_status/2 (8ca0aee)
+
+* sv/socket-error-portability (erts) (2010-05-19) 2 commits
+ - inet_drv.c: Remove red herring (ce6b017)
+ - use macro to portably test for socket system call errors (c81f4c4)
+
+* ta/asn1-reporting (asn1) (2010-04-23) 1 commit
+ - asn1ct: Make formatting of errors and warnings consistent (93face2)
+
+* ta/extend-nif-api (erts) (2010-05-07) 3 commits
+ - erl_nif: add make_atom_len, make_existing_atom_len and make_string_len (7ba3d59)
+ - erl_nif: add enif_get_atom_length and enif_get_list_length (855acf4)
+ - erl_nif: add enif_is_list and enif_is_tuple (8905503)
+
+* uw/epmd-fullnames (kernel) (2010-05-07) 1 commit
+ - Allow the erlang nodename host part to differ from the hostname (e0774be)
+
+* uw/mnesia-overload (mnesia) (2010-05-09) 1 commit
+ - Enable continuous monitoring of mnesia overload status (82c0904)
+
+* uw/mnesia-schema-merge (mnesia) (2010-05-09) 1 commit
+ - Allow a user_defined function to wrap mnesia_schema:merge_schema() (3f70f3d)
+
+------------------------------------------------------------
+[Dropped]
+
+* mh/ssh_channel-init-no-catch (ssh) (2010-01-25) 1 commit
+ . Remove pointless catch from ssh_channel:init/1. (bb7eaa5)
+
+We will not include this branch in R13B04 since 'ssh:shell/3'
+directly calls 'ssh_channel:init([Args])'.
+
+Some other change may be desired since 'ssh:shell/3' today
+may die from an internal badmatch, but it is not prioritized
+for us to fix it now.
+
+* ra/include-public_key-in-ssh (ssh) (2010-01-20) 1 commit
+ . Added public_key among ssh applications. (3a0c2c5)
+
+We will not include this branch in R13B04 since it would force
+applications using 'ssh' to 'application:start(public_key)' even
+though 'public_key' is just a library application even without
+a 'start' function. This rather points to a limitation in 'application'.
+We have discussed this without finding a sensible solution.
