@@ -1,0 +1,299 @@
+From - Fri Jun  4 09:32:28 2010
+Date: Fri Jun  4 09:32:28 2010
+To: erlang patches <erlang-patches@erlang.org>
+Subject: What's cooking in erlang/otp (2010-06-04)
+X-dev-at: fa66eb731b85726970cc4c581d32ebdc2ebb965e
+
+R14A is planned to be released on June 16. We will not
+include new features for that release. Bug fixes may
+be accepted depending on how necessary and risk free
+they are.
+
+We may still graduate a few of the cooking branches
+to the release...
+
+------------------------------------------------------------
+[Graduated]
+
+* am/net_kernel_catchall (kernel) (2010-02-20) 1 commit
+ + Add catch all handle_call to net_kernel (7d37fee)
+
+* bg/compiler (compiler, stdlib) (2010-03-12) 5 commits
+ + beam_peep: Remove optimization already done by beam_dead (0047185)
+ + beam_dead: Combine is_eq_exact instructions into select_val instructions (e96f49f)
+ + Evaluate is_record/3 at compile-time using type information (470c91d)
+ + Evaluate element/2 at compile-time using type information (7ac0808)
+ + erl_expand_records: Replace is_record() with matching (1858cb8)
+
+* bg/dist_utils (kernel) (2010-05-27) 1 commit
+ + dist_utils: Eliminate crash when list_to_existing_atom/1 fails (39e563a)
+
+* bg/remove-stray-sae-support (erts) (2010-05-22) 2 commits
+ + Remove unsupported erlang:blocking_read_file/1 (1e5e733)
+ + Remove stray SAE support (32a6d4e)
+
+* dgud/emacs-catch-improvements (tools) (2010-05-28) 2 commits
+ + Improved indentation of old catch. (16d48ac)
+ + Added more type highlighting and fixed record indentation with types. (6f1e1cd)
+
+* jl/windows-file-share-delete (erts) (2010-02-22) 1 commit
+ + Windows: Open files with FILE_SHARE_DELETE to get closer to UNIX semantics (426a5e2)
+
+* jv/autoimport-binary_to_term_2 (erts, stdlib) (2010-05-22) 1 commit
+ + Change binary_to_term/2 to be auto-imported (a62abc9)
+
+* kj/emacs-erlang-flymake (tools) (2010-05-30) 5 commits
+ + erlang-flymake: Document in README (54cda6a)
+ + erlang-flymake: Make the syntax check command configurable (704ce3e)
+ + erlang-flymake: By default pass <app>/include and <app>/ebin to compiler (418de1e)
+ + erlang-flymake: Include in Makefile (8f0dd81)
+ + erlang-flymake: Syntax check erlang code on the fly (using flymake) (766c27e)
+
+* ks/dialyzer (compiler, dialyzer, hipe, kernel, stdlib, syntax_tools) (2010-06-03) 15 commits
+ + dialyzer: Build the PLT even if there are unresolved remote types (169507c)
+ + proplists: Export the type property() (c9eae64)
+ + erl_lint: Issue warnings for undefined exported types (f062463)
+ + Minor fix in a print message (48599b8)
+ + Add handling of unknown types (d775f62)
+ + Add declaration for exported types (cafe056)
+ + Add types and specs; performed some cleanups also (5279efd)
+ + erl_scan: Add declarations for exported types (414b47a)
+ + stdlib: Add declarations for exported types (7d672e4)
+ + hipe: Add declarations for exported types (3c34f42)
+ + compiler: Add declarations for exported types (d5e1d11)
+ + syntax_tools: Add declarations for exported types (f614f22)
+.
+.
+.
+
+* rn/resolver-leaking-ports (kernel) (2010-05-27) 2 commits
+ + Resolver: make inet_dns decode ugly truncated reply (93ba7ad)
+ + Resolver: stop inet_res leaking ports (5099491)
+
+* uw/mnesia-overload (mnesia) (2010-05-09) 1 commit
+ + Enable continuous monitoring of mnesia overload status (82c0904)
+
+* uw/mnesia-schema-merge (mnesia) (2010-06-01) 2 commits
+ + remove debug printout and accidental variable name reuse (7abf617)
+ + Allow a user_defined function to wrap mnesia_schema:merge_schema() (f58fcc6)
+
+------------------------------------------------------------
+[New topics]
+
+* cb/emacs-eunit-run-recent (tools) (2010-06-01) 5 commits
+ - erlang-eunit: remove runtime dependency on cl package (2f9b0e4)
+ - Add Emacs EUnit feature: run recent (7b5a6f1)
+ - Add Emacs EUnit feature: auto-save (041ea7c)
+ - erlang-eunit: Optionally run code coverage analysis during eunit tests (50a54b8)
+ - erlang-eunit: Made alternative locations of files more flexible (c5067db)
+
+* ia/ssl_many_handshake_packages_at_once (ssl) (2010-06-02) 1 commit
+ - Fixed handling of several ssl/tls packets arriving at the same time. This was broken during a refactoring of the code. (b279fe0)
+
+* kj/emacs-eunit-run-current-test-with-cover (tools) (2010-05-26) 2 commits
+ - erlang-eunit: Optionally run code coverage analysis during eunit tests (50a54b8)
+ - erlang-eunit: Made alternative locations of files more flexible (c5067db)
+
+* ks/ets-tid-type (debugger, stdlib) (2010-05-28) 1 commit
+ - Remove tid() from the predefined builtin types. (94be2be)
+
+* sv/serge-new_float_ext (erl_interface, odbc) (2010-06-03) 3 commits
+ - Fix ei_tmo to restrict dflags to NEW_FLOAT_EXT (cbfa739)
+ - compact IEEE 754 double encoding in external binary format for ei (a39a5d8)
+ - fix typo in ei_decode_ei_term documentation (003698b)
+
+------------------------------------------------------------
+[Stalled]
+
+* bg/safer-local_to_univ (erts) (2010-02-11) 1 commit
+ - erl_time_sup.c: test for error return from mktime() (0f62f0b)
+
+We will not include this branch in R13B04 for two reasons:
+
+  o We are not 100% sure that this change is harmless on all
+    platforms in all timezones.
+  o We have an idea how the underlying problem can be fixed in
+    the calendar module (only) and I plan to try it out after the
+    release. We will keep this branch in pu as a reminder.
+
+Action expected from: Björn Gustavsson
+
+* db/tv_nthtail_fix (tv) (2009-12-01) 1 commit
+ - Fix for tv which restarts while trying to open a table (abe0759)
+
+Since our long-term goal is to migrate from gs towards wx,
+maintaining the old gs applications has a low priority for
+the Erlang/OTP team. Therefore, we will accept patches that
+seem sound, but we are unlikely to spend much of our own time
+fixing bugs.
+
+The author of this topic branch has found the real reason for
+the problem, but uncovered additional issues.
+
+Action expected from: The topic author - to decide whether to
+include the topic branch (which is a workaround, but does eliminate
+the crash) or to wait for a better fix from himself or someone else
+with an interest to advance the topic.
+
+* er/ei-decode_msg (erl_interface) (2010-03-11) 1 commit
+ - Add function to decode distribution header (864091a)
+
+Needs documentation and test cases.
+
+Action expected from: Topic author
+
+* gl/jinterface-pom (jinterface, otp) (2010-02-15) 2 commits
+ - Exclude jinterface build artifact from git (5acf5fa)
+ - Add pom.xml for jinterface build (aa68190)
+
+The pom.xml file should be generated by the toplevel Makefile
+since it contains the version number of Jinterface. This is
+along the same line as the .app files are generated.
+There should be a pom.xml.src that Makefile sed's into
+pom.xml. See stdlib/src/Makefile.
+
+Action expected from: Topic author
+
+* jn/gen_stream (stdlib) (2010-05-17) 1 commit
+ - Add new gen_stream behaviour for efficiently consuming serial streams (65f3db8)
+
+This topic branch has failing test cases. 
+
+shell_SUITE:start_restricted_from_shell;
+    Although the whole pu branch could be guilty
+    this topic branch is our prime suspect. The
+    test case does not fail when run standalone
+    so this has to be invesigated further.
+
+Action expected from: OTP team
+
+* jp/dependencies_makefile (compiler, erts) (2010-02-14) 3 commits
+ - squash! eliminate dialyzer warning (434e2ca)
+ - squash! fix snprintf for Windows (bf2708d)
+ - Add dependencies Makefile generation to erlc(1) and compile(3) (7cbc437)
+
+Approved in principle by the OTP Technical Board; now awaits a closer
+review of the implementation.
+
+Action expected from: Björn Gustavsson (the reviewer)
+
+* kr/gs-browser (gs) (2010-02-10) 1 commit
+ - Change lib/gs/src/tool_utils.erl to select multiple browsers other than Netscape (802d159)
+
+This topic branch introduces a new call to the deprecated regexp module.
+
+Action expected from: Topic author or anyone else with an interest to
+advance the topic
+
+------------------------------------------------------------
+[Cooking]
+
+* bg/bif-types (erts, hipe) (2010-06-02) 13 commits
+ - Add type information for erlang:garbage_collect_message_area/0 (11aae8f)
+ - Add type information for erts_debug:* BIFs (4545ea0)
+ - Add type information for erlang:port_call/2 (969dcd7)
+ - Add type information for erlang:display* BIFs (dbb50e4)
+ - Add type information for the BIFs in the binary module (3e2872c)
+ - Introduce and use the t_endian() helper (465f62a)
+ - Add type information for erlang:binary_part/2,3 (cde6d1b)
+ - Add type info for erlang:append/2 and erlang:subtract/2 (4ac4d00)
+ - Add type information for the erlang:adler32* BIFs (5acd3b0)
+ - Add ppc64 return for erlang:system_info(hipe_architecture) (564577b)
+ - Test that all BIFs have known types (c54da1b)
+ - utils/make_tables: Produce bifs.lists to support testing (e8e7dc1)
+.
+.
+.
+
+* bg/external-funs (compiler, erts, otp, stdlib) (2010-05-30) 6 commits
+ - Document erlang:make_fun/3 (4a3bc9f)
+ - v3_kernel: Clean up fun handling code (f81fa69)
+ - Test calling a parameterized module within a fun (d365ff3)
+ - EEP-23: Allow variables in fun M:F/A (e5b36ed)
+ - Reference manual: Improve the documentation for external funs (de19b3c)
+ - beam_loader: Support external funs in the literal pool (08ffb6b)
+
+* bg/nif_error (crypto, erts, hipe) (2010-05-24) 3 commits
+ - crypto: Add type specs for all documented functions (4b928be)
+ - crypto: Use erlang:nif_error/1 to squelch false Dialyzer warnings (c28c4aa)
+ - Add erlang:nif_error/1,2 (7ff117e)
+
+* bg/temp-hipe-fixes (compiler, hipe, kernel) (2010-03-15) 6 commits
+ - Avoid crash by skipping compilation_SUITE:on_load/1 (234e13e)
+ - Inline less aggressively for native-code compilation (9fcb48b)
+ - Crudely fix return type for the lists:key{search,find,member}/3 (ef71597)
+ - seq_trace_SUITE: Don't native-compile (2a81b1a)
+ - Disable native code if on_load is used (3befa76)
+ - andor_SUITE: Don't native-compile (97aa2da)
+
+This branch contains temporary workarounds to avoid failing test
+cases and is never intended to graduate.
+
+* cf/timer_tc (stdlib) (2010-04-06) 1 commit
+ - Add timer:tc/2 to measure the elapsed time of anonymous functions (2cca650)
+
+* egil/call-time-trace-patterns (erts) (2010-06-02) 23 commits
+ - Fix ops.tab to include i_return_time_trace (63751e0)
+ - Let trace_call_time_SUITE scheduling test be more relaxed (a46147d)
+ - Add documentation for call time breakpoints (9757f9b)
+ - Fix bp_hash_put to do hash value after rehash (9a4c67f)
+ - Extend trace_call_time_SUITE with bif-tests (97ea51c)
+ - Fix assertion in trace_pattern for bifs (1e1482a)
+ - Teach erlang:system_info/1 to list snifs (091c65e)
+ - Add bif tests to call time trace tests (bf4e102)
+ - Teach call time trace patterns to include bifs (b2369c6)
+ - Fix BeamInstr code array in export.h (c523cc5)
+ - Add trace call_time tests for nifs and bifs (00b691d)
+ - Teach call count tracing to use atomics (96a6c45)
+.
+.
+.
+
+.
+.
+.
+
+* hm/reltool-find-regular (reltool) (2010-05-19) 1 commit
+ - Improve lookup of erl files (05e0238)
+
+* jf/run_erl-disable-flow-control (erts) (2010-03-05) 1 commit
+ - Teach run_erl RUN_ERL_DISABLE_FLOWCNTRL for disabling flow control (d0775cd)
+
+* jr/cover-src-path (tools) (2010-04-23) 1 commit
+ - Fix searching for source files in analyse_to_file/* (b9d5068)
+
+* ks/cleanups (compiler, debugger, docbuilder, gs, stdlib) (2010-04-10) 5 commits
+ - compiler: Fix incorrect types and specs (9021667)
+ - escript: Add more types to records (edfbc4b)
+ - debugger: Clean up as suggested by tidier (42c0c33)
+ - docbuilder: Clean up as suggested by tidier (c22830a)
+ - gs: Clean up as suggested by tidier (eda4f7a)
+
+Was formerly called ks/cleanups-after-r13b04.
+
+* ms/file-exclusive-mode (erts, kernel) (2010-06-04) 2 commits
+ - Update preloaded modules (bac96ae)
+ - Support opening files in exclusive mode (4bd026c)
+
+* sb/make-files-like-erlc (tools) (2010-05-18) 1 commit
+ - Change make:files to behave more like erlc (5e9d051)
+
+* ta/asn1-reporting (asn1) (2010-04-23) 1 commit
+ - asn1ct: Make formatting of errors and warnings consistent (93face2)
+
+* uw/epmd-fullnames (kernel) (2010-05-07) 1 commit
+ - Allow the erlang nodename host part to differ from the hostname (e0774be)
+
+------------------------------------------------------------
+[Dropped]
+
+* am/kernel-stops (kernel) (2010-02-21) 1 commit
+ . Change restart behavior of network apps from permanent to transient (397343b)
+
+Not safe. The Erlang/OTP system has not been designed to survive the
+termination of key processes.
+
+* hb/edoc (edoc) (2010-04-01) 1 commit
+ . EDoc and Dialyzer specs and types (516e16c)
+
+Temporarily dropped. Waiting for updated dialyzer.
