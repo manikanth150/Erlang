@@ -1,0 +1,196 @@
+From - Mon Jun 28 13:33:39 2010
+Date: Mon Jun 28 13:33:39 2010
+To: erlang patches <erlang-patches@erlang.org>
+Subject: What's cooking in erlang/otp (2010-06-28)
+X-dev-at: 249613f10368dc694edb0a962d6025e19940b5af
+
+This issue of "What's cooking" is a weekend late due to
+midsummer holiday. Sorry about that.
+
+R14A was released as planned. We are now developing towards
+the R14B release. The 'dev' branch has just got updated
+version numbers, but more is to come...
+
+------------------------------------------------------------
+[Graduated]
+
+* egil/update-system-vsn (erts, kernel, stdlib) (2010-06-17) 1 commit
+ + Update Erlang system version to R14B (1e3f585)
+
+------------------------------------------------------------
+[New topics]
+
+* mk/net-dragonfly-bsd-patches (asn1, common_test, erl_interface, erts, et, gs, mnesia, odbc, reltool, runtime_tools, test_server, wx) (2010-06-23) 7 commits
+ - Remove unused variables (dab5af5)
+ - Do not hardcode browser name (82dcc82)
+ - Make sure the odbcserver binary finds the ODBC library at run-time (c86dff5)
+ - Use xxx(void) instead of xxx() (7142d52)
+ - Use proper install method (5314ae6)
+ - Add support for DragonFly BSD (03baa22)
+ - Add support for NetBSD (6b72959)
+
+* pg/beam_lib_cmp_2_return_type_specification (stdlib) (2010-06-17) 1 commit
+ - Fix beam_lib:cmp/2 return type specification (8dad90e)
+
+* pg/hipe_crash_with_on_load (erts) (2010-06-27) 1 commit
+ - Fix crash when calling functions in a module with an on_load attribute from a native module (495804b)
+
+* rani/sctp-udp-recv-error (erts) (2010-06-21) 1 commit
+ - Fix inet_drv to detect passive mode UDP errors for SCTP builds (5615d7a)
+
+* sd/epmd-stop-cli (erts) (2010-06-16) 2 commits
+ - fix typo (101b731)
+ - allow epmd -stop name to unregister a client from epmd (b070575)
+
+* ta/filetypo (kernel) (2010-06-11) 1 commit
+ - Correct trivial typos in file manual (6973f77)
+
+------------------------------------------------------------
+[Stalled]
+
+* bg/safer-local_to_univ (erts) (2010-02-11) 1 commit
+ - erl_time_sup.c: test for error return from mktime() (0f62f0b)
+
+We will not include this branch in R13B04 for two reasons:
+
+  o We are not 100% sure that this change is harmless on all
+    platforms in all timezones.
+  o We have a better solution for the underlying problem
+    in the pipeline soon to surface in 'dev'.
+
+Action expected from: OTP Team
+
+* db/tv_nthtail_fix (tv) (2009-12-01) 1 commit
+ - Fix for tv which restarts while trying to open a table (28f1e36)
+
+Since our long-term goal is to migrate from gs towards wx,
+maintaining the old gs applications has a low priority for
+the Erlang/OTP team. Therefore, we will accept patches that
+seem sound, but we are unlikely to spend much of our own time
+fixing bugs.
+
+The author of this topic branch has found the real reason for
+the problem, but uncovered additional issues.
+
+Action expected from: The topic author - to decide whether to
+include the topic branch (which is a workaround, but does eliminate
+the crash) or to wait for a better fix from himself or someone else
+with an interest to advance the topic.
+
+* er/ei-decode_msg (erl_interface) (2010-03-11) 1 commit
+ - Add function to decode distribution header (864091a)
+
+Needs documentation and test cases.
+
+Action expected from: Topic author
+
+* jp/dependencies_makefile (compiler, erts) (2010-02-14) 3 commits
+ - squash! eliminate dialyzer warning (434e2ca)
+ - squash! fix snprintf for Windows (bf2708d)
+ - Add dependencies Makefile generation to erlc(1) and compile(3) (7cbc437)
+
+Approved in principle by the OTP Technical Board; now awaits a closer
+review of the implementation.
+
+Action expected from: Björn Gustavsson (the reviewer)
+
+* kr/gs-browser (gs) (2010-02-10) 1 commit
+ - Change lib/gs/src/tool_utils.erl to select multiple browsers other than Netscape (802d159)
+
+This topic branch introduces a new call to the deprecated regexp module.
+
+Action expected from: Topic author or anyone else with an interest to
+advance the topic
+
+------------------------------------------------------------
+[Cooking]
+
+* bg/temp-hipe-fixes (compiler, hipe, kernel) (2010-03-15) 6 commits
+ - Avoid crash by skipping compilation_SUITE:on_load/1 (234e13e)
+ - Inline less aggressively for native-code compilation (9fcb48b)
+ - Crudely fix return type for the lists:key{search,find,member}/3 (ef71597)
+ - seq_trace_SUITE: Don't native-compile (2a81b1a)
+ - Disable native code if on_load is used (3befa76)
+ - andor_SUITE: Don't native-compile (97aa2da)
+
+This branch contains temporary workarounds to avoid failing test
+cases and is never intended to graduate.
+
+* cf/timer_tc (stdlib) (2010-04-06) 1 commit
+ - Add timer:tc/2 to measure the elapsed time of anonymous functions (2cca650)
+
+* jf/run_erl-disable-flow-control (erts) (2010-03-05) 1 commit
+ - Teach run_erl RUN_ERL_DISABLE_FLOWCNTRL for disabling flow control (d0775cd)
+
+* jn/gen_stream (stdlib) (2010-05-17) 1 commit
+ - Add new gen_stream behaviour for efficiently consuming serial streams (65f3db8)
+
+ . Add new gen_stream behaviour for efficiently consuming serial streams (65f3db8)
+
+This topic branch has failing test cases. 
+
+shell_SUITE:start_restricted_from_shell;
+    We have now tested with and without this topic branch and when
+    it is present that test case fails. We consider it proved
+    to be guilty. The test case does not fail when run standalone
+    so it seems to be tricky... Also, some of its own test cases
+    fail sporadicly apparently since the assumption there shoul
+    be no more processes after the test case does not hold;
+    probably a timing issue.
+
+Action expected from: Topic author.
+
+* jr/cover-src-path (tools) (2010-04-23) 1 commit
+ - Fix searching for source files in analyse_to_file/* (b9d5068)
+
+* ks/auth-specs (kernel) (2010-06-09) 1 commit
+ - auth: Fix types and specs (1c51135)
+
+* ks/cleanups (compiler, debugger, docbuilder, stdlib) (2010-04-10) 4 commits
+ - compiler: Fix incorrect types and specs (8e79baa)
+ - escript: Add more types to records (f2a2139)
+ - debugger: Clean up as suggested by tidier (9e962d7)
+ - docbuilder: Clean up as suggested by tidier (3647def)
+
+Was formerly called ks/cleanups-after-r13b04.
+
+* pg/honor-start-type-in-rel-files (sasl) (2010-06-06) 1 commit
+ - Honor start type in .rel files when building relup files (7599900)
+
+ . Honor start type in .rel files when building relup files (7f0192d)
+
+* sb/make-files-like-erlc (tools) (2010-05-18) 1 commit
+ - Change make:files to behave more like erlc (5e9d051)
+
+* se/http_response_empty_phrase (erts) (2010-06-10) 1 commit
+ - {packet,http} allow empty response phrase (288f54c)
+
+* sf/erts_de_busy_limit (erts) (2010-06-08) 1 commit
+ - Add flag-based setting for 'erts_de_busy_limit' constant (57c0eaf)
+
+ . Add flag-based setting for 'erts_de_busy_limit' constant (b584553)
+
+* ta/asn1-reporting (asn1) (2010-04-23) 1 commit
+ - asn1ct: Make formatting of errors and warnings consistent (93face2)
+
+* uw/epmd-fullnames (kernel) (2010-05-07) 1 commit
+ - Allow the erlang nodename host part to differ from the hostname (e0774be)
+
+* gl/jinterface-pom (jinterface, otp) (2010-02-08) 1 commit
+ - Generate pom.xml during jinterface build (165fbca)
+
+------------------------------------------------------------
+[Dropped]
+
+* hb/edoc (edoc) (2010-04-01) 1 commit
+ . EDoc and Dialyzer specs and types (516e16c)
+
+Temporarily dropped. Will be fixed to use updated dialyzer.
+
+* pg/xmerl_scan_hex_entities (xmerl) (2010-06-07) 1 commit
+ . Fix decoding of hex entities (&#xXXXX;) in xmerl_scan (36448fc)
+
+The bug it fixes is recognized, but the fix in the branch is
+not complete... The test case is in our internal 'dev' branch
+but the test suites are not released yet due to remaining
+copyright issues. We will fix the bug in a future release.
