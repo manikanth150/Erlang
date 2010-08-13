@@ -1,0 +1,199 @@
+From - Fri Aug 13 09:17:43 2010
+Date: Fri Aug 13 09:17:43 2010
+To: erlang patches <erlang-patches@erlang.org>
+Subject: What's cooking in erlang/otp (2010-08-13)
+X-dev-at: 871fdb232d7facc58c202ef81634a12fbdcfefb4
+
+We are now developing towards the R14B release and
+primarily will accept bugfixes for that.
+New features are not desired in that release...
+
+------------------------------------------------------------
+[Graduated]
+
+* cg/small-typos (erl_interface, kernel, megaco, odbc, snmp, ssl, stdlib) (2010-07-16) 1 commit
+ + Fix minor typos and errors in documentation (205cc29)
+
+* db/tv_nthtail_fix (tv) (2009-12-01) 1 commit
+ + Fix for tv which restarts while trying to open a table (28f1e36)
+
+* pg/load-native-code-for-early-modules (kernel) (2010-07-11) 1 commit
+ + Load native code for modules loaded before the code server (a8b8ec5)
+
+* pg/optimize_beam_dict_string_table (compiler) (2010-07-04) 1 commit
+ + beam_asm: Simplify string table generation for beams (173d1fd)
+
+* ta/doc-fixes (eunit, reltool, stdlib) (2010-07-25) 3 commits
+ + Remove extra leading spaces in filename doc (ac2ab4a)
+ + Remove wrong ')' in eunit overview edoc (fd54521)
+ + Correct a couple of reltool documentation errors (ec989d8)
+
+------------------------------------------------------------
+[New topics]
+
+* jp/ssl-foaf (ssl) (2010-08-12) 1 commit
+ - Allow server to use verify_peer and have no cacert (9971792)
+
+* mp/fix-hipe_bifs_alloc_data (erts) (2010-08-11) 1 commit
+ - fix hipe_bifs_alloc_data_2 to avoid "Yikes!" warning (6b8733b)
+
+* ms/inet-bug-fixes (erts, kernel) (2010-07-21) 4 commits
+ - inet: support retrieving MAC address on BSD (c8070ff)
+ - inet: fix getservbyname buffer overflow (d61d41e)
+ - inet: fix ifr_name buffer overflow (227d3f3)
+ - inet: null terminate ifr_name buffer (cfcb962)
+
+* ms/suppress-epmd-startup-message (erts) (2010-08-03) 1 commit
+ - epmd: suppress startup message (af2787b)
+
+* pan/local_univ_time_bsd/OTP-8580 (erts) (2010-06-10) 1 commit
+ - Teach erl_time_sup to handle timezones w/o DST on FreeBSD as on other platforms (7e6fe78)
+
+This branch replaces bg/safer-local_to_univ.
+
+* pg/fix-hipe-load (hipe) (2010-07-11) 1 commit
+ - Fix hipe:load/1 (9196195)
+
+* pg/fix-ssl-handshake-client-certificate (ssl) (2010-08-04) 1 commit
+ - Fix bug in ssl handshake protocol related to the choice of cipher suites in client hello message when a client certificate is used (0975941)
+
+* rt/solaris-pty-handling-fixes (erts) (2010-08-06) 2 commits
+ - Add corrected support for Solaris PTYs to run_erl (2ba4818)
+ - Fix a typo that leads to syntax errors with DEBUG defined in run_erl (edfe4b9)
+
+* rz/fix-httpc-docs (inets) (2010-07-10) 2 commits
+ - Fix http client docs (294dfc0)
+ - Fix broken links in inets docs (7e417c3)
+
+* sv/epmd-check-listen (erts) (2010-07-14) 1 commit
+ - check return value of epmd server listen() call (c5c8baa)
+
+* ta/asn1ct-fix-whitespace (asn1) (2010-07-12) 1 commit
+ - asn1ct: change unusual whitespace char from 0xA0 to 0x20 (c43d20b)
+
+* tj/ct-timestamp-granularity (common_test) (2010-07-13) 1 commit
+ - Include milliseconds in timestamps in Common Test log entries (4d18f18)
+
+* tm/fix-cover-html-escaping (tools) (2010-07-09) 1 commit
+ - Fix cover's HTML-generation logic to escape ampersands in source code (acc2dce)
+
+------------------------------------------------------------
+[Stalled]
+
+* er/ei-decode_msg (erl_interface) (2010-03-11) 1 commit
+ - Add function to decode distribution header (864091a)
+
+Needs documentation and test cases.
+
+Action expected from: Topic author
+
+* jp/dependencies_makefile (compiler, erts) (2010-02-14) 3 commits
+ - squash! eliminate dialyzer warning (434e2ca)
+ - squash! fix snprintf for Windows (bf2708d)
+ - Add dependencies Makefile generation to erlc(1) and compile(3) (7cbc437)
+
+Approved in principle by the OTP Technical Board; now awaits a closer
+review of the implementation.
+
+Action expected from: Björn Gustavsson (the reviewer)
+
+* jn/gen_stream (stdlib) (2010-07-15) 2 commits
+ - Track gen_stream processes directly for accurate test results (38a4083)
+ - Patch dev to reproduce jn/gen_stream (7694a74)
+
+ . Add new gen_stream behaviour for efficiently consuming serial streams (65f3db8)
+
+This topic branch has failing test cases. 
+
+shell_SUITE:start_restricted_from_shell;
+    We have now tested with and without this topic branch and when
+    it is present that test case fails. We consider it proved
+    to be guilty. The test case does not fail when run standalone
+    so it seems to be tricky... Also, some of its own test cases
+    fail sporadicly apparently since the assumption there shoul
+    be no more processes after the test case does not hold;
+    probably a timing issue.
+
+Action expected from: Topic author.
+
+* kr/gs-browser (gs) (2010-02-10) 1 commit
+ - Change lib/gs/src/tool_utils.erl to select multiple browsers other than Netscape (802d159)
+
+This topic branch introduces a new call to the deprecated regexp module.
+
+Action expected from: Topic author or anyone else with an interest to
+advance the topic
+
+* sf/erts_de_busy_limit (erts) (2010-06-08) 1 commit
+ - Add flag-based setting for 'erts_de_busy_limit' constant (67ed9ab)
+
+This topic branch has multiple issues described in this email:
+
+http://www.erlang.org/cgi-bin/ezmlm-cgi?3:mss:1303:201008:ldciadjdmjednikemjch
+
+Action expected from: Topic author.
+
+------------------------------------------------------------
+[Cooking]
+
+* bg/temp-hipe-fixes (compiler, hipe, kernel) (2010-03-15) 6 commits
+ - Avoid crash by skipping compilation_SUITE:on_load/1 (234e13e)
+ - Inline less aggressively for native-code compilation (9fcb48b)
+ - Crudely fix return type for the lists:key{search,find,member}/3 (ef71597)
+ - seq_trace_SUITE: Don't native-compile (2a81b1a)
+ - Disable native code if on_load is used (3befa76)
+ - andor_SUITE: Don't native-compile (97aa2da)
+
+This branch contains temporary workarounds to avoid failing test
+cases and is never intended to graduate.
+
+* gc/gen-format-status-improvements (stdlib) (2010-06-12) 1 commit
+ - Fix format_status bug for unregistered gen_event processes (95ed86f)
+
+* jf/run_erl-disable-flow-control (erts) (2010-03-05) 1 commit
+ - Teach run_erl RUN_ERL_DISABLE_FLOWCNTRL for disabling flow control (d0775cd)
+
+* jr/cover-src-path (tools) (2010-04-23) 1 commit
+ - Fix searching for source files in analyse_to_file/* (b9d5068)
+
+* mk/net-dragonfly-bsd-patches (asn1, common_test, erl_interface, erts, et, mnesia, reltool, runtime_tools, test_server, wx) (2010-06-23) 4 commits
+ - Remove unused variables (88a04a1)
+ - Use proper install method (6960062)
+ - Add support for DragonFly BSD (2008472)
+ - Add support for NetBSD (2fb2a1e)
+
+* pg/fix-segfault-on-crash_dump-with-hipe (erts) (2010-07-06) 1 commit
+ - Fix a bug that could produce a segmentation fault when dumping the crash log with hipe enabled and natively compiled modules (089e48c)
+
+* pg/hipe_crash_with_on_load (erts) (2010-07-30) 2 commits
+ - Fix crash when calling a module with an on_load attribute from a native module (2862bd2)
+
+* pg/honor-start-type-in-rel-files (sasl) (2010-06-06) 1 commit
+ - Honor start type in .rel files when building relup files (7599900)
+
+* sa/callback-attr (compiler, inets, kernel, otp, stdlib) (2010-06-08) 7 commits
+ - Add callback specs into 'application' module in kernel (b12de0a)
+ - Add callback specs to tftp module following internet documentation (2f27196)
+ - Add callback specs to inets_service module following possibly deprecated comments (cc249ec)
+ - Add '-callback' attributes in stdlib's behaviours (6df97f4)
+ - Update primary bootstrap (c864c17)
+ - Automatical generation of 'behaviour_info' function from '-callback' attributes (5b455e8)
+ - Add '-callback' attribute to language syntax (2f6c340)
+
+* sb/make-files-like-erlc (tools) (2010-05-18) 1 commit
+ - Change make:files to behave more like erlc (5e9d051)
+
+* ta/asn1-reporting (asn1) (2010-04-23) 1 commit
+ - asn1ct: Make formatting of errors and warnings consistent (93face2)
+
+* uw/epmd-fullnames (kernel) (2010-05-07) 1 commit
+ - Allow the erlang nodename host part to differ from the hostname (e0774be)
+
+------------------------------------------------------------
+[Dropped]
+
+* bg/safer-local_to_univ (erts) (2010-02-11) 1 commit
+ . erl_time_sup.c: test for error return from mktime() (0f62f0b)
+
+Replaced by pan/local_univ_time_bsd/OTP-8580.
+
