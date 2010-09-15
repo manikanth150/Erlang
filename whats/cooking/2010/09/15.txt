@@ -1,0 +1,185 @@
+From - Wed Sep 15 13:05:52 2010
+Date: Wed Sep 15 13:05:52 2010
+To: erlang patches <erlang-patches@erlang.org>
+Subject: What's cooking in erlang/otp (2010-09-15)
+X-dev-at: c9a40f46a37bd0891779d9204244a86ffb34a683
+
+The next release will be R14B01.
+
+The uw/epmd-fullnames branch has been taken out of 'pu'
+and has is now listed in the Stalled section of this email.
+
+------------------------------------------------------------
+[Graduated]
+
+* cg/docs-fixes (erts, stdlib, tools) (2010-09-06) 2 commits
+ + Linkify applications listed under "See Also" (e51b9af)
+ + Fix minor typos in the documentation (731b839)
+
+* mk/net-dragonfly-bsd-patches (asn1, common_test, erl_interface, erts, et, mnesia, reltool, runtime_tools, test_server, wx) (2010-06-23) 4 commits
+ + Remove unused variables (88a04a1)
+ + Use proper install method (6960062)
+ + Add support for DragonFly BSD (2008472)
+ + Add support for NetBSD (2fb2a1e)
+
+* ms/ei-overflow-fix (erl_interface) (2010-08-21) 1 commit
+ + ei: prevent overflow in ei_connect_init/ei_xconnect (ada2e2f)
+
+* ms/ei_connect-doc-examples (erl_interface) (2010-08-21) 1 commit
+ + ei_connect: correct man page examples (cdd39a4)
+
+* ms/fix-erl_call-overflow (erl_interface) (2010-08-22) 1 commit
+ + erl_call: fix multiple buffer overflows (e4ee460)
+
+* ms/inet-bug-fixes (erts, kernel) (2010-07-21) 4 commits
+ + inet: support retrieving MAC address on BSD (8393c5d)
+ + inet: fix getservbyname buffer overflow (d61d41e)
+ + inet: fix ifr_name buffer overflow (227d3f3)
+ + inet: null terminate ifr_name buffer (cfcb962)
+
+* pg/fix-hipe-crash-in-gc_after_bif (erts) (2010-07-17) 1 commit
+ + Fix call to erts_gc_after_bif_call in hipe glue (8bbcecd)
+
+* ph/auto_recognize_ipv6 (kernel) (2010-09-06) 2 commits
+ + Add tests (296b3ae)
+ + Let an 8-tuple given as ip_address() for gen_tcp/gen_udp/gen_sctp imply 'inet6' (8e415cb)
+
+* ta/asn1-test-compile-options (asn1) (2010-04-24) 1 commit
+ + Fix asn1_SUITE test_compile_options:verbose/1 (da97a82)
+
+* ta/asn1ct-fix-whitespace (asn1) (2010-07-12) 1 commit
+ + asn1ct: change unusual whitespace char from 0xA0 to 0x20 (c43d20b)
+
+------------------------------------------------------------
+[New topics]
+
+* ta/eliminate-warnings (edoc, hipe, mnesia) (2010-09-12) 3 commits
+ - mnesia: Do not auto-import error/2 (4276689)
+ - hipe: Do not auto-import min/2 and max/2 (41693be)
+ - edoc: Do not auto-import error/1 (fa669f5)
+
+* ta/sendfile (erts, kernel) (2010-09-06) 1 commit
+ - Implement file:sendfile/4 and file:sendfile/2 (0c0514e)
+
+------------------------------------------------------------
+[Stalled]
+
+* er/ei-decode_msg (erl_interface) (2010-03-11) 1 commit
+ - Add function to decode distribution header (864091a)
+
+Needs documentation and test cases.
+
+Action expected from: Topic author
+
+* jn/gen_stream (stdlib) (2010-09-05) 5 commits
+ - Use erlang:process_info(Pid, links) to determine if gen_stream managed worker processes are leaked (b2386df)
+ - Move gen_stream internal process test to after termination of gen_stream parent (f1d8a97)
+ - Add calls to code loader in every test to verify code loader still running (ac6cbba)
+ - Track gen_stream processes directly for accurate test results (38a4083)
+ - Patch dev to reproduce jn/gen_stream (7694a74)
+
+ . Add new gen_stream behaviour for efficiently consuming serial streams (65f3db8)
+
+This topic branch has a failing test case:
+
+shell_SUITE:start_restricted_from_shell;
+    We have now tested with and without this topic branch and when
+    it is present that test case fails. We consider it proved
+    to be guilty. The test case does not fail when run standalone
+    so it seems to be tricky... Also, some of its own test cases
+    fail sporadicly.
+
+Action expected from: Topic author.
+
+* jp/dependencies_makefile (compiler, erts) (2010-02-14) 3 commits
+ - squash! eliminate dialyzer warning (434e2ca)
+ - squash! fix snprintf for Windows (bf2708d)
+ - Add dependencies Makefile generation to erlc(1) and compile(3) (7cbc437)
+
+Approved in principle by the OTP Technical Board; now awaits a closer
+review of the implementation.
+
+Action expected from: Björn Gustavsson (the reviewer)
+
+* kr/gs-browser (gs) (2010-02-10) 1 commit
+ - Change lib/gs/src/tool_utils.erl to select multiple browsers other than Netscape (802d159)
+
+This topic branch introduces a new call to the deprecated regexp module.
+
+Action expected from: Topic author or anyone else with an interest to
+advance the topic
+
+* sf/erts_de_busy_limit (erts) (2010-06-08) 1 commit
+ - Add flag-based setting for 'erts_de_busy_limit' constant (67ed9ab)
+
+This topic branch has multiple issues described in this email:
+
+http://www.erlang.org/cgi-bin/ezmlm-cgi?3:mss:1303:201008:ldciadjdmjednikemjch
+
+Action expected from: Topic author.
+
+* uw/epmd-fullnames (kernel) (2010-05-07) 1 commit
+ . Allow the erlang nodename host part to differ from the hostname (e0774be)
+
+This topic branch needs to be rebased and the conflicts resolved.
+
+This topic branch also needs documentation and test cases.
+
+We are likely to approve the branch for graduation if those issues
+are fixed.
+
+Action expected from: Topic author.
+
+------------------------------------------------------------
+[Cooking]
+
+* bg/temp-hipe-fixes (compiler, hipe, kernel) (2010-03-15) 6 commits
+ - Avoid crash by skipping compilation_SUITE:on_load/1 (290bb30)
+ - Inline less aggressively for native-code compilation (d505c72)
+ - Crudely fix return type for the lists:key{search,find,member}/3 (df0669e)
+ - seq_trace_SUITE: Don't native-compile (9e3a3f0)
+ - Disable native code if on_load is used (2446475)
+ - andor_SUITE: Don't native-compile (eed30d2)
+
+This branch contains temporary workarounds to avoid failing test
+cases and is never intended to graduate.
+
+* gc/gen-format-status-improvements (stdlib) (2010-06-12) 1 commit
+ - Fix format_status bug for unregistered gen_event processes (95ed86f)
+
+* jf/run_erl-disable-flow-control (erts) (2010-03-05) 1 commit
+ - Teach run_erl RUN_ERL_DISABLE_FLOWCNTRL for disabling flow control (d0775cd)
+
+* km/pool_connect-to-running-nodes (stdlib) (2010-09-02) 1 commit
+ - Change pool module to attempt to attach to nodes that are already running (a9f4cbc)
+
+* ml/add-os-pid-to-port-info (erts) (2010-08-19) 1 commit
+ - Extend erlang:port_info/1,2 to show the OS pid of a spawned process (b2d85bf)
+
+* pg/honor-start-type-in-rel-files (sasl) (2010-06-06) 1 commit
+ - Honor start type in .rel files when building relup files (7599900)
+
+* rt/solaris-pty-handling-fixes (erts) (2010-08-06) 2 commits
+ - Add corrected support for Solaris PTYs to run_erl (2ba4818)
+ - Fix a typo that leads to syntax errors with DEBUG defined in run_erl (edfe4b9)
+
+* sa/callback-attr (compiler, inets, kernel, otp, stdlib) (2010-06-08) 7 commits
+ - Add callback specs into 'application' module in kernel (eea750e)
+ - Add callback specs to tftp module following internet documentation (d03554c)
+ - Add callback specs to inets_service module following possibly deprecated comments (3d0bf65)
+ - Add '-callback' attributes in stdlib's behaviours (b131583)
+ - Update primary bootstrap (b64ffe6)
+ - Automatical generation of 'behaviour_info' function from '-callback' attributes (879d6fc)
+ - Add '-callback' attribute to language syntax (d63a448)
+
+* sb/make-files-like-erlc (tools) (2010-05-18) 1 commit
+ - Change make:files to behave more like erlc (5e9d051)
+
+* sv/epmd-check-listen (erts) (2010-07-14) 1 commit
+ - check return value of epmd server listen() call (c5c8baa)
+
+* ta/asn1-reporting (asn1) (2010-04-23) 1 commit
+ - asn1ct: Make formatting of errors and warnings consistent (93face2)
+
+* ta/ensure-dot-ssh-exists (ssh) (2010-09-03) 1 commit
+ - ssh: ensure ~/.ssh exists (5bc5325)
