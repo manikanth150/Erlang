@@ -1,5 +1,5 @@
-From - Fri Dec  3 14:17:43 2010
-Date: Fri Dec  3 14:17:43 2010
+From - Fri Dec  3 15:17:35 2010
+Date: Fri Dec  3 15:17:35 2010
 To: erlang patches <erlang-patches@erlang.org>
 Subject: What's cooking in erlang/otp (2010-12-03)
 X-dev-at: 74ec1253e1a89f0bb266831f73716a24c0798dc1
@@ -34,7 +34,7 @@ some more of the branches currently in 'pu'.
 [New topics]
 
 * dk/agent-capabilities (snmp) (2010-12-01) 1 commit
- - AGENT-CAPABILITIES handling added to SNMP mib compiler (b149b95)
+ - AGENT-CAPABILITIES handling added to SNMP mib compiler (17c3b19)
 
 * fm/posix-fallocate (erts, kernel) (2010-12-01) 1 commit
  - Added file:allocate/3. This function allocates space for a file. It only has effect in POSIX platforms that implement the posix_fallocate system call. (ea3dfb9)
@@ -137,13 +137,13 @@ cases and is never intended to graduate.
  - Honor start type in .rel files when building relup files (7599900)
 
 * sa/callback-attr (compiler, inets, kernel, otp, stdlib) (2010-06-08) 7 commits
- - Add callback specs into 'application' module in kernel (87d4f70)
- - Add callback specs to tftp module following internet documentation (2ac8ea7)
- - Add callback specs to inets_service module following possibly deprecated comments (58a362d)
- - Add '-callback' attributes in stdlib's behaviours (4a64017)
- - Update primary bootstrap (d0e761a)
- - Automatically generate 'behaviour_info' function from '-callback' attributes (991da40)
- - Add '-callback' attribute to language syntax (d5cba37)
+ - Add callback specs into 'application' module in kernel (85ae9d7)
+ - Add callback specs to tftp module following internet documentation (019e6d1)
+ - Add callback specs to inets_service module following possibly deprecated comments (575c7af)
+ - Add '-callback' attributes in stdlib's behaviours (a9da5cc)
+ - Update primary bootstrap (d5d255b)
+ - Automatically generate 'behaviour_info' function from '-callback' attributes (1155c86)
+ - Add '-callback' attribute to language syntax (1a1cc4b)
 
 * sb/make-files-like-erlc (tools) (2010-05-18) 1 commit
  - Change make:files to behave more like erlc (5e9d051)
