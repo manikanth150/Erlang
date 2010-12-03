@@ -1,0 +1,171 @@
+From - Fri Dec  3 14:17:43 2010
+Date: Fri Dec  3 14:17:43 2010
+To: erlang patches <erlang-patches@erlang.org>
+Subject: What's cooking in erlang/otp (2010-12-03)
+X-dev-at: 74ec1253e1a89f0bb266831f73716a24c0798dc1
+
+The next release will be R14B01, expected to be released
+December 8.
+
+Feature branches sent in from now on are unlikely to be
+included in R14B01. Bug fixes may still make it, depending
+on the application, the severity of the bug, and how unlikely
+the bug fix is to break something.
+
+We will try to review and include into the R14B01 release
+some more of the branches currently in 'pu'.
+
+------------------------------------------------------------
+[Graduated]
+
+* bw/gitignore (otp) (2010-10-05) 1 commit
+ + Add win32 specific build artifacts to .gitignore (834cd98)
+
+* bw/win32-file-linking (erts) (2010-10-04) 1 commit
+ + Add Win32 support for hard and symbolic file system links (1f6d7c8)
+
+* bw/win32-laa (erts) (2010-10-06) 1 commit
+ + Added win32 large address aware link option (8bb6f48)
+
+* dc/update-INSTALL-WIN32.md (otp) (2010-09-19) 1 commit
+ + Doc update to latest dependencies & how to compile with free VS2008 Express (8e8061c)
+
+------------------------------------------------------------
+[New topics]
+
+* dk/agent-capabilities (snmp) (2010-12-01) 1 commit
+ - AGENT-CAPABILITIES handling added to SNMP mib compiler (b149b95)
+
+* fm/posix-fallocate (erts, kernel) (2010-12-01) 1 commit
+ - Added file:allocate/3. This function allocates space for a file. It only has effect in POSIX platforms that implement the posix_fallocate system call. (ea3dfb9)
+
+* ms/epmd-local-access-check (erts) (2010-11-24) 1 commit
+ - epmd: include host address in local access check (5b68030)
+
+------------------------------------------------------------
+[Stalled]
+
+* jn/gen_stream (stdlib) (2010-09-05) 5 commits
+ - Use erlang:process_info(Pid, links) to determine if gen_stream managed worker processes are leaked (b2386df)
+ - Move gen_stream internal process test to after termination of gen_stream parent (f1d8a97)
+ - Add calls to code loader in every test to verify code loader still running (ac6cbba)
+ - Track gen_stream processes directly for accurate test results (38a4083)
+ - Patch dev to reproduce jn/gen_stream (7694a74)
+
+ . Add new gen_stream behaviour for efficiently consuming serial streams (65f3db8)
+
+This topic branch has a failing test case:
+
+shell_SUITE:start_restricted_from_shell;
+    We have now tested with and without this topic branch and when
+    it is present that test case fails. We consider it proved
+    to be guilty. The test case does not fail when run standalone
+    so it seems to be tricky... Also, some of its own test cases
+    fail sporadicly.
+
+Action expected from: Topic author.
+
+* jp/dependencies_makefile (compiler, erts) (2009-12-14) 1 commit
+ - Add dependencies Makefile generation to erlc(1) and compile(3) (4945add)
+
+Approved in principle by the OTP Technical Board; now awaits a closer
+review of the implementation.
+
+Action expected from: Björn Gustavsson (the reviewer)
+
+------------------------------------------------------------
+[Cooking]
+
+* bg/temp-hipe-fixes (compiler, hipe, kernel) (2010-03-15) 6 commits
+ - Avoid crash by skipping compilation_SUITE:on_load/1 (8592a02)
+ - Inline less aggressively for native-code compilation (e699ad4)
+ - Crudely fix return type for the lists:key{search,find,member}/3 (2b72202)
+ - seq_trace_SUITE: Don't native-compile (2712344)
+ - Disable native code if on_load is used (e8d0ea4)
+ - andor_SUITE: Don't native-compile (e25ef8c)
+
+This branch contains temporary workarounds to avoid failing test
+cases and is never intended to graduate.
+
+* bw/efile_exists (erts) (2010-10-07) 1 commit
+ - prim_file:exists/{1,2} which is lightweight file existence check (7203932)
+
+* bw/tv-render-fix (tv) (2010-10-06) 1 commit
+ - tv: Allow table viewer to display refs, ports and small binaries (5eff630)
+
+* cg/fix-prng (stdlib) (2010-10-06) 1 commit
+ - Fix a bug in the implementation of the pseudo-random number generator (863ec4d)
+
+* fm/httpc-upload-body-streaming (inets) (2010-10-05) 2 commits
+ - httpc: add option to do automatic chunked transfer-encoding (6951ed1)
+ - httpc: allow streaming of PUT and POST request bodies (f9ec3cb)
+
+* gc/gen-format-status-improvements (stdlib) (2010-06-12) 1 commit
+ - Fix format_status bug for unregistered gen_event processes (95ed86f)
+
+* hw/call-chmod-without-f (asn1, common_test, compiler, cosFileTransfer, crypto, debugger, docbuilder, edoc, erl_interface, erts, et, inets, inviso, kernel, megaco, mnesia, orber, parsetools, percept, public_key, reltool, runtime_tools, snmp, ssl, stdlib, syntax_tools, test_server, tools) (2010-11-15) 1 commit
+ - Call chmod without the "-f" flag (7ed11a8)
+
+* hw/epmd-bind-to-address (erts) (2010-11-10) 1 commit
+ - Allow user to specify the IP address epmd binds to (bcf3b3d)
+
+* hw/fix-epmd-perror (erts) (2010-11-13) 1 commit
+ - Fix epmd's dbg_perror() output (b363d7d)
+
+* jf/run_erl-disable-flow-control (erts) (2010-03-05) 1 commit
+ - Teach run_erl RUN_ERL_DISABLE_FLOWCNTRL for disabling flow control (d0775cd)
+
+* km/pool_connect-to-running-nodes (stdlib) (2010-09-02) 1 commit
+ - Change pool module to attempt to attach to nodes that are already running (a9f4cbc)
+
+* ks/asn1-dialyzer-fixes (asn1) (2010-11-18) 1 commit
+ - Shut off some dialyzer warnings (508a6d2)
+
+* mh/dialyzer-full-path-option (dialyzer) (2010-09-15) 1 commit
+ - Dialyzer: add --fullpath option for printing full paths in warnings (3703ea6)
+
+* ml/add-os-pid-to-port-info (erts) (2010-08-19) 1 commit
+ - Extend erlang:port_info/1,2 to show the OS pid of a spawned process (b2d85bf)
+
+* pg/des-cfb-functions (crypto) (2010-10-16) 1 commit
+ - Add DES and Triple DES cipher feedback (CFB) mode functions (2c79ae7)
+
+* pg/fix-hibernate-with-hipe (erts, otp) (2010-09-27) 1 commit
+ - Fix several bugs related to hibernate/3 and HiPE (babd761)
+
+* pg/honor-start-type-in-rel-files (sasl) (2010-06-06) 1 commit
+ - Honor start type in .rel files when building relup files (7599900)
+
+* sa/callback-attr (compiler, inets, kernel, otp, stdlib) (2010-06-08) 7 commits
+ - Add callback specs into 'application' module in kernel (87d4f70)
+ - Add callback specs to tftp module following internet documentation (2ac8ea7)
+ - Add callback specs to inets_service module following possibly deprecated comments (58a362d)
+ - Add '-callback' attributes in stdlib's behaviours (4a64017)
+ - Update primary bootstrap (d0e761a)
+ - Automatically generate 'behaviour_info' function from '-callback' attributes (991da40)
+ - Add '-callback' attribute to language syntax (d5cba37)
+
+* sb/make-files-like-erlc (tools) (2010-05-18) 1 commit
+ - Change make:files to behave more like erlc (5e9d051)
+
+* sg/fix-diskless-booted-relup (sasl) (2010-09-19) 1 commit
+ - Remove traces of release_handler reading from filesystem when it has Masters list (54cb5df)
+
+* sv/epmd-check-listen (erts) (2010-07-14) 1 commit
+ - check return value of epmd server listen() call (c5c8baa)
+
+* ta/asn1-reporting (asn1) (2010-04-23) 1 commit
+ - asn1ct: Make formatting of errors and warnings consistent (93face2)
+
+* ta/ensure-dot-ssh-exists (ssh) (2010-09-02) 1 commit
+ - ssh: ensure ~/.ssh exists (2c14d90)
+
+* ta/sendfile (erts, kernel) (2010-09-06) 1 commit
+ - Implement file:sendfile (c652dda)
+
+* ts/cover-with-export_all (tools) (2010-09-23) 1 commit
+ - add user specified compiler options on form reloading (eb02beb)
+
+* uw/xmerl-expand-simple (xmerl) (2010-10-25) 1 commit
+ - Track parents when expanding #xmlElement records (9f4c1ee)
+
