@@ -40,6 +40,7 @@ if (@ARGV) {
 my $title = "Currently in the 'pu' branch";
 print <<"END";
 <html>
+<meta http-equiv="content-type" Content="text/html; charset=utf-8">
 <title>$title</title>
 <style type="text/css" media="all">
     body {
