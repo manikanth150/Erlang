@@ -1,0 +1,308 @@
+From - Fri Mar  4 16:23:07 2011
+Date: Fri Mar  4 16:23:07 2011
+To: erlang patches <erlang-patches@erlang.org>
+Subject: What's cooking in erlang/otp (2011-03-04)
+X-dev-at: ac73b2c8efa68f0237febd1fb0cde5e5ee59215e
+
+------------------------------------------------------------
+[Graduated]
+
+* cr/httpc-docs (inets, kernel) (2010-12-15) 1 commit
+ + inets/httpc: Polish documentation (748dbeb)
+
+* fd/httpc-man-page-fixes (inets) (2010-12-16) 1 commit
+ + Grammar and typo fixes for the httpc module documentation (778a608)
+
+* fm/dict-man-page (stdlib) (2010-12-13) 2 commits
+ + Fixes to the orddict module documentation (18777e8)
+ + Fixes to the dict module documentation (c537777)
+
+* hw/erl-clarify-detached-doc (erts) (2011-01-24) 1 commit
+ + Mention that "-detached" implies "-noinput" (98e954d)
+
+* ih/calendar-iso-8601-erl (stdlib) (2010-12-14) 1 commit
+ + Add ISO week number calculation functions to the calendar module in stdlib (7c94e6f)
+
+* ks/code-spec-fixes (hipe, kernel) (2011-01-30) 1 commit
+ + Sanitize the specs of the code module (2697ce8)
+
+* ks/dialyzer-fullpath (dialyzer) (2011-01-20) 1 commit
+ + Add a --fullpath option to Dialyzer (b4c3711)
+
+* ks/hipe-icode-range-fix (hipe) (2011-02-02) 3 commits
+ + Cleanup specs (cc526d2)
+ + Fix bug in the simplification of inexact comparisons (6c9a53e)
+ + Various cleanups and cosmetic changes (b397a5b)
+
+* ks/process_status (erts, hipe) (2011-03-02) 1 commit
+ + Document exiting and garbage_collecting process statuses (804bb7f)
+
+* sa/dialyzer-fix-guards (dialyzer) (2011-01-14) 3 commits
+ + Fix warnings about guards containing not (271ee93)
+ + Fix errors in the handling of 'and'/'or' guards (02e0f98)
+ + Cosmetic changes (326ec4e)
+
+* ta/driver-entry-typos (erts) (2010-12-26) 1 commit
+ + Fix a couple typos in driver_entry(3) (68aed1c)
+
+* ta/httpc-typo () (2011-01-09) 0 commits
+
+------------------------------------------------------------
+[New topics]
+
+* cg/fix-sizeof-array-arg (erl_interface) (2011-02-25) 1 commit
+ - Fix using sizeof() for array given as function argument (6228f21)
+
+* jk/ssl_connection_hibernate (ssl) (2011-02-23) 3 commits
+ - Add the option { hibernate_after, int() } to ssl:connect and ssl:listen (0c21eac)
+ - Changed to function-head matching. (ee4d17c)
+ - Added hibernate_after option to ssl:connect and ssl:listen. (6bbca38)
+
+* ms/beam-fix-format-specifiers-in-erl_exit-msg (erts) (2011-02-25) 1 commit
+ - Fix format specifiers in erl_exit messages (13f5d59)
+
+------------------------------------------------------------
+[Stalled]
+
+------------------------------------------------------------
+[Cooking]
+
+* bd/mod_esi_binary (inets) (2011-02-23) 1 commit
+ - Modify mod_esi:deliver/2 to accept binary data (73f261d)
+
+* bg/temp-hipe-fixes (compiler, hipe, kernel) (2010-03-15) 6 commits
+ - Avoid crash by skipping compilation_SUITE:on_load/1 (8592a02)
+ - Inline less aggressively for native-code compilation (e699ad4)
+ - Crudely fix return type for the lists:key{search,find,member}/3 (2b72202)
+ - seq_trace_SUITE: Don't native-compile (2712344)
+ - Disable native code if on_load is used (e8d0ea4)
+ - andor_SUITE: Don't native-compile (e25ef8c)
+
+This branch contains temporary workarounds to avoid failing test
+cases and is never intended to graduate.
+
+* bsmr/fix-makefile-in-for-xref-mod-app-escript (otp) (2010-12-10) 1 commit
+ - Fix for Makefile.in invoking xref_mod_app.escript (10d4235)
+
+* bw/efile_exists (erts) (2010-10-07) 1 commit
+ - prim_file:exists/{1,2} which is lightweight file existence check (7203932)
+
+* bw/tv-render-fix (tv) (2010-10-06) 1 commit
+ - tv: Allow table viewer to display refs, ports and small binaries (5eff630)
+
+* cg/fix-pointer-dereference (erts) (2011-02-23) 1 commit
+ - Fix some wrong pointer dereferences (47f9ef2)
+
+* cg/fix-prng (stdlib) (2010-10-06) 1 commit
+ - Fix a bug in the implementation of the pseudo-random number generator (863ec4d)
+
+* fd/unix-efile-readdir-fix (erts) (2010-12-15) 1 commit
+ - Fix call to strncat, 3rd arg should be of type size_t and not a pointer (78cfdaf)
+
+* fm/httpc-upload-body-streaming (inets) (2010-12-01) 1 commit
+ - httpc: added support for streaming the body of an upload request (PUT or POST) (402ce68)
+
+* fm/posix-fallocate (erts, kernel) (2011-01-10) 2 commits
+ - Fix build on Solaris (38a922d)
+ - Added file:allocate/2 (9870d9b)
+
+* gc/gen-format-status-improvements (stdlib) (2010-06-12) 1 commit
+ - Fix format_status bug for unregistered gen_event processes (95ed86f)
+
+* gl/erts-doterlang-docs (erts) (2010-12-19) 1 commit
+ - Add back documentation on .erlang processing (6f9d175)
+
+* gl/gen_server-doc (otp) (2011-01-29) 1 commit
+ - Update Handling Other Messages section in gen_server, gen_fsm, gen_events overviews (1fb616d)
+
+* hw/call-chmod-without-f (asn1, common_test, compiler, cosFileTransfer, crypto, debugger, docbuilder, edoc, erl_interface, erts, et, inets, inviso, kernel, megaco, mnesia, orber, parsetools, percept, public_key, reltool, runtime_tools, snmp, ssl, stdlib, syntax_tools, test_server, tools) (2010-11-15) 1 commit
+ - Call chmod without the "-f" flag (7ed11a8)
+
+* hw/epmd-bind-to-address (erts) (2010-11-10) 1 commit
+ - Allow user to specify the IP address epmd binds to (bcf3b3d)
+
+* hw/fix-epmd-perror (erts) (2010-11-13) 1 commit
+ - Fix epmd's dbg_perror() output (b363d7d)
+
+* ja/cocci-useless-cast (erts) (2011-02-01) 1 commit
+ - Remove useless casts from the emulator (4163493)
+
+* jf/run_erl-disable-flow-control (erts) (2010-03-05) 1 commit
+ - Teach run_erl RUN_ERL_DISABLE_FLOWCNTRL for disabling flow control (d0775cd)
+
+* jn/gen_stream (stdlib) (2011-01-31) 1 commit
+ - Add gen_stream behaviour (730c7fd)
+
+* km/pool_connect-to-running-nodes (stdlib) (2010-09-02) 1 commit
+ - Change pool module to attempt to attach to nodes that are already running (a9f4cbc)
+
+* ks/erl_recomment (syntax_tools) (2011-02-23) 1 commit
+ - Fix bug with some comments disappearing (64eb70d)
+
+* ks/hipe-ppc64 (erts, hipe, kernel) (2011-02-10) 8 commits
+ - Enable HiPE by default when compiling for PPC64 (577a628)
+ - Translate RTL to PPC code on PPC64 too (6f40a86)
+ - Changes in ppc files for PPC64 (ea5edef)
+ - Additions for the PPC64 backend (861cfc9)
+ - Changes for the PPC64 backend (dbba32b)
+ - Added loader for ppc64 (60826a5)
+ - New files for the 64-bit backends (7c53e28)
+ - Cleanup  tags (e34f3a0)
+
+* ks/prim_file-fixes (erts) (2011-02-05) 3 commits
+ - New version of the file (ca86ed3)
+ - Driver names should be strings, not atoms (b8ea40c)
+ - Cleanup and cosmetic changes (6adc116)
+
+* ks/reltool-spec-fixes (reltool) (2011-01-12) 1 commit
+ - Fix two erroneous specs of reltool.erl (96c81d6)
+
+* ks/typer (typer) (2011-02-10) 21 commits
+ - Strengthen some specs (e70b5f1)
+ - Allow for --show_success_typings spelling also (bb66841)
+ - Add '--show_success_typings' option (8376b29)
+ - Fix crash in oveloaded contracts with overlapping domains (752b058)
+ - Fix a type error and do some further cleanup (0ef74b6)
+ - Type cleanups and simplifications (39bf5ad)
+ - Cleanup the analysis record (0b1d045)
+ - Remove typer_annotator.erl and typer.hrl (066368a)
+ - Remove typer_info.erl file (03aa23f)
+ - Remove typer_options.erl file (3683f8d)
+ - Remove typer_preprocess.erl file (f4a8288)
+ - Delete typer_map.erl file, really this time (3c1e906)
+.
+.
+.
+
+.
+.
+.
+
+.
+.
+.
+
+* mh/eunit-surefire-reports (eunit) (2011-02-25) 1 commit
+ - Don't shorten error messages in Eunit Surefire reports (d0cc2ae)
+
+* mk/net-kernel-epmd-return-list (kernel) (2010-12-10) 1 commit
+ - Fix list returned by net_kernel:epmd_module (169d7e4)
+
+* ms/epmd-local-access-check (erts) (2010-11-24) 1 commit
+ - epmd: include host address in local access check (5b68030)
+
+* ms/file-fix-hang-reading-compressed-files (erts, kernel) (2011-01-30) 1 commit
+ - file: fix hang reading compressed files (292ecd0)
+
+* ms/inets-prevent_xss_in_error_pages (inets) (2011-02-21) 1 commit
+ - inets: prevent XSS in error pages (4827d5d)
+
+* nox/xmerl-namespace-axis (xmerl) (2010-12-07) 12 commits
+ - Implement namespace axis (27d791f)
+ - Add `#xmlPI` support to xmerl_xpath:write_node/1 (75e67f5)
+ - Fix processing-instruction(name?) (f05e78b)
+ - Fix path filters (610df56)
+ - Support more top-level primary expressions (770d6d9)
+ - Accumulate comments in element nodes (e5b6b3a)
+ - Add `default_attrs` option (18584c5)
+ - Allow whole documents to be returned (aef3dea)
+ - Track parents and namespace in `#xmlAttribute` nodes (dc9b220)
+ - Track parents in `#xmlPI` nodes (5095331)
+ - Set `vsn` field in `#xmlDecl` record (d712331)
+ - Fix namespace-conformance constraints (e062270)
+
+* pg/des-cfb-functions (crypto) (2010-10-16) 1 commit
+ - Add DES and Triple DES cipher feedback (CFB) mode functions (2c79ae7)
+
+* pg/fix-hibernate-with-hipe (erts, otp) (2010-09-27) 1 commit
+ - Fix several bugs related to hibernate/3 and HiPE (ce00ecb)
+
+ . Fix several bugs related to hibernate/3 and HiPE (babd761)
+
+* pg/hipe-remove-constants-pool (erts) (2011-01-29) 1 commit
+ - Remove hipe constants pool (0c16b09)
+
+* pg/honor-start-type-in-rel-files (sasl) (2010-06-06) 1 commit
+ - Honor start type in .rel files when building relup files (7599900)
+
+* rc/rpc_pmap-typo (kernel) (2011-02-22) 1 commit
+ - Fix typo in doc of rpc:pmap/3 (ee1ea4c)
+
+* sa/callback-attr (compiler, inets, kernel, otp, stdlib) (2010-06-08) 7 commits
+ - Add callback specs into 'application' module in kernel (85ae9d7)
+ - Add callback specs to tftp module following internet documentation (019e6d1)
+ - Add callback specs to inets_service module following possibly deprecated comments (575c7af)
+ - Add '-callback' attributes in stdlib's behaviours (a9da5cc)
+ - Update primary bootstrap (d5d255b)
+ - Automatically generate 'behaviour_info' function from '-callback' attributes (1155c86)
+ - Add '-callback' attribute to language syntax (1a1cc4b)
+
+* sa/float_to_list_2 (erts, stdlib) (2011-01-16) 1 commit
+ - Added float_to_list/2 that allows to specify formatting options (ee5a309)
+
+* sb/make-files-like-erlc (tools) (2010-05-18) 1 commit
+ - Change make:files to behave more like erlc (5e9d051)
+
+* sg/fix-diskless-booted-relup (sasl) (2010-09-19) 1 commit
+ - Remove traces of release_handler reading from filesystem when it has Masters list (54cb5df)
+
+* sv/enif_is_exception (erts) (2011-02-22) 1 commit
+ - add support for checking if an ERL_NIF_TERM is an exception (f8cc2b0)
+
+* ta/binary-part-typo (stdlib) (2011-01-22) 1 commit
+ - Fix typo in binary:part/2 example (98f51f2)
+
+* ta/efficiencyguide-typos (otp) (2011-01-27) 1 commit
+ - Fix typos in efficiency guide (5d62504)
+
+* ta/epmd-typo (erts) (2011-01-09) 1 commit
+ - Fix typo in epmd help (ce956a8)
+
+* ta/erlsrv-typos (erts) (2010-12-14) 1 commit
+ - Fix two typos in erlsrv log messages (31b82e8)
+
+* ta/erts-doc (erts) (2011-02-01) 1 commit
+ - erts: Fix doc typos, duplication and readability (04e81b8)
+
+* ta/inet_port-doc (kernel) (2011-02-20) 1 commit
+ - Fix inet:port/1 doc to match implementation/spec (b351d8f)
+
+* ta/sendfile (erts, kernel) (2011-01-13) 1 commit
+ - Implement file:sendfile (0b277d9)
+
+* ta/zip-doc (stdlib) (2011-02-23) 1 commit
+ - Fix typos in zip manpage (f911632)
+
+* ts/cover-with-export_all (tools) (2010-09-23) 1 commit
+ - add user specified compiler options on form reloading (eb02beb)
+
+* tv/edoc-loop-fix (edoc) (2011-02-01) 1 commit
+ - Fix infinite loop for malformed edoc input (6ac05e5)
+
+* uw/mnesia-majority (mnesia) (2011-01-30) 8 commits
+ - Add documentation text about majority checking (f5b8427)
+ - add mnesia_majority_test suite (9c2f765)
+ - where_to_wlock optimization + change_table_majority/2 (a535b6c)
+ - bug in mnesia_tm:needs_majority/2 (eb81e20)
+ - optimize sticky_lock maj. check (5b304d4)
+ - check majority for sticky locks (ae9e1fa)
+ - Write locks now check majority when needed. (6f02d2e)
+ - Add {majority, boolean()} per-table option. (c3241c0)
+
+* vb/shell (erts, kernel, stdlib) (2011-01-21) 6 commits
+ - Add expandfmt_fun option for io:setopts (f139eab)
+ - Correct JCL's help indentation (95672fa)
+ - Handle JCL's "r" command error when no pool started (ba4b196)
+ - Fix tab expansion in remote shell (e2077cb)
+ - edlin_expand: fix matches formatting (838b84a)
+ - Take into account arity len when calculating field's width (ff28c52)
+
+------------------------------------------------------------
+[Dropped]
+
+* dk/agent-capabilities (snmp) (2010-12-01) 1 commit
+ . AGENT-CAPABILITIES handling added to SNMP mib compiler (17c3b19)
+
+* fd/supervisor-delete-child-spec-on-child-termination (stdlib) (2011-01-19) 1 commit
+ . Added supervisor:start_child/3 (bdf27ab)
+
