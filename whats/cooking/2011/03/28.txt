@@ -31,6 +31,9 @@ X-dev-at: 9f78db422a8facfaad909a656ffabeb27f8fe2fd
  + Fix inet:port/1 doc to match implementation/spec (aeb8dc0)
  + Fix typos in zip manpage (2fb83f9)
 
+* ta/doc-fixes (erts) (2010-12-14) 1 commit
+ . Fix two typos in erlsrv log messages (cef1bb0)
+
 * ta/erts-doc () (2011-02-01) 0 commits
 
 * ta/inet_port-doc () (2011-02-20) 0 commits
@@ -251,6 +254,4 @@ cases and is never intended to graduate.
 * rj/fix-typer-delete (typer) (2011-03-10) 1 commit
  . Fix TypEr crash when used with several source files (6d0fa8e)
 
-* ta/doc-fixes (erts) (2010-12-14) 1 commit
- . Fix two typos in erlsrv log messages (cef1bb0)
 
