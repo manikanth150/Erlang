@@ -1,0 +1,231 @@
+From - Wed Apr 27 15:05:59 2011
+Date: Wed Apr 27 15:05:59 2011
+To: erlang patches <erlang-patches@erlang.org>
+Subject: What's cooking in erlang/otp (2011-04-27)
+X-dev-at: ef407fad10bccb97aab140f5b99786b8c7b2237a
+
+------------------------------------------------------------
+[Graduated]
+
+* hw/fix-epmd-perror (erts) (2010-11-13) 1 commit
+ + Fix epmd's dbg_perror() output (b363d7d)
+
+* ms/heart-rem-garbage-append (erts, kernel) (2011-04-05) 1 commit
+ + heart: remove garbage appended to heart command (fa8456a)
+
+* ta/dialyzer-doc (dialyzer) (2011-04-11) 3 commits
+ + dialyzer/doc: synchronize manual.txt and dialyzer.xml (8b852b4)
+ + dialyzer/doc: fix whitespace errors (69f8ad2)
+ + dialyzer/doc: use consistent colons in type specs (890defc)
+
+
+------------------------------------------------------------
+[New topics]
+
+* mh/inhibit-newline-inside-typespec (tools) (2011-04-14) 1 commit
+ - Inhibit electric newline after "->" when inside a type spec (c0c600a)
+
+* pr/mnesia_frag_hash (mnesia) (2011-04-27) 2 commits
+ - add mnesia_frag_hash test (69bbc9c)
+ - Reduce calls to phash in key_to_frag_number (67a20c0)
+
+* sa/dialyzer-tests (dialyzer) (2011-03-21) 22 commits
+ - Update dialyzer.spec (ebe1cab)
+ - Add race/ets_insert_public (a0c71c6)
+ - Add opaque/ewgi,ewgi2 (daf9793)
+ - Add opaque/schuett_bug (f8b48ad)
+ - Add small/param_types_crash (ff7eb30)
+ - Add small/file_open_encoding (b2d6763)
+ - Add small/false_false (03d4842)
+ - Add small/ets_update_counter (fea24cb)
+ - Add small/bin_compr (0a8e4e3)
+ - Add small/tuple_set_crash (fa50197)
+ - Add small/refine_failing (71f45fe)
+ - Add small/not_bogus_warning (2a88480)
+...
+
+* ta/dragonfly-test_server-config (test_server) (2011-04-22) 1 commit
+ - Add DragonflyBSD support to test_server (0a97fea)
+
+* ta/driver_entry-typo (erts) (2011-04-26) 1 commit
+ - driver_entry: Remove gratuitous paren and fix typo (4380605)
+
+* tn/inet_drv-fix (erts) (2011-04-08) 1 commit
+ - Use libdlpi to get physical address (e360563)
+
+------------------------------------------------------------
+[Stalled]
+
+* bw/efile_exists (erts) (2010-10-07) 1 commit
+ - prim_file:exists/{1,2} which is lightweight file existence check (7203932)
+
+Action expected from: Topic author
+
+* fm/posix-fallocate (erts, kernel) (2011-04-15) 4 commits
+ - Added missing surrounding if statement (5ec9fab)
+ - Fixes to file:allocate/2 and respective tests (d0fb479)
+ - Fix build on Solaris (9b8aecf)
+ - Added file:allocate/2 (7554dbb)
+
+Action expected from: Topic author
+
+* jf/run_erl-disable-flow-control (erts) (2010-03-05) 1 commit
+ - Teach run_erl RUN_ERL_DISABLE_FLOWCNTRL for disabling flow control (d0775cd)
+
+Action expected from: Topic author
+
+* jn/gen_stream (stdlib) (2011-04-15) 2 commits
+ - Update gen_stream tests to conform with common_test standard (9f50d34)
+ - Add gen_stream behaviour (3065e10)
+
+Action expected from: OTP-Team
+
+* lt/et-fix (et) (2011-03-30) 1 commit
+ - Force contents window size to display correctly on Windows. (9836fb2)
+
+Action expected from: Topic author
+
+* sa/callback-attr (compiler, inets, kernel, otp, stdlib) (2010-06-08) 6 commits
+ - Add callback specs into 'application' module in kernel (a180fb1)
+ - Add callback specs to tftp module following internet documentation (d0e32d8)
+ - Add callback specs to inets_service module following possibly deprecated comments (d90e984)
+ - Add '-callback' attributes in stdlib's behaviours (acf3d67)
+ - Update primary bootstrap (30c1e91)
+ - Add '-callback' attribute to language syntax (6ee955e)
+
+Action expected from: OTP-Team
+
+* ta/typer-quote-atoms (hipe, typer) (2011-03-20) 1 commit
+ - Quote atoms if necessary in types (254e21e)
+
+Action expected from: Hipe-team reviewer
+
+* uw/mnesia-majority (mnesia) (2011-01-30) 8 commits
+ - Add documentation text about majority checking (f5b8427)
+ - add mnesia_majority_test suite (9c2f765)
+ - where_to_wlock optimization + change_table_majority/2 (a535b6c)
+ - bug in mnesia_tm:needs_majority/2 (eb81e20)
+ - optimize sticky_lock maj. check (5b304d4)
+ - check majority for sticky locks (ae9e1fa)
+ - Write locks now check majority when needed. (6f02d2e)
+ - Add {majority, boolean()} per-table option. (c3241c0)
+
+Action expected from: OTP-Applications team
+
+* vb/shell (erts, kernel, stdlib) (2011-01-21) 6 commits
+ - Add expandfmt_fun option for io:setopts (f139eab)
+ - Correct JCL's help indentation (95672fa)
+ - Handle JCL's "r" command error when no pool started (ba4b196)
+ - Fix tab expansion in remote shell (e2077cb)
+ - edlin_expand: fix matches formatting (838b84a)
+ - Take into account arity len when calculating field's width (ff28c52)
+
+Action expected from: OTP-reviewer
+
+* pd/ttb_upgrade (observer) (2011-04-05) 30 commits
+ . additional tests for ttb module (ee2dabc)
+ . new tests for ttb module (6f8ec53)
+ . updated documentation (d39fa78)
+ . updated OTP tests (dc1af0f)
+ . (BUGFIX) Error with ip tracing to wrap sets (5082fc8)
+ . Add onviso_server and cli as an exemplary ttb usage (d5a68df)
+ . Include logfile name in fetch directory name (45f3302)
+ . missing files addes (3e759dd)
+ . dbg-type tracing (ece6a3b)
+ . Optional handler specification allowed in stop/1 - Allowed optional handler specification in trace/2 (97be5ad)
+ . Flush file trace port buffers with given frequency (9d4b083)
+ . Autoresume tracing (7101720)
+.
+.
+.
+Action expected from: Topic author
+
+* nox/xmerl-namespace-axis (xmerl) (2010-12-07) 12 commits
+ . Implement namespace axis (27d791f)
+ . Add `#xmlPI` support to xmerl_xpath:write_node/1 (75e67f5)
+ . Fix processing-instruction(name?) (f05e78b)
+ . Fix path filters (610df56)
+ . Support more top-level primary expressions (770d6d9)
+ . Accumulate comments in element nodes (e5b6b3a)
+ . Add `default_attrs` option (18584c5)
+ . Allow whole documents to be returned (aef3dea)
+ . Track parents and namespace in `#xmlAttribute` nodes (dc9b220)
+ . Track parents in `#xmlPI` nodes (5095331)
+ . Set `vsn` field in `#xmlDecl` record (d712331)
+ . Fix namespace-conformance constraints (e062270)
+
+Planned for R15
+
+------------------------------------------------------------
+[Cooking]
+
+* bd/mod_esi_timeout_fix (inets) (2011-03-17) 1 commit
+ - Fix timeout message generated by mod_esi (eea0a7b)
+
+* bg/temp-hipe-fixes (compiler, hipe, kernel) (2010-03-15) 6 commits
+ - Avoid crash by skipping compilation_SUITE:on_load/1 (0d913e0)
+ - Inline less aggressively for native-code compilation (0215ac6)
+ - Crudely fix return type for the lists:key{search,find,member}/3 (4f48864)
+ - seq_trace_SUITE: Don't native-compile (3799b17)
+ - Disable native code if on_load is used (f35872c)
+ - andor_SUITE: Don't native-compile (a8ab68c)
+
+This branch contains temporary workarounds to avoid failing test
+cases and is never intended to graduate.
+
+* bsmr/fix-makefile-in-for-xref-mod-app-escript (otp) (2010-12-10) 1 commit
+ - Fix for Makefile.in invoking xref_mod_app.escript (10d4235)
+
+* km/pool_connect-to-running-nodes (stdlib) (2010-09-02) 1 commit
+ - Change pool module to attempt to attach to nodes that are already running (a9f4cbc)
+
+* ks/prim_file-fixes (erts) (2011-04-27) 3 commits
+ - add prim_file.beam (e56d1c1)
+ - Driver names should be strings, not atoms (0f03b1e)
+ - Cleanup and cosmetic changes (bfc2254)
+
+* ks/snmp-specs (snmp) (2011-04-03) 1 commit
+ - Add specs for functions that do not return (7354ffb)
+
+* ms/beam-fix-format-specifiers-in-erl_exit-msg (erts) (2011-04-06) 1 commit
+ - Fix format specifiers in erl_exit messages (a8bacf3)
+
+* ms/erl_interface-compile-error (erl_interface) (2011-04-08) 1 commit
+ - erl_interface: fix compile error (daad8e6)
+
+* ms/file-fix-hang-reading-compressed-files (erts, kernel) (2011-04-07) 1 commit
+ - file: fix hang reading compressed files (b9e8506)
+
+* ms/unsigned-integer-overflow-in-error (erts) (2011-04-06) 1 commit
+ - Unsigned integer may overflow in error message (3257bb0)
+
+* rj/fix-httpd-format (inets) (2011-03-17) 1 commit
+ - Fix log messages formating in httpd (cbe8b2e)
+
+* ta/sendfile (erts, kernel) (2011-01-13) 1 commit
+ - Implement file:sendfile (6c70e81)
+
+* ta/unicode-non-chars (stdlib) (2011-04-05) 1 commit
+ - unicode: document 16#FFFE and 16#FFFF (non chars) (4207846)
+
+* dc/improved_find_redist (erts) (2011-03-18) 1 commit
+ . support new SDKs in find_redist.sh and fallback to $ERL_TOP as last resort (f4f35aa)
+
+* sv/enif_is_exception (erts) (2011-02-22) 1 commit
+ . add support for checking if an ERL_NIF_TERM is an exception (f8cc2b0)
+
+------------------------------------------------------------
+[Dropped]
+
+
+* fm/os_type_doc_missing_family (kernel) (2011-04-14) 1 commit
+ . Add missing OS familiy 'ose' to os:type/0 documentation (188f3dd)
+
+Should remove 'ose' from code, not supported 
+
+* pl/solaris11-build (erts) (2011-04-10) 1 commit
+ . Fix building on Solaris 11 Express (49beba0)
+
+Dropped for tn/inet_drv-fix 
+
+
