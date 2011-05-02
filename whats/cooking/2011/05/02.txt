@@ -1,0 +1,212 @@
+From - Mon May  2 15:36:00 2011
+Date: Mon May  2 15:36:00 2011
+To: erlang patches <erlang-patches@erlang.org>
+Subject: What's cooking in erlang/otp (2011-05-02)
+X-dev-at: 8d74122d8ee9eb46bfb49c13ec39f515996a58a2
+
+------------------------------------------------------------
+[Graduated]
+
+* km/pool_connect-to-running-nodes (stdlib) (2010-09-02) 1 commit
+ + Change pool module to attempt to attach to nodes that are already running (a9f4cbc)
+
+* ks/prim_file-fixes (erts) (2011-04-27) 3 commits
+ + add prim_file.beam (e56d1c1)
+ + Driver names should be strings, not atoms (0f03b1e)
+ + Cleanup and cosmetic changes (bfc2254)
+
+* ms/erl_interface-compile-error (erl_interface) (2011-04-08) 1 commit
+ + erl_interface: fix compile error (daad8e6)
+
+* ms/file-fix-hang-reading-compressed-files (erts, kernel) (2011-04-07) 1 commit
+ + file: fix hang reading compressed files (b9e8506)
+
+* ms/unsigned-integer-overflow-in-error (erts) (2011-04-06) 1 commit
+ + Unsigned integer may overflow in error message (3257bb0)
+
+* sv/enif_is_exception (erts) (2011-02-22) 1 commit
+ + add support for checking if an ERL_NIF_TERM is an exception (b02f03c)
+
+* ta/common_test-ignore-ct_slave-xml (otp) (2011-04-27) 1 commit
+ + Ignore lib/common_test/doc/src/ct_slave.xml (44465b1)
+
+* ta/driver_entry-typo (erts) (2011-04-26) 1 commit
+ + driver_entry: Remove gratuitous paren and fix typo (4380605)
+
+------------------------------------------------------------
+[New topics]
+
+* kj/eunit-race-cond (eunit) (2011-04-17) 2 commits
+ - Don't let eunit_surefire report back to eunit when stopping (bd38a12)
+ - Wait until all eunit listeners terminate (0e7c557)
+
+* ks/list_to_bitstring (hipe) (2011-05-01) 4 commits
+ - Fix handling of <<_:N,_:_*M>> type expressions (9a256f1)
+ - Fix the argument of erlang:list_to_bitstring/1 (1abe7a3)
+ - Move function to its proper place (ba73458)
+ - Remove unneeded function 'sequence/2' (b9903ed)
+
+* ss/fix-cover-fd-leak (tools) (2011-04-29) 1 commit
+ - Fix file descriptor leak (0568a0e)
+
+* ta/inet_drv-cleanup (erts) (2011-05-02) 2 commits
+ - inet_drv: remove unused tcp request id (1a0389b)
+ - inet_drv: remove gratuitous assignment (92b693e)
+
+------------------------------------------------------------
+[Stalled]
+
+* bw/efile_exists (erts) (2010-10-07) 1 commit
+ - prim_file:exists/{1,2} which is lightweight file existence check (7203932)
+
+Action expected from: Topic author
+
+* fm/posix-fallocate (erts, kernel) (2011-04-15) 4 commits
+ - Added missing surrounding if statement (5ec9fab)
+ - Fixes to file:allocate/2 and respective tests (d0fb479)
+ - Fix build on Solaris (9b8aecf)
+ - Added file:allocate/2 (7554dbb)
+
+Action expected from: Topic author
+
+* jf/run_erl-disable-flow-control (erts) (2010-03-05) 1 commit
+ - Teach run_erl RUN_ERL_DISABLE_FLOWCNTRL for disabling flow control (d0775cd)
+
+Action expected from: Topic author
+
+* jn/gen_stream (stdlib) (2011-04-15) 2 commits
+ - Update gen_stream tests to conform with common_test standard (9f50d34)
+ - Add gen_stream behaviour (3065e10)
+
+Action expected from: OTP-Team
+
+* lt/et-fix (et) (2011-03-30) 1 commit
+ - Force contents window size to display correctly on Windows. (9836fb2)
+
+Action expected from: Topic author
+
+* sa/callback-attr (compiler, inets, kernel, otp, stdlib) (2010-06-08) 6 commits
+ - Add callback specs into 'application' module in kernel (a180fb1)
+ - Add callback specs to tftp module following internet documentation (d0e32d8)
+ - Add callback specs to inets_service module following possibly deprecated comments (d90e984)
+ - Add '-callback' attributes in stdlib's behaviours (acf3d67)
+ - Update primary bootstrap (30c1e91)
+ - Add '-callback' attribute to language syntax (6ee955e)
+
+Action expected from: OTP-Team
+
+* ta/typer-quote-atoms (hipe, typer) (2011-03-20) 1 commit
+ - Quote atoms if necessary in types (254e21e)
+
+Action expected from: Hipe-team reviewer
+
+* uw/mnesia-majority (mnesia) (2011-01-30) 8 commits
+ - Add documentation text about majority checking (f5b8427)
+ - add mnesia_majority_test suite (9c2f765)
+ - where_to_wlock optimization + change_table_majority/2 (a535b6c)
+ - bug in mnesia_tm:needs_majority/2 (eb81e20)
+ - optimize sticky_lock maj. check (5b304d4)
+ - check majority for sticky locks (ae9e1fa)
+ - Write locks now check majority when needed. (6f02d2e)
+ - Add {majority, boolean()} per-table option. (c3241c0)
+
+Action expected from: OTP-Applications team
+
+* vb/shell (erts, kernel, stdlib) (2011-01-21) 6 commits
+ - Add expandfmt_fun option for io:setopts (f139eab)
+ - Correct JCL's help indentation (95672fa)
+ - Handle JCL's "r" command error when no pool started (ba4b196)
+ - Fix tab expansion in remote shell (e2077cb)
+ - edlin_expand: fix matches formatting (838b84a)
+ - Take into account arity len when calculating field's width (ff28c52)
+
+Action expected from: OTP-reviewer
+
+* nox/xmerl-namespace-axis (xmerl) (2010-12-07) 12 commits
+ . Implement namespace axis (27d791f)
+ . Add `#xmlPI` support to xmerl_xpath:write_node/1 (75e67f5)
+ . Fix processing-instruction(name?) (f05e78b)
+ . Fix path filters (610df56)
+ . Support more top-level primary expressions (770d6d9)
+ . Accumulate comments in element nodes (e5b6b3a)
+ . Add `default_attrs` option (18584c5)
+ . Allow whole documents to be returned (aef3dea)
+ . Track parents and namespace in `#xmlAttribute` nodes (dc9b220)
+ . Track parents in `#xmlPI` nodes (5095331)
+ . Set `vsn` field in `#xmlDecl` record (d712331)
+ . Fix namespace-conformance constraints (e062270)
+
+Action expected from: R15 rel
+------------------------------------------------------------
+[Cooking]
+
+* bd/mod_esi_timeout_fix (inets) (2011-03-17) 1 commit
+ - Fix timeout message generated by mod_esi (eea0a7b)
+
+* bg/temp-hipe-fixes (compiler, hipe, kernel) (2010-03-15) 6 commits
+ - Avoid crash by skipping compilation_SUITE:on_load/1 (0d913e0)
+ - Inline less aggressively for native-code compilation (0215ac6)
+ - Crudely fix return type for the lists:key{search,find,member}/3 (4f48864)
+ - seq_trace_SUITE: Don't native-compile (3799b17)
+ - Disable native code if on_load is used (f35872c)
+ - andor_SUITE: Don't native-compile (a8ab68c)
+
+This branch contains temporary workarounds to avoid failing test
+cases and is never intended to graduate.
+
+* bsmr/fix-makefile-in-for-xref-mod-app-escript (otp) (2010-12-10) 1 commit
+ - Fix for Makefile.in invoking xref_mod_app.escript (10d4235)
+
+* ks/snmp-specs (snmp) (2011-04-03) 1 commit
+ - Add specs for functions that do not return (7354ffb)
+
+* mh/inhibit-newline-inside-typespec (tools) (2011-04-14) 1 commit
+ - Inhibit electric newline after "->" when inside a type spec (c0c600a)
+
+* ms/beam-fix-format-specifiers-in-erl_exit-msg (erts) (2011-04-06) 1 commit
+ - Fix format specifiers in erl_exit messages (a8bacf3)
+
+* pr/mnesia_frag_hash (mnesia) (2011-04-27) 2 commits
+ - add mnesia_frag_hash test (1d6762d)
+ - Reduce calls to phash in key_to_frag_number (67a20c0)
+
+* rj/fix-httpd-format (inets) (2011-03-17) 1 commit
+ - Fix log messages formating in httpd (cbe8b2e)
+
+* sa/dialyzer-tests (dialyzer) (2011-03-21) 22 commits
+ - Update dialyzer.spec (6f2b127)
+ - Add race/ets_insert_public (fee1a1e)
+ - Add opaque/ewgi,ewgi2 (7cd0b26)
+ - Add opaque/schuett_bug (9c7d84b)
+ - Add small/param_types_crash (aaf9ec2)
+ - Add small/file_open_encoding (a106909)
+ - Add small/false_false (4cd05bf)
+ - Add small/ets_update_counter (3f25077)
+ - Add small/bin_compr (8b3b609)
+ - Add small/tuple_set_crash (dc91d02)
+ - Add small/refine_failing (bb03af3)
+ - Add small/not_bogus_warning (c3c4253)
+...
+
+* ta/dragonfly-test_server-config (test_server) (2011-04-22) 1 commit
+ - Add DragonflyBSD support to test_server (0a97fea)
+
+* ta/sendfile (erts, kernel) (2011-01-13) 1 commit
+ - Implement file:sendfile (6c70e81)
+
+* ta/unicode-non-chars (stdlib) (2011-04-05) 1 commit
+ - unicode: document 16#FFFE and 16#FFFF (non chars) (5043e8f)
+
+* tn/inet_drv-fix (erts) (2011-04-08) 1 commit
+ - Use libdlpi to get physical address (e360563)
+
+* dc/improved_find_redist (erts) (2011-03-18) 1 commit
+ . support new SDKs in find_redist.sh and fallback to $ERL_TOP as last resort (f4f35aa)
+
+------------------------------------------------------------
+[Dropped]
+
+* ta/inet_drv-gratuitous-assign (erts) (2011-04-30) 1 commit
+ . inet_drv: remove gratuitous assignment (6d2477c)
+
+
