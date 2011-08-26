@@ -1,0 +1,308 @@
+From - Fri Aug 26 13:25:03 2011
+Date: Fri Aug 26 13:25:03 2011
+To: erlang patches <erlang-patches@erlang.org>
+Subject: What's cooking in erlang/otp (2011-08-26)
+X-dev-at: d48eaa0731017e5cdadca0af77ac14cd949b6c67
+
+Make sure to check the updated wiki on github.
+
+
+------------------------------------------------------------
+[Graduated]
+
+* sa/prim-file-fix (erts) (2011-05-27) 1 commit
+ . Replace atom in DRV macro in prim_file with string (3ca5c01)
+
+* ao/fix-percept-msgs (percept) (2011-06-06) 2 commits
+ + Fix message handling in select requests (30bcf83)
+ + Add demonitor to avoid keeping DOWN message in the queue (c52f5a6)
+
+* cr/trivia (otp, public_key, ssl, stdlib) (2011-08-08) 3 commits
+ + replace "a ssl" with "an ssl" (89ca4da)
+ + reindent pkix_path_validation/3 (c432477)
+ + Trivial documentation fixes (e011c1a)
+
+* gs/yecc-example (parsetools) (2011-08-18) 1 commit
+ + Fix incorrect order of pseudo variables in yecc example (f5c2fe1)
+
+* hw/update-chmod-without-f (dialyzer, diameter, sasl, snmp, ssh, xmerl) (2011-06-05) 1 commit
+ + Again: Call chmod without the "-f" flag (d0fb46f)
+
+* kj/eunit-surefire-fixes (eunit) (2011-05-11) 1 commit
+ + Generate separate surefire XMLs for each test suite (61621e6)
+
+* rc/edoc-minor (edoc) (2011-08-02) 5 commits
+ + forgot to ensure that xmerl is found in path for include_lib to work (52e430e)
+ + fix -spec declaration that doesn't work in R13B04 (b2fe00d)
+ + eliminate warnings about unused imports (d23c137)
+ + removed CVS-keywords from source files (9c9ed58)
+ + synchronized with edoc development version (403d462)
+
+* rc/r14-gc-fix (erts) (2011-08-13) 1 commit
+ + fix 64-bit issues in the garbage collection (caad36a)
+
+* sa/dialyzer-server-loop-fix (dialyzer) (2011-05-03) 1 commit
+ + Fix server loop detection (3a7af1c)
+
+* sa/dialyzer-small-fixes (dialyzer) (2011-07-13) 6 commits
+ + Fix dialyzer warning on default clause for binary comprehension (b4f5b85)
+ + Update results of race_SUITE/extract_translations (964f6fc)
+ + Update results of small_SUITE/flatten (c60992f)
+ + Add codec_can and list_to_bitstring tests (ada2590)
+ + Fix bug when reporting unused functions (5a68d01)
+ + Update Dialyzer's r9c_suite results (a50b0c6)
+
+* ta/nif-strict-aliasing (erts) (2011-05-10) 2 commits
+ + erts: use a union to avoid strict aliasing issues (614729d)
+ + erts: adapt matrix_nif to R14 erl_nif API changes (4c3ab34)
+
+------------------------------------------------------------
+[New topics]
+
+* dc/fix_win32_static_crypto (crypto, erts) (2011-08-11) 1 commit
+ - Fix win32 OpenSSL static linking broken in 20c9d6e (52230a4)
+
+* hl/beam_disasm-no_attri_chunk (compiler) (2011-08-26) 2 commits
+ - Add test suite for beam_disasm in compiler (63b3acf)
+ - Fix error if no attributes chunk found in beam files (e0cca51)
+
+* mp/xmerl-ucs2-fix (xmerl) (2011-08-25) 1 commit
+ - Fixed xmerl_ucs UCS2 little endian en/decoding (374b029)
+
+* rc/ftp-avoid-hanging (inets) (2010-08-25) 1 commit
+ - Avoid hanging in socket-accept (cb7dfde)
+
+* rc/remote-shell-completion (kernel) (2010-10-22) 1 commit
+ - make tab completion work in remote shells (73d1959)
+
+* rc/stdlib-edoc-fix (stdlib) (2011-08-18) 1 commit
+ - fix broken edoc annotations (6a49d6d)
+
+* va/http-win-dir-traversal (inets) (2011-08-26) 1 commit
+ - Fix httpd directory traversal on Windows (a936795)
+
+* va/httpd-typo-fix (inets) (2011-08-25) 1 commit
+ - Typofix in httpd_file:handle_error message (8fcbeef)
+* ta/asn1ct-werr (asn1) (2011-06-24) 1 commit
+ . asn1ct: add warnings_as_errors option (09ada024)
+
+* ta/compile-werr-beam-file (compiler) (2011-06-01) 1 commit
+ . Do not write beam file if Werr and warnings /= [] (850d4c9)
+
+* ta/erl_compile-dead-code (stdlib) (2011-08-19) 1 commit
+ . Remove dead code in erl_compile (f2ca6d4)
+
+------------------------------------------------------------
+[Stalled]
+
+
+* nox/xmerl-namespace-axis (xmerl) (2010-12-07) 12 commits
+ . Implement namespace axis (27d791f)
+ . Add `#xmlPI` support to xmerl_xpath:write_node/1 (75e67f5)
+ . Fix processing-instruction(name?) (f05e78b)
+ . Fix path filters (610df56)
+ . Support more top-level primary expressions (770d6d9)
+ . Accumulate comments in element nodes (e5b6b3a)
+ . Add `default_attrs` option (18584c5)
+ . Allow whole documents to be returned (aef3dea)
+ . Track parents and namespace in `#xmlAttribute` nodes (dc9b220)
+ . Track parents in `#xmlPI` nodes (5095331)
+ . Set `vsn` field in `#xmlDecl` record (d712331)
+ . Fix namespace-conformance constraints (e062270)
+
+Action expected from: R15
+
+* pd/ttb_upgrade (observer) (2011-04-05) 30 commits
+ . additional tests for ttb module (ee2dabc)
+ . new tests for ttb module (6f8ec53)
+ . updated documentation (d39fa78)
+ . updated OTP tests (dc1af0f)
+ . (BUGFIX) Error with ip tracing to wrap sets (5082fc8)
+ . Add onviso_server and cli as an exemplary ttb usage (d5a68df)
+ . Include logfile name in fetch directory name (45f3302)
+ . missing files addes (3e759dd)
+ . dbg-type tracing (ece6a3b)
+ . Optional handler specification allowed in stop/1 - Allowed optional handler specification in trace/2 (97be5ad)
+ . Flush file trace port buffers with given frequency (9d4b083)
+ . Autoresume tracing (7101720)
+
+Action expected from: Topic author
+
+* bw/efile_exists (erts) (2010-10-07) 1 commit
+ - prim_file:exists/{1,2} which is lightweight file existence check (7203932)
+
+Action expected from: Topic author
+
+* fm/posix-fallocate (erts, kernel) (2011-04-15) 4 commits
+ - Added missing surrounding if statement (5ec9fab)
+ - Fixes to file:allocate/2 and respective tests (d0fb479)
+ - Fix build on Solaris (9b8aecf)
+ - Added file:allocate/2 (7554dbb)
+
+Action expected from: Topic author
+
+* jn/gen_stream (stdlib) (2011-04-15) 2 commits
+ - Update gen_stream tests to conform with common_test standard (9f50d34)
+ - Add gen_stream behaviour (3065e10)
+
+Action expected from: OTP-Team
+
+* sa/callback-attr (compiler, inets, kernel, orber, otp, stdlib) (2010-06-08) 8 commits
+ - Add callback specs into 'application' module in kernel (4bca766)
+ - Add callback specs to tftp module following internet documentation (bba649c)
+ - Add callback specs to inets_service module following possibly deprecated comments (e41a958)
+ - Add '-callback' attributes in stdlib's behaviours (d8d94c4)
+ - Update primary bootstrap (199525a)
+ - Update the documentation with information on the callback attribute (311a25f)
+ - Automatically generate 'behaviour_info' function from '-callback' attributes (7c44f16)
+ - Add '-callback' attribute to language syntax (e8336ff)
+
+Action expected from: OTP-Team
+
+* ta/typer-quote-atoms (hipe, typer) (2011-03-20) 1 commit
+ - Quote atoms if necessary in types (254e21e)
+
+Action expected from: Hipe-team reviewer
+
+* ms/epmd-IPv6-node-reg (erts, kernel) (2011-06-03) 1 commit
+ - epmd: support IPv6 node registration (5523b21)
+
+Action expected from: R15
+
+------------------------------------------------------------
+[Cooking]
+
+* at/error_logger_calls (diameter, inets, ssl) (2011-07-01) 1 commit
+ - Fix incorrect use of error_logger:(info|warning|error)_report/2 (ba12fcc)
+
+
+* bg/temp-hipe-fixes (compiler, hipe, kernel) (2010-03-15) 6 commits
+ - Avoid crash by skipping compilation_SUITE:on_load/1 (a8ea623)
+ - Inline less aggressively for native-code compilation (1346686)
+ - Crudely fix return type for the lists:key{search,find,member}/3 (c03a748)
+ - seq_trace_SUITE: Don't native-compile (b8c17a9)
+ - Disable native code if on_load is used (974ee4e)
+ - andor_SUITE: Don't native-compile (86e4df8)
+
+This branch contains temporary workarounds to avoid failing test
+cases and is never intended to graduate.
+
+* cr/md2-With-RSA-Encryption (crypto, public_key) (2011-08-06) 1 commit
+ - support md2WithRSAEncryption certificates in public_key (0535da1)
+
+* fk/ref_manual_fix (otp) (2011-07-20) 1 commit
+ - Fix non-existing function (erlang:disconnect/1) in distributed reference manual (da76dcc)
+
+* fm/enif_is_number (erts) (2011-06-08) 1 commit
+ - Add NIF function enif_is_number (8db78b0)
+
+* fm/external_size_2 (erts, hipe) (2011-05-16) 1 commit
+ - Added erlang:external_size/2 BIF (2f4277a)
+
+* fm/gen_tcp_udp_doc_packet_type (kernel) (2011-06-19) 1 commit
+ - Fix type of Packet arg of gen_tcp:send/2 and gen_udp:send/4 (042f8da)
+
+* fm/zlib_doc (erts, kernel) (2011-05-31) 1 commit
+ - Fix doc and spec tags for a few zlib erlang module functions (efe2951)
+
+ . Fix doc and spec tags for a few zlib erlang module functions (8eddbb9)
+Action expected from: Topic author, rebase
+
+* ft/fix_supervisor_temporary_restart (stdlib) (2011-08-03) 1 commit
+ - fix supervisors restarting temporary children (4f9b938)
+
+* hw/detect-cpus-on-irix (erts) (2011-06-07) 1 commit
+ - Detect the available CPUs on IRIX (e68fde9)
+
+* hw/ignore-empty-epmd-address (erts) (2011-07-13) 1 commit
+ - Let epmd ignore empty ERL_EPMD_ADDRESS (32228c6)
+
+* jw/release_handler_1 (sasl) (2011-06-14) 3 commits
+ - catch suspended supervisors (b03c6e1)
+ - catch the errors specifically rather than attempting to pattern match (02d40e2)
+ - General improvements to get_supervised_procs (d02e9d5)
+
+* ml/two-trivial-documentation-fixes (otp, stdlib) (2011-06-21) 1 commit
+ - Fix trivial documentation errors (217f907)
+
+ . Fix trivial documentation errors
+
+* ms/ei-int-overflow-in-string-atom-enc (erl_interface) (2011-06-06) 1 commit
+ - ei: integer overflow in string/atom encoding (9cf9cde)
+
+* ms/epmd-fix-compiler-warnings (erts) (2011-06-03) 1 commit
+ - epmd: fix compiler warnings (b5ff56d)
+
+* pl/no_bat_files_none_win32 (observer, webtool) (2011-07-21) 1 commit
+ - Do not install *.bat files on non-win32 machines (a863e97)
+
+* pr/mnesia_frag_hash (mnesia) (2011-04-27) 2 commits
+ - add mnesia_frag_hash test (1d6762d)
+ - Reduce calls to phash in key_to_frag_number (67a20c0)
+
+* rc/epp-include-path-fix (stdlib) (2011-06-14) 1 commit
+ - Make Erlang preprocessor check dir of current file first (b5d2469)
+
+* rc/eunit-2.2.0 (eunit) (2011-07-18) 1 commit
+ - Updated to EUnit version 2.2.0. (a394b47)
+
+* rz/add_proplist_type (common_test, dialyzer, edoc, stdlib, test_server) (2011-05-22) 1 commit
+ - Add a proplist() type (7d8a1f8)
+
+* ta/configure-fdatasync (erts) (2011-06-13) 2 commits
+ - Document fdatasync -lrt requirement (SunOS <= 5.10) (8f0f462)
+ - Move fdatasync autoconf checks to proper place (8b579a2)
+
+* ta/docs-fixes (dialyzer, erts, inets, runtime_tools, tools) (2011-08-25) 6 commits
+ - Fix typos in dbg(3) (f77182d)
+ - dialyzer: fix a small typo in list_to_bitstring test (62db541)
+ - Fix typos in cover.erl (f5aa87a)
+ - Fix typos (variable name) in erl_nif(3) (6184023)
+ - Fix typos in mod_esi(3) (72cfdaa)
+ - Fix trivial typos in erlang(3) (e8f8e9a)
+
+* ta/hipe_cleanup (hipe) (2011-07-05) 1 commit
+ - Clean up hipe.hrl.src (Signed-off-by: Kostis) (aa1d02f)
+
+* ta/nif-variadic-funs (erts) (2011-05-13) 1 commit
+ - erts: convert variadic nif funs into inline funs (9a1f9b6)
+
+* ta/sendfile (erts, kernel) (2011-01-13) 1 commit
+ - Implement file:sendfile (d2ad2e9)
+
+* ta/teach_emacs_yecc_and_leex_compile (tools) (2011-07-03) 1 commit
+ - Teach the emacs mode to compile yecc and leex files (5e18b53)
+
+* ta/werror (asn1, compiler, erts, parsetools, sasl) (2011-08-19) 13 commits
+ - systools: add warnings_as_errors option (58a0d81)
+ - asn1ct: add warnings_as_errors option (6259e29)
+ - leex: optimize werror/1 (fb35412)
+ - yecc: optimize werror/1 (5afa6d6)
+ - yecc: use more descriptive name: 'werror' (d949dba)
+ - leex: use more descriptive name: 'werror' (efc6b08)
+ - compile: log warnings as errors if -Werror is enabled (856e8cd)
+ - yecc: log warnings as errors if -Werror is enabled (3bc32a8)
+ - leex: log warnings as errors if -Werror is enabled (8e7ef96)
+ - yecc: honour -Werror passed from erlc (aae1fbf)
+ - leex: honour -Werror passed from erlc (2010d2b)
+ - Do not write beam file if Werr and warnings /= [] (4708125)
+
+
+* ta/wx-obsolete-guard (wx) (2011-06-28) 1 commit
+ - wx: fix obsolete guard warning (list/1) (af61de4)
+
+* tn/inet_drv-fix (erts) (2011-04-08) 1 commit
+ - Use libdlpi to get physical address (e360563)
+
+------------------------------------------------------------
+[Dropped]
+
+* vb/shell (erts, kernel, stdlib) (2011-01-21) 6 commits
+ . Add expandfmt_fun option for io:setopts (f139eab)
+ . Correct JCL's help indentation (95672fa)
+ . Handle JCL's "r" command error when no pool started (ba4b196)
+ . Fix tab expansion in remote shell (e2077cb)
+ . edlin_expand: fix matches formatting (838b84a)
+ . Take into account arity len when calculating field's width (ff28c52)
+
+Dropped due to lack of communication with topic author
