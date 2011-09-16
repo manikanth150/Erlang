@@ -1,0 +1,259 @@
+From - Fri Sep 16 13:59:46 2011
+Date: Fri Sep 16 13:59:46 2011
+To: erlang patches <erlang-patches@erlang.org>
+Subject: What's cooking in erlang/otp (2011-09-16)
+X-dev-at: 3753f81232c68c8db9e6dcd0b2911583cf1b5bd1
+
+The release date for R14B04 is close.
+Patches submitted next week will most likely be included in the R15 release
+
+
+------------------------------------------------------------
+[Graduated]
+
+* dc/fix_win32_static_crypto (crypto, erts) (2011-08-11) 1 commit
+ + Fix win32 OpenSSL static linking broken in 20c9d6e (52230a4)
+
+* fm/enif_compare-64-to-32bits-cast (erts) (2011-09-01) 1 commit
+ + Fix enif_compare on 64bits machines (03d8c28)
+
+* fm/external_size_2 (erts, hipe) (2011-05-16) 1 commit
+ + Add erlang:external_size/2 BIF (1b2cea3)
+
+* hw/detect-cpus-on-irix (erts) (2011-06-07) 1 commit
+ + Detect the available CPUs on IRIX (e68fde9)
+
+* hw/ignore-empty-epmd-address (erts) (2011-07-13) 1 commit
+ + Let epmd ignore empty ERL_EPMD_ADDRESS (32228c6)
+
+* ms/ei-int-overflow-in-string-atom-enc (erl_interface) (2011-06-06) 1 commit
+ + ei: integer overflow in string/atom encoding (9cf9cde)
+
+* sa/dialyzer-dev (dialyzer, hipe) (2011-01-30) 6 commits
+ + Add origin information to #fun_var closures (4d9bf5c)
+ + Suppress some warnings about generation of non-returning funs (45537dc)
+ + Enhance Dialyzer's inference on comparisons (e7f7a30)
+ + Fix infinite loop in dataflow (25b2e48)
+ + Minor fix in dead code (ae96591)
+ + Update r9c/{inets,mnesia} results in dialyzer's test suite (c68f922)
+
+* ta/erl_compile-dead-code (stdlib) (2011-08-19) 1 commit
+ + Remove dead code in erl_compile (4c63d9d)
+
+* ta/werror (asn1, compiler, erts, parsetools, sasl, snmp) (2011-09-06) 15 commits
+ + snmp: extend warnings_as_errors test (bbdc6a3)
+ + systools: add warnings_as_errors option (130f34e)
+ + asn1ct: add warnings_as_errors option (fa90ce7)
+ + leex: optimize werror/1 (78c109d)
+ + yecc: optimize werror/1 (5d4aadd)
+ + yecc: use more descriptive name: 'werror' (9520bbf)
+ + leex: use more descriptive name: 'werror' (ebb7283)
+ + compile: optimize werror/1 (899dbcf)
+ + compile: log warnings as errors if -Werror is enabled (25f32f4)
+ + yecc: log warnings as errors if -Werror is enabled (a6b46d1)
+ + leex: log warnings as errors if -Werror is enabled (089df2b)
+ + yecc: honour -Werror passed from erlc (48de2c2)
+.
+.
+.
+
+* va/httpd-typo-fix (inets) (2011-08-25) 1 commit
+ + Typofix in httpd_file:handle_error message (8fcbeef)
+
+------------------------------------------------------------
+[New topics]
+
+* ac/fix-erl_interface-docs (erl_interface) (2011-09-07) 2 commits
+ - Make comment reflect code in erl_interface/src/misc/ei_decode_term.c (ff9a8a6)
+ - ei_decode_ei_term() returns 1 if index is incremented (292eb1b)
+
+* cf/simple_one_for_one_shutdown (otp, stdlib) (2011-09-14) 3 commits
+ - Explain how dynamic child processes are stopped (0473132)
+ - Stack errors when dynamic children are stopped (42c581d)
+ - Explicitly kill dynamic children in supervisors (4775947)
+
+* cf/supervisor_shutdown_infinity (otp, stdlib) (2011-09-14) 2 commits
+ - Add a warning to docs about workers' shutdown strategy (76cc98d)
+ - Allow an infinite timeout to shutdown worker processes (9f6552d)
+
+* cr/cppcheck (erl_interface, erts) (2011-08-08) 1 commit
+ - Changes inspired by running cppcheck(1) (ef757a1)
+
+* dj/xmerl_ucs-latin9-support (xmerl) (2011-04-13) 1 commit
+ - Add latin9 (iso-8859-15) support in xmerl_ucs (60c2511)
+
+* hl/fix-ms_transform-scope-warn (stdlib) (2011-08-26) 1 commit
+ - ms_transform: Fix incorrect `variable shadowed' warnings (29610af)
+
+* mh/create_cookie_error_msg (kernel) (2011-09-15) 1 commit
+ - Specify file name and error on create_cookie failure (9319587)
+
+* pg/fix-hipe-bs_get_float2 (hipe) (2011-09-03) 1 commit
+ - Fix bug with binary pattern matching of floats of variable size (ba14137)
+
+------------------------------------------------------------
+[Stalled]
+
+* bw/efile_exists (erts) (2010-10-07) 1 commit
+ - prim_file:exists/{1,2} which is lightweight file existence check (7203932)
+
+Action expected from: Topic author
+
+* fm/posix-fallocate (erts, kernel) (2010-12-28) 1 commit
+ - Added file:allocate/2 (682f39a)
+
+Action expected from: Topic author
+
+* hl/beam_disasm-no_attri_chunk (compiler) (2011-08-26) 2 commits
+ - Add test suite for beam_disasm in compiler (63b3acf)
+ - Fix error if no attributes chunk found in beam files (e0cca51)
+
+Action expected from: Topic author
+
+* jn/gen_stream (stdlib) (2011-04-15) 2 commits
+ - Update gen_stream tests to conform with common_test standard (ce84daf)
+ - Add gen_stream behaviour (6a089a4)
+
+Action expected from: OTP-Team
+
+* ms/epmd-IPv6-node-reg (erts, kernel) (2011-06-03) 1 commit
+ - epmd: support IPv6 node registration (5523b21)
+
+Action expected from: R15
+
+* pr/mnesia_frag_hash (mnesia) (2011-04-27) 2 commits
+ - add mnesia_frag_hash test (1d6762d)
+ - Reduce calls to phash in key_to_frag_number (67a20c0)
+
+Action expected from: Topic author
+
+* rc/epp-include-path-fix (stdlib) (2011-06-14) 1 commit
+ - Make Erlang preprocessor check dir of current file first (b5d2469)
+
+Action expected from: Topic author
+
+* fm/enif_is_number (erts) (2011-06-08) 1 commit
+ - Add NIF function enif_is_number (8db78b0)
+
+Action expected from: R15
+
+* ta/nif-variadic-funs (erts) (2011-05-13) 1 commit
+ - erts: convert variadic nif funs into inline funs (9a1f9b6)
+
+Action expected from: R15
+
+* tn/inet_drv-fix (erts) (2011-04-08) 1 commit
+ - Use libdlpi to get physical address (e360563)
+
+Action expected from: Topic author
+
+* nox/xmerl-namespace-axis (xmerl) (2010-12-07) 12 commits
+ . Implement namespace axis (27d791f)
+ . Add `#xmlPI` support to xmerl_xpath:write_node/1 (75e67f5)
+ . Fix processing-instruction(name?) (f05e78b)
+ . Fix path filters (610df56)
+ . Support more top-level primary expressions (770d6d9)
+ . Accumulate comments in element nodes (e5b6b3a)
+ . Add `default_attrs` option (18584c5)
+ . Allow whole documents to be returned (aef3dea)
+ . Track parents and namespace in `#xmlAttribute` nodes (dc9b220)
+ . Track parents in `#xmlPI` nodes (5095331)
+ . Set `vsn` field in `#xmlDecl` record (d712331)
+ . Fix namespace-conformance constraints (e062270)
+
+Action expected from: R15
+
+* pd/ttb-cleanup (observer, runtime_tools) (2011-08-25) 38 commits
+ . Support for stopped and resumed tracing. (7e2c876)
+ . More robust testing of tracing with 'local' option. (1924817)
+ . Print path to logs dir unless nofetch option specified. (f7dc3bf)
+ . Removed unused option to send realtime trace to erlide. (224f432)
+ . Documented global state when applying formatting function to trace logs. (584eec8)
+ . Test for: (BUGFIX) Error with ip tracing to wrap sets. (7f2123b)
+ . Stop option 'return' changed to 'return_fetch_dir' (b610184)
+ . update format function's description (e598660)
+ . It is safe to change cwd on control node or remote nodes while tracing (2d319d3)
+ . fixed documentation (4e3b8cc)
+ . additional tests for ttb module (da2e84e)
+ . new tests for ttb module (871839b)
+.
+.
+.
+
+Action expected from: R15
+
+* sa/callback-attr (compiler, inets, kernel, orber, otp, stdlib) (2010-06-08) 8 commits
+ - Add callback specs into 'application' module in kernel (4bca766)
+ - Add callback specs to tftp module following internet documentation (bba649c)
+ - Add callback specs to inets_service module following possibly deprecated comments (e41a958)
+ - Add '-callback' attributes in stdlib's behaviours (d8d94c4)
+ - Update primary bootstrap (199525a)
+ - Update the documentation with information on the callback attribute (311a25f)
+ - Automatically generate 'behaviour_info' function from '-callback' attributes (7c44f16)
+ - Add '-callback' attribute to language syntax (e8336ff)
+
+Action expected from: R15
+
+------------------------------------------------------------
+[Cooking]
+
+* bg/temp-hipe-fixes (compiler, hipe, kernel) (2010-03-15) 6 commits
+ - Avoid crash by skipping compilation_SUITE:on_load/1 (a8ea623)
+ - Inline less aggressively for native-code compilation (1346686)
+ - Crudely fix return type for the lists:key{search,find,member}/3 (c03a748)
+ - seq_trace_SUITE: Don't native-compile (b8c17a9)
+ - Disable native code if on_load is used (974ee4e)
+ - andor_SUITE: Don't native-compile (86e4df8)
+
+This branch contains temporary workarounds to avoid failing test
+cases and is never intended to graduate.
+
+* cr/md2-With-RSA-Encryption (crypto, public_key) (2011-09-06) 3 commits
+ - Document crypto:sha_mac_96/2 to compute an SHA MAC, not MD5 (6cd2fa9)
+ - Support md2WithRSAEncryption certificates in public_key (c7e5f75)
+ - Support 'md2' hash in crypto:rsa_sign/3 and crypto:rsa_verify/4 (82897cc)
+
+* jw/release_handler_1 (sasl) (2011-06-09) 1 commit
+ - General improvements to release_handler_1:get_supervised_procs (feecf39)
+
+* mp/xmerl-ucs2-fix (xmerl) (2011-08-25) 1 commit
+ - Fixed xmerl_ucs UCS2 little endian en/decoding (374b029)
+
+* pg/fix-cover-leftover-down-msg (tools) (2011-08-29) 1 commit
+ - [cover]fix leftover {'DOWN', ..} msg in callers queue (07e2860)
+
+* rc/ftp-avoid-hanging (inets) (2010-08-25) 1 commit
+ - Avoid hanging in socket-accept (cb7dfde)
+
+* rc/remote-shell-completion (kernel) (2010-10-22) 1 commit
+ - make tab completion work in remote shells (73d1959)
+
+* ta/docs-fixes (common_test, cosFileTransfer, dialyzer, diameter, erts, hipe, ic, inets, kernel, otp, runtime_tools, ssl, stdlib, test_server, toolbar, tools, wx, xmerl) (2011-08-31) 17 commits
+ - Fix more misspellings of compatibility (c59dc07)
+ - Fix misspelling of kept (411edce)
+ - Fix misspelling of compatibility in ssl_basic_SUITE (41683d2)
+ - Fix misspelling of compatibility (2f696e4)
+ - Fix misspelling of accommodate (65c9f41)
+ - Fix misspelling of exceed (dfbbdaa)
+ - Fix misspelling of accidentally (044a09a)
+ - Fix misspelling of erroneous in xmerl_xsd (d15f145)
+ - Fix misspelling of erroneous (90fc4f6)
+ - Fix misspelling of successful (90f703b)
+ - Fix typos in instrument(3) (e17a38a)
+ - Fix typos in dbg(3) (38f6fbc)
+.
+.
+.
+
+* ta/typer-quote-atoms (hipe, typer) (2011-09-15) 1 commit
+ - Quote atoms if necessary in types (9c132d6)
+
+* ta/sendfile (erts, kernel) (2011-01-13) 1 commit
+ - Implement file:sendfile (e362bb2)
+
+* va/http-win-dir-traversal (inets) (2011-08-26) 1 commit
+ - Fix httpd directory traversal on Windows (a936795)
+
+------------------------------------------------------------
+[Dropped]
+
