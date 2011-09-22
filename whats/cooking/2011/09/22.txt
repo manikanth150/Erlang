@@ -1,0 +1,260 @@
+From - Thu Sep 22 14:32:57 2011
+Date: Thu Sep 22 14:32:57 2011
+To: erlang patches <erlang-patches@erlang.org>
+Subject: What's cooking in erlang/otp (2011-09-22)
+X-dev-at: 3d31498a0d08a9cf572fc966c025ed44ef15e831
+
+The release date for R14B04 is close.
+Patches submitted next week will most likely be included in the R15 release
+
+
+------------------------------------------------------------
+[Graduated]
+
+* ac/fix-erl_interface-docs (erl_interface) (2011-09-07) 2 commits
+ + Make comment reflect code in erl_interface/src/misc/ei_decode_term.c (ff9a8a6)
+ + ei_decode_ei_term() returns 1 if index is incremented (292eb1b)
+
+* cr/cppcheck (erl_interface, erts) (2011-08-08) 1 commit
+ + Changes inspired by running cppcheck(1) (ef757a1)
+
+* cr/md2-With-RSA-Encryption (crypto, public_key) (2011-09-06) 3 commits
+ + Document crypto:sha_mac_96/2 to compute an SHA MAC, not MD5 (6cd2fa9)
+ + Support md2WithRSAEncryption certificates in public_key (c7e5f75)
+ + Support 'md2' hash in crypto:rsa_sign/3 and crypto:rsa_verify/4 (82897cc)
+
+* dgud/mnesia/fix-compat/OTP-9473 (mnesia) (2011-08-26) 6 commits
+ + [mnesia] Fix schema conversion to previous versions (34f20bd)
+ + [mnesia] Whitespace fixes (06f4e74)
+ + [mnesia] Update protocol version (1b3cf4e)
+ + [mnesia] Mnesia schema merge tested with 2 nodes, r13b04 -> r14b (dev) (4364724)
+ + [mnesia] Fixed bug in aborted schema transactions (2566dbc)
+ + [mnesia] Add hrl dependency (5cc5184)
+
+* dgud/wx/virtual-listctrl/OTP-9415 (wx) (2011-07-14) 7 commits
+ + Handle overloading callbacks the same as events (30283e3)
+ + Fix documentation and callback options in wxListCtrl:create/3 (f6d6615)
+ + Add example and testcase (ac97067)
+ + Add wxListItemAttr (0635c27)
+ + Generated code of previous commit (0f6282f)
+ + Add support for virtual listctrls (98a0a3a)
+ + Re-generated with new doxygen (7c9696d)
+
+* dj/xmerl_ucs-latin9-support (xmerl) (2011-04-13) 1 commit
+ + Add latin9 (iso-8859-15) support in xmerl_ucs (60c2511)
+
+* egil/fix-compiler-warning/OTP-9542 (erts, gs, os_mon) (2011-09-16) 3 commits
+ + gs: Update to modern type guards in examples (2c79dee)
+ + os_mon: Check results from fgets in cpu_sup (211389b)
+ + erts: Remove compiler warning in sys.c (a27dbff)
+
+* jw/release_handler_1 (sasl) (2011-06-09) 1 commit
+ + General improvements to release_handler_1:get_supervised_procs (feecf39)
+
+* mp/xmerl-ucs2-fix (xmerl) (2011-08-25) 1 commit
+ + Fixed xmerl_ucs UCS2 little endian en/decoding (374b029)
+
+* pg/fix-hipe-bs_get_float2 (hipe) (2011-09-03) 1 commit
+ + Fix bug with binary pattern matching of floats of variable size (ba14137)
+
+* ta/docs-fixes (common_test, cosFileTransfer, dialyzer, diameter, erts, hipe, ic, inets, kernel, otp, runtime_tools, ssl, stdlib, test_server, toolbar, tools, wx, xmerl) (2011-09-16) 19 commits
+ + Fix misspelling of intermediate (85b7372)
+ + Fix typos in erts/preloaded/src (067b7a9)
+ + Fix more misspellings of compatibility (c59dc07)
+ + Fix misspelling of kept (411edce)
+ + Fix misspelling of compatibility in ssl_basic_SUITE (41683d2)
+ + Fix misspelling of compatibility (2f696e4)
+ + Fix misspelling of accommodate (65c9f41)
+ + Fix misspelling of exceed (dfbbdaa)
+ + Fix misspelling of accidentally (044a09a)
+ + Fix misspelling of erroneous in xmerl_xsd (d15f145)
+ + Fix misspelling of erroneous (90fc4f6)
+ + Fix misspelling of successful (90f703b)
+.
+.
+.
+
+* ta/typer-quote-atoms (dialyzer, hipe, typer) (2011-09-19) 2 commits
+ + Update Dialyzer's reference results (291e32d)
+ + Quote atoms if necessary in types (9c132d6)
+
+------------------------------------------------------------
+[New topics]
+
+* rj/fix-doctypos (kernel, otp) (2011-09-19) 3 commits
+ - Adds missing spaces in Reference Manual in distributed section (0ac642f)
+ - Fixes typo in heart doc, adds missing parenthesis (60ed9f9)
+ - Fixes typo in Reference Manual in macros section (63c101d)
+
+* ta/erl_prim_loader-primary_archive-reloading (erts, stdlib) (2011-09-01) 1 commit
+ - [erts,stdlib] fix escript/primary archive reloading (e88bfb7)
+
+------------------------------------------------------------
+[Stalled]
+
+* bw/efile_exists (erts) (2010-10-07) 1 commit
+ - prim_file:exists/{1,2} which is lightweight file existence check (7203932)
+
+Action expected from: Topic author
+
+* fm/enif_is_number (erts) (2011-06-08) 1 commit
+ - Add NIF function enif_is_number (8db78b0)
+
+Action expected from: R15
+
+* fm/posix-fallocate (erts, kernel) (2010-12-28) 1 commit
+ - Added file:allocate/2 (682f39a)
+
+Action expected from: Topic author
+
+* hl/beam_disasm-no_attri_chunk (compiler) (2011-07-22) 1 commit
+ - beam_disasm: Handle stripped BEAM files (347dfb0)
+
+Action expected from: Topic author
+
+* jn/gen_stream (stdlib) (2011-04-15) 2 commits
+ - Update gen_stream tests to conform with common_test standard (ce84daf)
+ - Add gen_stream behaviour (6a089a4)
+
+Action expected from: OTP-Team
+
+* ms/epmd-IPv6-node-reg (erts, kernel) (2011-06-03) 1 commit
+ - epmd: support IPv6 node registration (5523b21)
+
+Action expected from: R15
+
+* pr/mnesia_frag_hash (mnesia) (2011-04-27) 2 commits
+ - add mnesia_frag_hash test (1d6762d)
+ - Reduce calls to phash in key_to_frag_number (67a20c0)
+
+Action expected from: Topic author
+
+* rc/epp-include-path-fix (stdlib) (2011-06-14) 1 commit
+ - Make Erlang preprocessor check dir of current file first (b5d2469)
+
+Action expected from: Topic author
+
+* ta/nif-variadic-funs (erts) (2011-05-13) 1 commit
+ - erts: convert variadic nif funs into inline funs (9a1f9b6)
+
+Action expected from: R15
+
+* tn/inet_drv-fix (erts) (2011-04-08) 1 commit
+ - Use libdlpi to get physical address (e360563)
+
+Action expected from: Topic author
+
+------------------------------------------------------------
+[Cooking]
+
+* bg/temp-hipe-fixes (compiler, kernel) (2010-03-15) 5 commits
+ - Avoid crash by skipping compilation_SUITE:on_load/1 (dbfaf1e)
+ - Inline less aggressively for native-code compilation (d3c0f64)
+ - seq_trace_SUITE: Don't native-compile (c567913)
+ - Disable native code if on_load is used (df43791)
+ - andor_SUITE: Don't native-compile (60d5f08)
+
+This branch contains temporary workarounds to avoid failing test
+cases and is never intended to graduate.
+
+* cf/simple_one_for_one_shutdown (otp, stdlib) (2011-09-14) 3 commits
+ - Explain how dynamic child processes are stopped (0473132)
+ - Stack errors when dynamic children are stopped (42c581d)
+ - Explicitly kill dynamic children in supervisors (4775947)
+
+* cf/supervisor_shutdown_infinity (otp, stdlib) (2011-09-14) 2 commits
+ - Add a warning to docs about workers' shutdown strategy (76cc98d)
+ - Allow an infinite timeout to shutdown worker processes (9f6552d)
+
+* hl/fix-ms_transform-scope-warn (stdlib) (2011-08-26) 1 commit
+ - ms_transform: Fix incorrect `variable shadowed' warnings (29610af)
+
+* mh/create_cookie_error_msg (kernel) (2011-09-15) 1 commit
+ - Specify file name and error on create_cookie failure (9319587)
+
+* pg/fix-cover-leftover-down-msg (tools) (2011-08-29) 1 commit
+ - [cover]fix leftover {'DOWN', ..} msg in callers queue (cc087c3)
+
+* rc/remote-shell-completion (kernel) (2010-10-22) 1 commit
+ - make tab completion work in remote shells (73d1959)
+
+* ta/sendfile (erts, kernel) (2011-01-13) 1 commit
+ - Implement file:sendfile (e362bb2)
+
+* va/http-win-dir-traversal (inets) (2011-08-26) 1 commit
+ - Fix httpd directory traversal on Windows (a936795)
+
+------------------------------------------------------------
+[Dropped]
+
+* nox/xmerl-namespace-axis (xmerl) (2010-12-07) 12 commits
+ . Implement namespace axis (27d791f)
+ . Add `#xmlPI` support to xmerl_xpath:write_node/1 (75e67f5)
+ . Fix processing-instruction(name?) (f05e78b)
+ . Fix path filters (610df56)
+ . Support more top-level primary expressions (770d6d9)
+ . Accumulate comments in element nodes (e5b6b3a)
+ . Add `default_attrs` option (18584c5)
+ . Allow whole documents to be returned (aef3dea)
+ . Track parents and namespace in `#xmlAttribute` nodes (dc9b220)
+ . Track parents in `#xmlPI` nodes (5095331)
+ . Set `vsn` field in `#xmlDecl` record (d712331)
+ . Fix namespace-conformance constraints (e062270)
+
+* pd/ttb-cleanup (observer, runtime_tools) (2011-08-25) 38 commits
+ . Support for stopped and resumed tracing. (7e2c876)
+ . More robust testing of tracing with 'local' option. (1924817)
+ . Print path to logs dir unless nofetch option specified. (f7dc3bf)
+ . Removed unused option to send realtime trace to erlide. (224f432)
+ . Documented global state when applying formatting function to trace logs. (584eec8)
+ . Test for: (BUGFIX) Error with ip tracing to wrap sets. (7f2123b)
+ . Stop option 'return' changed to 'return_fetch_dir' (b610184)
+ . update format function's description (e598660)
+ . It is safe to change cwd on control node or remote nodes while tracing (2d319d3)
+ . fixed documentation (4e3b8cc)
+ . additional tests for ttb module (da2e84e)
+ . new tests for ttb module (871839b)
+.
+.
+.
+
+* pf/fix-cover-leftover-down-msg (Makefile
+, asn1, common_test, compiler, cosEvent, cosEventDomain, cosFileTransfer, cosNotification, cosProperty, cosTime, cosTransactions, crypto, debugger, diameter, docbuilder, erl_interface, erts, eunit, gs, hipe, ic, inets, jinterface, kernel, megaco, mnesia, observer, orber, os_mon, otp, parsetools, public_key, runtime_tools, snmp, ssh, ssl, stdlib, test_server, tv, wx, xmerl) (2011-09-21) 302 commits
+
+ . Merge remote branch 'upstream/dev' into major (4b30074)
+ . Merge branch 'dev' into major (a192733)
+ . Merge branch 'dev' into major (e58fa57)
+ . Merge branch 'dev' into major (ec36499)
+ . Merge branch 'dev' into major (532c72b)
+ . Merge branch 'dev' into major (70fa7fa)
+ . Merge branch 'dev' into major (bdc4bab)
+ . Merge branch 'dev' into major (50dc9c8)
+ . Merge branch 'dev' into major (40f724a)
+ . Merge branch 'dev' into major (87288e1)
+ . Merge branch 'dev' into major (adbad8f)
+ . Merge branch 'dev' into major (9be7dd2)
+.
+.
+.
+
+* rc/ftp-avoid-hanging (inets) (2010-08-25) 1 commit
+ . Avoid hanging in socket-accept (cb7dfde)
+
+* sa/callback-attr (Makefile
+, asn1, common_test, compiler, cosEvent, cosEventDomain, cosFileTransfer, cosNotification, cosProperty, cosTime, cosTransactions, crypto, debugger, diameter, docbuilder, erl_interface, erts, eunit, gs, hipe, ic, inets, jinterface, kernel, megaco, mnesia, observer, orber, os_mon, otp, parsetools, public_key, runtime_tools, snmp, ssh, ssl, stdlib, test_server, tv, wx, xmerl) (2010-06-08) 306 commits
+ . Add callback specs into 'application' module in kernel (a54866b)
+ . Add callback specs to tftp module following internet documentation (e14c3c6)
+ . Add callback specs to inets_service module following possibly deprecated comments (3eaa5a9)
+ . Add '-callback' attributes in stdlib's behaviours (b606232)
+ . Update primary bootstrap (fbf331d)
+ . Update the documentation with information on the callback attribute (e6a152e)
+ . Automatically generate 'behaviour_info' function from '-callback' attributes (c1aa398)
+ . Add '-callback' attribute to language syntax (1837121)
+ . Merge branch 'dev' into major (532c72b)
+ . Merge branch 'dev' into major (70fa7fa)
+ . Merge branch 'dev' into major (bdc4bab)
+ . Merge branch 'dev' into major (50dc9c8)
+.
+.
+.
+
