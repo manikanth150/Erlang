@@ -1,0 +1,215 @@
+From - Fri Oct  7 14:09:33 2011
+Date: Fri Oct  7 14:09:33 2011
+To: erlang patches <erlang-patches@erlang.org>
+Subject: What's cooking in erlang/otp (2011-10-07)
+X-dev-at: 00202339445daae6ed931f28f932089d5c3dd455
+
+Read 
+https://github.com/erlang/otp/wiki/Branches
+and  
+https://github.com/erlang/otp/wiki/Submitting-patches
+
+New Branching strategy short version:
+
+The branch 'master' will be the upcoming major release (e.g. R15).
+Branch from this to submit patches for the next major release.
+(New features and major changes)
+
+New branch 'maint' will be introduced AFTER R15, and will be the next maintenance release (e.g. R15B01) 
+Branch from this to submit patches for the next maintenance release.
+(Bug fixes and minor changes)
+
+
+The 'pu' branch will be based on 'master' and we will later add a 'maint-pu' for the 'maint' branch.
+
+------------------------------------------------------------
+[Graduated]
+
+* hl/beam_disasm-no_attri_chunk (compiler) (2011-07-22) 1 commit
+ + beam_disasm: Handle stripped BEAM files (347dfb0)
+
+* pd/ttb-cleanup (observer, runtime_tools) (2011-08-25) 38 commits
+ + Support for stopped and resumed tracing. (7e2c876)
+ + More robust testing of tracing with 'local' option. (1924817)
+ + Print path to logs dir unless nofetch option specified. (f7dc3bf)
+ + Removed unused option to send realtime trace to erlide. (224f432)
+ + Documented global state when applying formatting function to trace logs. (584eec8)
+ + Test for: (BUGFIX) Error with ip tracing to wrap sets. (7f2123b)
+ + Stop option 'return' changed to 'return_fetch_dir' (b610184)
+ + update format function's description (e598660)
+ + It is safe to change cwd on control node or remote nodes while tracing (2d319d3)
+ + fixed documentation (4e3b8cc)
+ + additional tests for ttb module (da2e84e)
+ + new tests for ttb module (871839b)
+
+* rc/edoc-0.7.9 (edoc) (2011-09-25) 6 commits
+ + bumped revision (df2063c)
+ + removed some never-matching clauses reported by dialyzer (823f018)
+ + Fix macro expansion in comments following Erlang types (530d3b1)
+ + URI-escape bytes as two hex digits always (reported by Alfonso De Gregorio) (10f7682)
+ + updated author e-mail (766d0f0)
+ + recognize some more URI schemas in wiki text, in particular https (d11d6ac)
+
+* rc/eunit-2.2.1 (eunit) (2011-09-23) 4 commits
+ + removed some never-matching clauses reported by dialyzer (c78dae0)
+ + updated author e-mails and homepages (fde5038)
+ + removed cvs keywords from files (33b9fe2)
+ + removed files that should not be checked in (756f301)
+
+* sa/dialyzer-bug-fixes (dialyzer, hipe, typer) (2011-09-28) 4 commits
+ + Fix typer's crash for nonexisting files (e4d5a20)
+ + Remove unused macro (39a3e0a)
+ + Decrease tuple arity limit (7fc2604)
+ + Fix bug in dataflow (e36b171)
+
+* va/http-win-dir-traversal (inets) (2011-08-26) 1 commit
+ + Fix httpd directory traversal on Windows (a936795)
+
+* sa/callback-attr (compiler, inets, kernel, otp, stdlib) (2010-06-08) 8 commits
+ . Add callback specs into 'application' module in kernel (a54866b)
+ . Add callback specs to tftp module following internet documentation (e14c3c6)
+ . Add callback specs to inets_service module following possibly deprecated comments (3eaa5a9)
+ . Add '-callback' attributes in stdlib's behaviours (b606232)
+ . Update primary bootstrap (fbf331d)
+ . Update the documentation with information on the callback attribute (e6a152e)
+ . Automatically generate 'behaviour_info' function from '-callback' attributes (c1aa398)
+ . Add '-callback' attribute to language syntax (1837121)
+
+------------------------------------------------------------
+[New topics]
+
+* fm/process_info_doc_fix (erts) (2011-09-20) 1 commit
+ - Fix documentation for erlang:process_flag/2 (e88a46d)
+
+* gs/mod_log-fix (inets) (2011-09-24) 1 commit
+ - Fix logging of content length in mod_log (166f4cc)
+
+* mh/run_erl-exit-status (erts) (2011-09-02) 1 commit
+ - run_erl.c: propagate exit status from child process (29364cf)
+
+* rj/fix-debugger-msgs (debugger) (2011-09-25) 2 commits
+ - Fixes "OK" spelling in debugger messages and variables (808629d)
+ - Fixes debugger message with wx (e43aa85)
+
+* rj/fix-erlang-doc-style (erts) (2011-09-26) 1 commit
+ - Fixes module erlang doc style: option description (283e3ab)
+
+* rj/fix-net_kernel-doc (kernel) (2011-09-28) 1 commit
+ - Fixes net_kernel:get_net_ticktime() doc (bfa676a)
+
+* rj/fix-remove-exec-bit (asn1, common_test, debugger, dialyzer, docbuilder, erts, hipe, orber, otp, percept, public_key, sasl, snmp, ssh, wx, xmerl) (2011-09-24) 3 commits
+ - Removes exec bit from files: info files, dat, bat (25d7dee)
+ - Removes exec bit from files related to: XML, make, C (b414881)
+ - Removes exec bit from: erl, hrl, xml, html, asn, gif, xpm (75a1021)
+
+------------------------------------------------------------
+[Stalled]
+
+* jn/gen_stream (stdlib) (2011-04-15) 2 commits
+ - Update gen_stream tests to conform with common_test standard (ce84daf)
+ - Add gen_stream behaviour (6a089a4)
+
+Action expected from: OTP-Team
+
+* bw/efile_exists (erts) (2010-10-07) 1 commit
+ - prim_file:exists/{1,2} which is lightweight file existence check (7203932)
+
+Action expected from: Topic author
+
+* fm/posix-fallocate (erts, kernel) (2010-12-28) 1 commit
+ - Added file:allocate/2 (682f39a)
+
+Action expected from: Topic author
+
+* tn/inet_drv-fix (erts) (2011-04-08) 1 commit
+ - Use libdlpi to get physical address (e360563)
+
+Action expected from: Topic author
+
+* pr/mnesia_frag_hash (mnesia) (2011-04-27) 2 commits
+ - add mnesia_frag_hash test (1d6762d)
+ - Reduce calls to phash in key_to_frag_number (67a20c0)
+
+Action expected from: Topic author
+
+
+------------------------------------------------------------
+[Cooking]
+
+* bg/temp-hipe-fixes (compiler, kernel) (2010-03-15) 5 commits
+ - Avoid crash by skipping compilation_SUITE:on_load/1 (0198ee2)
+ - Inline less aggressively for native-code compilation (41638df)
+ - seq_trace_SUITE: Don't native-compile (fce2b79)
+ - Disable native code if on_load is used (c8994f2)
+ - andor_SUITE: Don't native-compile (531e5d9)
+
+This branch contains temporary workarounds to avoid failing test
+cases and is never intended to graduate.
+
+* cf/simple_one_for_one_shutdown (otp, stdlib) (2011-09-14) 3 commits
+ - Explain how dynamic child processes are stopped (0473132)
+ - Stack errors when dynamic children are stopped (42c581d)
+ - Explicitly kill dynamic children in supervisors (4775947)
+
+* cf/supervisor_shutdown_infinity (otp, stdlib) (2011-09-14) 2 commits
+ - Add a warning to docs about workers' shutdown strategy (76cc98d)
+ - Allow an infinite timeout to shutdown worker processes (9f6552d)
+
+* hl/fix-ms_transform-scope-warn (stdlib) (2011-08-26) 1 commit
+ - ms_transform: Fix incorrect `variable shadowed' warnings (29610af)
+
+* mh/create_cookie_error_msg (kernel) (2011-09-15) 1 commit
+ - Specify file name and error on create_cookie failure (9319587)
+
+* pg/fix-cover-leftover-down-msg (tools) (2011-08-29) 1 commit
+ - [cover]fix leftover {'DOWN', ..} msg in callers queue (cc087c3)
+
+* rc/remote-shell-completion (kernel) (2010-10-22) 1 commit
+ - make tab completion work in remote shells (73d1959)
+
+* rj/fix-doctypos (kernel, otp) (2011-09-19) 3 commits
+ - Adds missing spaces in Reference Manual in distributed section (0ac642f)
+ - Fixes typo in heart doc, adds missing parenthesis (60ed9f9)
+ - Fixes typo in Reference Manual in macros section (63c101d)
+
+* ta/erl_prim_loader-primary_archive-reloading (erts, stdlib) (2011-09-01) 1 commit
+ - [erts,stdlib] fix escript/primary archive reloading (e88bfb7)
+
+* ta/sendfile (erts, kernel) (2011-01-13) 1 commit
+ - Implement file:sendfile (e362bb2)
+
+* ta/nif-variadic-funs (erts) (2011-05-13) 1 commit
+ - erts: convert variadic nif funs into inline funs (9a1f9b6)
+
+* fm/enif_is_number (erts) (2011-06-08) 1 commit
+ - Add NIF function enif_is_number (8db78b0)
+
+* ms/epmd-IPv6-node-reg (erts, kernel) (2011-06-03) 1 commit
+ - epmd: support IPv6 node registration (5523b21)
+
+* nox/xmerl-namespace-axis (xmerl) (2010-12-07) 12 commits
+ . Implement namespace axis (27d791f)
+ . Add `#xmlPI` support to xmerl_xpath:write_node/1 (75e67f5)
+ . Fix processing-instruction(name?) (f05e78b)
+ . Fix path filters (610df56)
+ . Support more top-level primary expressions (770d6d9)
+ . Accumulate comments in element nodes (e5b6b3a)
+ . Add `default_attrs` option (18584c5)
+ . Allow whole documents to be returned (aef3dea)
+ . Track parents and namespace in `#xmlAttribute` nodes (dc9b220)
+ . Track parents in `#xmlPI` nodes (5095331)
+ . Set `vsn` field in `#xmlDecl` record (d712331)
+ . Fix namespace-conformance constraints (e062270)
+
+* rc/epp-include-path-fix (stdlib) (2011-06-14) 1 commit
+ - Make epp search directory of current file first when including another file (3001e9d)
+
+------------------------------------------------------------
+[Dropped]
+
+
+* rj/typer-fix-delete (typer) (2011-09-24) 1 commit
+ . Fixes TypEr crash when doing old files cleanup (189d095)
+ 
+ Adressed by Kostis/Stavros in sa/dialyzer-bug-fixes 
+
