@@ -56,7 +56,7 @@ the topic branch has been updated.
 END
 
 my $root_url = "https://github.com/erlang/otp/commit";
-foreach (`git log --oneline --first-parent dev..pu`) {
+foreach (`git log --oneline --first-parent master..pu`) {
     if (/^([\da-f]*) Merge branch '([^\']*)'/) {
 	my($child,$topic) = ($1,$2);
 	my $range = "$child^1..$child^2";
