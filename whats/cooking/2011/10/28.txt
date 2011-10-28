@@ -1,0 +1,207 @@
+From - Fri Oct 28 14:22:27 2011
+Date: Fri Oct 28 14:22:27 2011
+To: erlang patches <erlang-patches@erlang.org>
+Subject: What's cooking in erlang/otp (2011-10-28)
+X-dev-at: 3e294fdb901018a0f3926a11ffe20a19b9494d79
+
+Read 
+https://github.com/erlang/otp/wiki/Branches
+and  
+https://github.com/erlang/otp/wiki/Submitting-patches
+
+New Branching strategy short version:
+
+The branch 'master' will be the upcoming major release (e.g. R15).
+Branch from this to submit patches for the next major release.
+(New features and major changes)
+
+New branch 'maint' will be introduced AFTER R15, and will be the next maintenance release (e.g. R15B01) 
+Branch from this to submit patches for the next maintenance release.
+(Bug fixes and minor changes)
+
+
+The 'pu' branch will be based on 'master' and we will later add a 'maint-pu' for the 'maint' branch.
+
+------------------------------------------------------------
+[Graduated]
+
+* cf/simple_one_for_one_shutdown (otp, stdlib) (2011-09-14) 3 commits
+ + Explain how dynamic child processes are stopped (0473132)
+ + Stack errors when dynamic children are stopped (42c581d)
+ + Explicitly kill dynamic children in supervisors (4775947)
+
+* cf/supervisor_shutdown_infinity (otp, stdlib) (2011-09-14) 2 commits
+ + Add a warning to docs about workers' shutdown strategy (9679510)
+ + Allow an infinite timeout to shutdown worker processes (2c4e984)
+
+* cg/fix-prng () (2010-10-06) 0 commits
+
+* fm/enif_is_number (erts) (2011-06-08) 1 commit
+ + Add NIF function enif_is_number (8db78b0)
+
+* hl/fix-ms_transform-scope-warn (stdlib) (2011-08-26) 1 commit
+ + ms_transform: Fix incorrect `variable shadowed' warnings (29610af)
+
+* pg/des-cfb-functions () (2011-09-06) 0 commits
+
+* rc/epp-include-path-fix (stdlib) (2011-06-14) 1 commit
+ + Make epp search directory of current file first when including another file (36a4d64)
+
+* sa/callback-attr (compiler, inets, kernel, otp, stdlib) (2010-06-08) 8 commits
+ + Add callback specs into 'application' module in kernel (ed72d05)
+ + Add callback specs to tftp module following internet documentation (3ae8414)
+ + Add callback specs to inets_service module following possibly deprecated comments (1d3544d)
+ + Add '-callback' attributes in stdlib's behaviours (9bb4ba8)
+ + Update primary bootstrap (570594d)
+ + Update the documentation with information on the callback attribute (8ea0c7c)
+ + Automatically generate 'behaviour_info' function from '-callback' attributes (493262e)
+ + Add '-callback' attribute to language syntax (0edb6a4)
+
+------------------------------------------------------------
+[New topics]
+
+* hw/asn1rt_check-transform (asn1) (2011-10-15) 1 commit
+ - asn1rt_check: Fix transform_to_EXTERNAL1990 for binary input (6a69602)
+
+* jw/gen_event (stdlib) (2011-10-18) 1 commit
+ - General code clean up and clarity fixes (dbd14ea)
+
+* jw/release_handler-which-releases (sasl) (2011-10-18) 1 commit
+ - Add release_handler:which_releases/1 (66be346)
+
+* sa/dialyzer-wunderspecs (dialyzer) (2011-10-04) 2 commits
+ - Fix false warning about closure application (33f6f13)
+ - Change category of 'might also return' warnings (7892a31)
+
+* ta/docs (erts, kernel, stdlib, test_server) (2011-10-21) 6 commits
+ - file: correct make_link/2 and make_symlink/2 docs (80cec73)
+ - Fix typo in test_server(3) (f5645ca)
+ - Fix typos in io_protocol.xml (a5351af)
+ - Fix typo in erlang(3) (88db908)
+ - Fix typos in tar_SUITE (b8bd881)
+ - Fix typos in erts/preloaded/src (bd31962)
+
+* ta/prim_archive-reloading-mfa (erts, kernel, stdlib) (2011-10-19) 2 commits
+ - escript_SUITE: remove gratuitous space (3d89996)
+ - [erts,kernel,stdlib] fix escript/primary archive reloading (4ac74ce)
+
+* ta/snmpc-warnings-option (snmp) (2011-10-05) 1 commit
+ - snmpc: fix --warnings/--W option parsing (156b2ed)
+
+------------------------------------------------------------
+[Stalled]
+
+* bw/efile_exists (erts) (2010-10-07) 1 commit
+ - prim_file:exists/{1,2} which is lightweight file existence check (7203932)
+
+Action expected from: Topic author
+
+* fm/posix-fallocate (erts, kernel) (2010-12-28) 1 commit
+ - Added file:allocate/2 (682f39a)
+
+Action expected from: Topic author
+
+* jn/gen_stream (stdlib) (2011-04-15) 2 commits
+ - Update gen_stream tests to conform with common_test standard (ce84daf)
+ - Add gen_stream behaviour (6a089a4)
+
+Action expected from: OTP-Team
+
+* pr/mnesia_frag_hash (mnesia) (2011-04-27) 2 commits
+ - add mnesia_frag_hash test (1d6762d)
+ - Reduce calls to phash in key_to_frag_number (67a20c0)
+
+Action expected from: Topic author
+
+* tn/inet_drv-fix (erts) (2011-04-08) 1 commit
+ - Use libdlpi to get physical address (e360563)
+
+Action expected from: Topic author
+
+------------------------------------------------------------
+[Cooking]
+
+* bg/temp-hipe-fixes (compiler, kernel) (2010-03-15) 5 commits
+ - Avoid crash by skipping compilation_SUITE:on_load/1 (0198ee2)
+ - Inline less aggressively for native-code compilation (41638df)
+ - seq_trace_SUITE: Don't native-compile (fce2b79)
+ - Disable native code if on_load is used (c8994f2)
+ - andor_SUITE: Don't native-compile (531e5d9)
+
+This branch contains temporary workarounds to avoid failing test
+cases and is never intended to graduate.
+
+* fm/process_info_doc_fix (erts) (2011-09-20) 1 commit
+ - Fix documentation for erlang:process_flag/2 (e88a46d)
+
+* gs/mod_log-fix (inets) (2011-09-24) 1 commit
+ - Fix logging of content length in mod_log (166f4cc)
+
+* mh/create_cookie_error_msg (kernel) (2011-09-15) 1 commit
+ - Specify file name and error on create_cookie failure (9319587)
+
+* mh/run_erl-exit-status (erts) (2011-09-02) 1 commit
+ - run_erl.c: propagate exit status from child process (29364cf)
+
+* ms/epmd-IPv6-node-reg (erts, kernel) (2011-06-03) 1 commit
+ - epmd: support IPv6 node registration (5523b21)
+
+* pg/fix-cover-leftover-down-msg (tools) (2011-08-29) 1 commit
+ - [cover]fix leftover {'DOWN', ..} msg in callers queue (cc087c3)
+
+* rc/remote-shell-completion (kernel) (2010-10-22) 1 commit
+ - make tab completion work in remote shells (73d1959)
+
+* rj/fix-debugger-msgs (debugger) (2011-09-25) 2 commits
+ - Fixes "OK" spelling in debugger messages and variables (808629d)
+ - Fixes debugger message with wx (e43aa85)
+
+* rj/fix-doctypos (kernel, otp) (2011-09-19) 3 commits
+ - Adds missing spaces in Reference Manual in distributed section (0ac642f)
+ - Fixes typo in heart doc, adds missing parenthesis (60ed9f9)
+ - Fixes typo in Reference Manual in macros section (63c101d)
+
+* rj/fix-erlang-doc-style (erts) (2011-09-26) 1 commit
+ - Fixes module erlang doc style: option description (283e3ab)
+
+* rj/fix-net_kernel-doc (kernel) (2011-09-28) 1 commit
+ - Fixes net_kernel:get_net_ticktime() doc (bfa676a)
+
+* rj/fix-remove-exec-bit (asn1, common_test, debugger, dialyzer, docbuilder, erts, hipe, orber, otp, percept, public_key, sasl, snmp, ssh, wx, xmerl) (2011-09-24) 3 commits
+ - Removes exec bit from files: info files, dat, bat (25d7dee)
+ - Removes exec bit from files related to: XML, make, C (b414881)
+ - Removes exec bit from: erl, hrl, xml, html, asn, gif, xpm (75a1021)
+
+* ta/nif-variadic-funs (erts) (2011-05-13) 1 commit
+ - erts: convert variadic nif funs into inline funs (d76f146)
+
+* ta/sendfile (erts, kernel) (2011-01-13) 1 commit
+ - Implement file:sendfile (cea7b65)
+
+------------------------------------------------------------
+[Dropped]
+
+* ao/fix_atime_mtime (erts, kernel) (2011-10-27) 2 commits
+ . Fixes a crash in file_server_2 when file:change_time/2,3 are called with invalid dates (4e0e7ae)
+ . Fixes wrong updates of file modification time (mtime) when only access time (atime) should be updated (42a8968)
+
+* nox/xmerl-namespace-axis (xmerl) (2010-12-07) 12 commits
+ . Implement namespace axis (27d791f)
+ . Add `#xmlPI` support to xmerl_xpath:write_node/1 (75e67f5)
+ . Fix processing-instruction(name?) (f05e78b)
+ . Fix path filters (610df56)
+ . Support more top-level primary expressions (770d6d9)
+ . Accumulate comments in element nodes (e5b6b3a)
+ . Add `default_attrs` option (18584c5)
+ . Allow whole documents to be returned (aef3dea)
+ . Track parents and namespace in `#xmlAttribute` nodes (dc9b220)
+ . Track parents in `#xmlPI` nodes (5095331)
+ . Set `vsn` field in `#xmlDecl` record (d712331)
+ . Fix namespace-conformance constraints (e062270)
+
+* rj/typer-fix-delete (typer) (2011-09-24) 1 commit
+ . Fixes TypEr crash when doing old files cleanup (189d095)
+
+* ta/erl_prim_loader-primary_archive-reloading (erts, kernel, stdlib) (2011-09-01) 1 commit
+ . [erts,kernel,stdlib] fix escript/primary archive reloading (b5e09a8)
+
