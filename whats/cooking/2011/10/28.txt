@@ -178,13 +178,6 @@ cases and is never intended to graduate.
 * ta/sendfile (erts, kernel) (2011-01-13) 1 commit
  - Implement file:sendfile (cea7b65)
 
-------------------------------------------------------------
-[Dropped]
-
-* ao/fix_atime_mtime (erts, kernel) (2011-10-27) 2 commits
- . Fixes a crash in file_server_2 when file:change_time/2,3 are called with invalid dates (4e0e7ae)
- . Fixes wrong updates of file modification time (mtime) when only access time (atime) should be updated (42a8968)
-
 * nox/xmerl-namespace-axis (xmerl) (2010-12-07) 12 commits
  . Implement namespace axis (27d791f)
  . Add `#xmlPI` support to xmerl_xpath:write_node/1 (75e67f5)
@@ -199,9 +192,12 @@ cases and is never intended to graduate.
  . Set `vsn` field in `#xmlDecl` record (d712331)
  . Fix namespace-conformance constraints (e062270)
 
+
+------------------------------------------------------------
+[Dropped]
+
+
 * rj/typer-fix-delete (typer) (2011-09-24) 1 commit
  . Fixes TypEr crash when doing old files cleanup (189d095)
 
-* ta/erl_prim_loader-primary_archive-reloading (erts, kernel, stdlib) (2011-09-01) 1 commit
- . [erts,kernel,stdlib] fix escript/primary archive reloading (b5e09a8)
 
