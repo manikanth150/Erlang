@@ -1,0 +1,217 @@
+From - Wed Nov 23 15:35:31 2011
+Date: Wed Nov 23 15:35:31 2011
+To: erlang patches <erlang-patches@erlang.org>
+Subject: What's cooking in erlang/otp (2011-11-23)
+X-dev-at: f545894e96d5898285eee8dce812c885cf208fb7
+
+Read 
+https://github.com/erlang/otp/wiki/Branches
+and  
+https://github.com/erlang/otp/wiki/Submitting-patches
+
+New Branching strategy short version:
+
+The branch 'master' will be the upcoming major release (e.g. R15).
+Branch from this to submit patches for the next major release.
+(New features and major changes)
+
+New branch 'maint' will be introduced AFTER R15, and will be the next maintenance release (e.g. R15B01) 
+Branch from this to submit patches for the next maintenance release.
+(Bug fixes and minor changes)
+
+
+The 'pu' branch will be based on 'master' and we will later add a 'maint-pu' for the 'maint' branch.
+
+------------------------------------------------------------
+[Graduated]
+
+* fm/process_info_doc_fix (erts) (2011-09-20) 1 commit
+ + Fix documentation for erlang:process_flag/2 (e88a46d)
+
+* gs/mod_log-fix (inets) (2011-09-24) 1 commit
+ + Fix logging of content length in mod_log (166f4cc)
+
+* jw/release_handler-which-releases (sasl) (2011-10-18) 1 commit
+ + Add release_handler:which_releases/1 (66be346)
+
+* mh/odbc-shutdown-normal-exit (odbc) (2011-10-21) 1 commit
+ + An ODBC process should exit normally if its client exits with 'shutdown' (06d560b)
+
+* nox/xmerl-namespace-axis (xmerl) (2011-10-28) 13 commits
+ + Fix bugs and add a flag to skip comments (5b2375f)
+ + Implement namespace axis (ef8ba55)
+ + Add `#xmlPI` support to xmerl_xpath:write_node/1 (5b9aeb6)
+ + Fix processing-instruction(name?) (bffc6b4)
+ + Fix path filters (3eaca03)
+ + Support more top-level primary expressions (3979cef)
+ + Accumulate comments in element nodes (6d84168)
+ + Add `default_attrs` option (fcf6b58)
+ + Allow whole documents to be returned (7fc95c0)
+ + Track parents and namespace in `#xmlAttribute` nodes (64a4119)
+ + Track parents in `#xmlPI` nodes (2b11547)
+ + Set `vsn` field in `#xmlDecl` record (5d3feb9)
+.
+.
+.
+
+* pr/mnesia_frag_hash (mnesia) (2011-04-27) 2 commits
+ + add mnesia_frag_hash test (1d6762d)
+ + Reduce calls to phash in key_to_frag_number (67a20c0)
+
+* rj/fix-net_kernel-doc (kernel) (2011-09-28) 1 commit
+ + Fixes net_kernel:get_net_ticktime() doc (bfa676a)
+
+* sa/dialyzer-behaviours (dialyzer) (2011-11-14) 8 commits
+ + Wrap up behaviours patch for Dialyzer (8167578)
+ + Detection of callback-spec discrepancies (8682e6b)
+ + Allow none() as return value in callbacks (fc075ff)
+ + Behaviour callback discrepancy detection for Dialyzer (d101155)
+ + Add lookup function for callbacks (7fde343)
+ + Store callbacks in codeserver and PLT (191151e)
+ + Collect callback definitions during compilation (93aa83a)
+ + Update inets results (0472f66)
+
+* sa/dialyzer-wunderspecs (dialyzer) (2011-10-04) 2 commits
+ + Fix false warning about closure application (33f6f13)
+ + Change category of 'might also return' warnings (7892a31)
+
+* ta/snmpc-warnings-option (snmp) (2011-10-05) 1 commit
+ + snmpc: fix --warnings/--W option parsing (156b2ed)
+
+------------------------------------------------------------
+[New topics]
+
+* ac/xpath-scan (xmerl) (2011-11-21) 1 commit
+ - Treat , as special in xmerl_xpath_scan. (15925c0)
+
+* av/maint-memsup (os_mon) (2011-11-08) 1 commit
+ - Fix segmentation fault in memsup (a95ebdd)
+
+* jz/remove-variable-processes_busy (erts) (2011-11-02) 1 commit
+ - erts: remove variable processes_busy (d428f18)
+
+* mh/eunit_surefire-fixture-errors (eunit) (2011-03-10) 1 commit
+ - Include fixture setup and cleanup errors in Eunit Surefire report (7425075)
+
+* slf/dtrace (Makefile
+, dtrace, erts, kernel, otp) (2011-11-17) 4 commits
+ - Add DTrace support for OS X, Solaris, and Linux (via SystemTap), 4/4 (9d9194b)
+ - Add DTrace support for OS X, Solaris, and Linux (via SystemTap), 3/4 (09689d6)
+ - Add DTrace support for OS X, Solaris, and Linux (via SystemTap), 2/4 (139b645)
+ - Add DTrace support for OS X, Solaris, and Linux (via SystemTap), 1/4 (fe471ac)
+
+* vd/jinterface-atom-message (jinterface) (2011-11-11) 1 commit
+ - Improve error message when creating a too long OtpErlangAtom (334d636)
+
+------------------------------------------------------------
+[Stalled]
+
+* bw/efile_exists (erts) (2010-10-07) 1 commit
+ - prim_file:exists/{1,2} which is lightweight file existence check (2759905)
+
+Action expected from: Topic author
+
+* jn/gen_stream (stdlib) (2011-04-15) 2 commits
+ - Update gen_stream tests to conform with common_test standard (ce84daf)
+ - Add gen_stream behaviour (6a089a4)
+
+Action expected from: OTP-Team
+
+* tn/inet_drv-fix (erts) (2011-04-08) 1 commit
+ - Use libdlpi to get physical address (e360563)
+
+Action expected from: Topic author
+
+------------------------------------------------------------
+[Cooking]
+
+* ao/fix-change-time-inval-dates (kernel) (2011-11-01) 1 commit
+ - Fix a crash when file:change_time/2,3 are called with invalid dates (cddc88d)
+
+* bg/temp-hipe-fixes (compiler, kernel) (2010-03-15) 5 commits
+ - Avoid crash by skipping compilation_SUITE:on_load/1 (0198ee2)
+ - Inline less aggressively for native-code compilation (41638df)
+ - seq_trace_SUITE: Don't native-compile (fce2b79)
+ - Disable native code if on_load is used (c8994f2)
+ - andor_SUITE: Don't native-compile (531e5d9)
+
+This branch contains temporary workarounds to avoid failing test
+cases and is never intended to graduate.
+
+* hw/asn1rt_check-transform (asn1) (2011-10-15) 1 commit
+ - asn1rt_check: Fix transform_to_EXTERNAL1990 for binary input (6a69602)
+
+* mh/create_cookie_error_msg (kernel) (2011-09-15) 1 commit
+ - Specify file name and error on create_cookie failure (9319587)
+
+* mh/run_erl-exit-status (erts) (2011-09-02) 1 commit
+ - run_erl.c: propagate exit status from child process (29364cf)
+
+* sg/fix-snmp_note_store-timer (snmp) (2011-11-08) 2 commits
+ - snmp: add regression test for GC timer (597ce3c)
+ - snmp: fix GC timer in snmp_note_store (09816ca)
+
+* ta/docs (erts, inets, kernel, otp, reltool, ssl, stdlib, test_server) (2011-11-23) 12 commits
+ - Fix typo in reltool(3) (8932510)
+ - Fix typo in gen_sctp(3) (d0656f3)
+ - Fix typo in mod_responsecontrol.erl (bd8fa78)
+ - Fix typo in erts_alloc(3) (161d70b)
+ - Fix typos in ssl_cipher.erl (505e3a2)
+ - Fix typos in expressions.xml (8353450)
+ - file: correct make_link/2 and make_symlink/2 docs (765afb8)
+ - Fix typo in test_server(3) (85b7363)
+ - Fix typos in io_protocol.xml (0e472e5)
+ - Fix typo in erlang(3) (3262866)
+ - Fix typos in tar_SUITE (8a61b06)
+ - Fix typos in erts/preloaded/src (bc875dd)
+
+* ta/prim_archive-reloading-mfa (erts, kernel, stdlib) (2011-10-19) 2 commits
+ - escript_SUITE: remove gratuitous space (3d89996)
+ - [erts,kernel,stdlib] fix escript/primary archive reloading (4ac74ce)
+
+* uw/extending_gen (stdlib) (2011-11-21) 5 commits
+ - fix error in gen_[server|fsm]:enter_loop() (8983794)
+ - fix documentation and whitespace errors (dd2a47b)
+ - await process death in dummy_via:reset() (42d93e4)
+ - faulty export in gen_fsm_SUITE.erl (e447bbe)
+ - Add plugin support for alternative name lookup (ed6daae)
+
+* wc/fix-eunit-print-stacktrace (eunit) (2011-11-02) 1 commit
+ - fix eunit to print stacktrace correctly if test cases throw any exception (73b94a9)
+
+* ws/erl-xcomp-avr32 (otp) (2011-11-01) 1 commit
+ - Update xcomp config for AVR32/buildroot-v3.0.0 (e89c2af)
+
+------------------------------------------------------------
+[Dropped]
+
+* ao/fix_atime_mtime (erts, kernel) (2011-10-27) 2 commits
+ . Fixes a crash in file_server_2 when file:change_time/2,3 are called with invalid dates (4e0e7ae)
+ . Fixes wrong updates of file modification time (mtime) when only access time (atime) should be updated (42a8968)
+
+* fm/posix-fallocate (erts, kernel) (2010-12-28) 1 commit
+ . Added file:allocate/2 (7b39f0f)
+
+* jw/gen_event (stdlib) (2011-10-18) 1 commit
+ . General code clean up and clarity fixes (dbd14ea)
+
+* ms/epmd-IPv6-node-reg (erts, kernel) (2011-06-03) 1 commit
+ . epmd: support IPv6 node registration (5523b21)
+
+* ta/sendfile (diameter, erts, kernel, otp, stdlib, tools) (2011-01-13) 22 commits
+ . Implement file:sendfile (c44f202)
+ . otp: Update profiling doc with eprof (bb55c1c)
+ . eprof: Fix invalid references to removed functions (25d213a)
+ . Fix a few tests that used to fail on the HiPE platform (7afae64)
+ . Dumb down release target to Solaris /usr/ucb/install (75ca1f8)
+ . Dumb down opt/release targets to make 3.80 (b3e7e9c)
+ . Minor tweaks and cleanup (ab7d352)
+ . Need absolute -pa for bootstrap build (b9bed0b)
+ . Simpler release targets for src subdirectories (5fbbdc6)
+ . Use secondary expansion for src subdirectory rules (0f63f67)
+ . One makefile for src build instead of recursion (0c7bbe0)
+ . Remove app dependency on compiler to avoid forced recompilation (903dca1)
+.
+.
+.
+
