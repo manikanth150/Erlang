@@ -4,23 +4,19 @@ To: erlang patches <erlang-patches@erlang.org>
 Subject: What's cooking in erlang/otp (2011-11-23)
 X-dev-at: f545894e96d5898285eee8dce812c885cf208fb7
 
-Read 
-https://github.com/erlang/otp/wiki/Branches
-and  
-https://github.com/erlang/otp/wiki/Submitting-patches
+Hello!
 
-New Branching strategy short version:
+The release of R15B is approaching, the preliminary release date is 14th of December.
 
-The branch 'master' will be the upcoming major release (e.g. R15).
-Branch from this to submit patches for the next major release.
-(New features and major changes)
-
-New branch 'maint' will be introduced AFTER R15, and will be the next maintenance release (e.g. R15B01) 
-Branch from this to submit patches for the next maintenance release.
-(Bug fixes and minor changes)
+The code stop for me, and thus for patches from you, is Wednesday the 30th November.
+Keep in mind that that date is for patches that are reviewed and done by that date, so if you want to have your patch included in R15, you need to send it in asap.
 
 
-The 'pu' branch will be based on 'master' and we will later add a 'maint-pu' for the 'maint' branch.
+After the release of R15B we will introduce the new 'maint' branch and the new 'maint-pu' branch for patches.
+See the wiki for more information about what branch to base your patch-branches upon.
+https://github.com/erlang/otp/wiki
+
+
 
 ------------------------------------------------------------
 [Graduated]
@@ -50,9 +46,7 @@ The 'pu' branch will be based on 'master' and we will later add a 'maint-pu' for
  + Track parents and namespace in `#xmlAttribute` nodes (64a4119)
  + Track parents in `#xmlPI` nodes (2b11547)
  + Set `vsn` field in `#xmlDecl` record (5d3feb9)
-.
-.
-.
+ ...
 
 * pr/mnesia_frag_hash (mnesia) (2011-04-27) 2 commits
  + add mnesia_frag_hash test (1d6762d)
@@ -182,22 +176,6 @@ cases and is never intended to graduate.
 * ws/erl-xcomp-avr32 (otp) (2011-11-01) 1 commit
  - Update xcomp config for AVR32/buildroot-v3.0.0 (e89c2af)
 
-------------------------------------------------------------
-[Dropped]
-
-* ao/fix_atime_mtime (erts, kernel) (2011-10-27) 2 commits
- . Fixes a crash in file_server_2 when file:change_time/2,3 are called with invalid dates (4e0e7ae)
- . Fixes wrong updates of file modification time (mtime) when only access time (atime) should be updated (42a8968)
-
-* fm/posix-fallocate (erts, kernel) (2010-12-28) 1 commit
- . Added file:allocate/2 (7b39f0f)
-
-* jw/gen_event (stdlib) (2011-10-18) 1 commit
- . General code clean up and clarity fixes (dbd14ea)
-
-* ms/epmd-IPv6-node-reg (erts, kernel) (2011-06-03) 1 commit
- . epmd: support IPv6 node registration (5523b21)
-
 * ta/sendfile (diameter, erts, kernel, otp, stdlib, tools) (2011-01-13) 22 commits
  . Implement file:sendfile (c44f202)
  . otp: Update profiling doc with eprof (bb55c1c)
@@ -211,7 +189,15 @@ cases and is never intended to graduate.
  . Use secondary expansion for src subdirectory rules (0f63f67)
  . One makefile for src build instead of recursion (0c7bbe0)
  . Remove app dependency on compiler to avoid forced recompilation (903dca1)
-.
-.
-.
+
+------------------------------------------------------------
+[Dropped]
+* fm/posix-fallocate (erts, kernel) (2010-12-28) 1 commit
+ . Added file:allocate/2 (7b39f0f)
+Temporary dropped due to massive merge conflicts
+Needs rebase, and testfixes.
+
+* jw/gen_event (stdlib) (2011-10-18) 1 commit
+ . General code clean up and clarity fixes (dbd14ea)
+
 

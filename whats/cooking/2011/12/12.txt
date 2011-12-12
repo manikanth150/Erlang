@@ -1,0 +1,183 @@
+From - Mon Dec 12 15:21:25 2011
+Date: Mon Dec 12 15:21:25 2011
+To: erlang patches <erlang-patches@erlang.org>
+Subject: What's cooking in erlang/otp (2011-12-12)
+X-dev-at: ceb98f28568ed42a0d31a76ff4a2f0171a77bda8
+
+After the release of R15B we will introduce the new 'maint' branch and the new 'maint-pu' branch for patches.
+See the wiki for more information about what branch to base your patch-branches upon.
+https://github.com/erlang/otp/wiki
+
+
+
+------------------------------------------------------------
+[Graduated]
+
+* ac/xpath-scan (xmerl) (2011-11-21) 1 commit
+ + Treat , as special in xmerl_xpath_scan. (15925c0)
+
+* ao/fix-change-time-inval-dates (kernel) (2011-11-01) 1 commit
+ + Fix a crash when file:change_time/2,3 are called with invalid dates (cddc88d)
+
+* jz/erts-unblock-fpe () (2011-12-02) 0 commits
+
+* ka/flymake_include_deps (tools) (2011-12-07) 1 commit
+ + Add deps as erlang-flymake include directory. (c0bd297)
+
+* nk/jinterface_better_buffer_alloc (jinterface) (2011-11-30) 2 commits
+ + restore Java5 compatibility (607ba45)
+ + JInterface: improve OtpOutputStream buffer allocation (864faca)
+
+* rc/mnesia_log-no-async (mnesia) (2011-12-02) 1 commit
+ + Use the synchronous log_terms instead of alog_terms in mnesia_log:ets2dcd() (336d579)
+
+* sa/dialyzer-fixes (dialyzer, hipe, kernel, typer) (2011-11-30) 7 commits
+ + Correct callback spec in application module (832ce20)
+ + Refine warning about callback specs with extra ranges (feeaaad)
+ + Cleanup autoimport compiler directives (cf40c6a)
+ + Fix Dialyzer's warnings in typer (ed1b052)
+ + Fix Dialyzer's warning for its own code (572bc40)
+ + Fix bug in Dialyzer's behaviours analysis (3f55d39)
+ + Fix crash in Dialyzer (9949c1e)
+
+* sa/dialyzer-fixes-r15 (dialyzer, hipe, typer) (2011-11-28) 6 commits
+ + Update inets test results (804f817)
+ + Add file/line info in a particular Dialyzer crash (42c3c03)
+ + Fix Dialyzer's warnings in HiPE (94ab93b)
+ + Fix Dialyzer's warning for its own code (ac61d22)
+ + Fix crash in Typer (18427c8)
+ + No warnings for underspecs with remote types (804df7a)
+
+* sv/http-gen_tcp-long-lines () (2011-11-24) 
+
+* ta/docs (configure.in.src
+, crypto, erts, hipe, inets, kernel, megaco, otp, reltool, sasl, ssl, stdlib, test_server, xmerl) (2011-12-05) 15 commits
+ + Fix misspelling of chosen (f3052a3)
+ + Fix typos in erl(1) (d507bcb)
+ + Fix misspelling of 'turn off' (7381015)
+ + Fix typo in reltool(3) (de28313)
+ + Fix typo in gen_sctp(3) (1033c3c)
+ + Fix typo in mod_responsecontrol.erl (c64874d)
+ + Fix typo in erts_alloc(3) (f4f52a7)
+ + Fix typos in ssl_cipher.erl (bcb385e)
+ + Fix typos in expressions.xml (42a6821)
+ + file: correct make_link/2 and make_symlink/2 docs (6a223b0)
+ + Fix typo in test_server(3) (3a6b8ea)
+ + Fix typos in io_protocol.xml (682e602)
+
+
+* tn/inet_drv-fix () (2011-11-30) 
+
+* ta/sendfile (erts, kernel) (2011-01-13) 1 commit
+ . Implement file:sendfile (0514afb)
+
+* jz/remove-variable-processes_busy (erts) (2011-11-02) 1 commit
+ . erts: remove variable processes_busy (d428f18)
+Rewritten by Björn
+
+
+------------------------------------------------------------
+[New topics]
+
+* bm/ssl_npn (ssl) (2011-12-10) 2 commits
+ - Update SSL docs for SSL Next Protocol Support (4d2ba8b)
+ - Support for SSL Next Protocol Negotiation * http://technotes.googlecode.com/git/nextprotoneg.html (1173de0)
+
+* jz/error-logic-efile_sendfile (erts) (2011-11-29) 1 commit
+ - erts: minor fix for unnecessary condition (6581e8b)
+
+* jz/sendfile_chunk_size (erts) (2011-11-29) 1 commit
+ - erts: change SENDFILE_CHUNK_SIZE from signed to unsigned (a94aded)
+
+* rc/mnesia-lock-conflict-events (mnesia) (2011-11-28) 1 commit
+ - Generate mnesia events for conflicting locks (1cad437)
+
+* vd/java-string-bug (jinterface) (2011-11-13) 2 commits
+ - add test for Java string bug (e01d6f3)
+ - workaround for Java bug http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=6242664 (a30445c)
+
+------------------------------------------------------------
+[Stalled]
+
+* bw/efile_exists (erts) (2010-10-07) 1 commit
+ - prim_file:exists/{1,2} which is lightweight file existence check (2759905)
+
+Action expected from: Topic author
+
+------------------------------------------------------------
+[Cooking]
+
+* bg/temp-hipe-fixes (compiler, kernel) (2010-03-15) 5 commits
+ - Avoid crash by skipping compilation_SUITE:on_load/1 (497eae8)
+ - Inline less aggressively for native-code compilation (5a5fffe)
+ - seq_trace_SUITE: Don't native-compile (cac1991)
+ - Disable native code if on_load is used (7c3d056)
+ - andor_SUITE: Don't native-compile (8c513a4)
+
+This branch contains temporary workarounds to avoid failing test
+cases and is never intended to graduate.
+
+* av/maint-memsup (os_mon) (2011-11-08) 1 commit
+ - Fix segmentation fault in memsup (a95ebdd)
+
+* hw/asn1rt_check-transform (asn1) (2011-10-15) 1 commit
+ - asn1rt_check: Fix transform_to_EXTERNAL1990 for binary input (6a69602)
+
+* mh/create_cookie_error_msg (kernel) (2011-09-15) 1 commit
+ - Specify file name and error on create_cookie failure (9319587)
+
+* mh/eunit_surefire-fixture-errors (eunit) (2011-03-10) 1 commit
+ - Include fixture setup and cleanup errors in Eunit Surefire report (7425075)
+
+* mh/run_erl-exit-status (erts) (2011-11-29) 1 commit
+ - run_erl.c: propagate exit status from child process (bd15706)
+
+* sg/fix-snmp_note_store-timer (snmp) (2011-11-08) 2 commits
+ - snmp: add regression test for GC timer (597ce3c)
+ - snmp: fix GC timer in snmp_note_store (09816ca)
+
+* ta/prim_archive-reloading-mfa (erts, kernel, stdlib) (2011-10-19) 2 commits
+ - escript_SUITE: remove gratuitous space (3d89996)
+ - [erts,kernel,stdlib] fix escript/primary archive reloading (4ac74ce)
+
+* uw/extending_gen (stdlib) (2011-01-17) 1 commit
+ - Add plugin support for alternative name lookup (b042673)
+
+* vd/jinterface-atom-message (jinterface) (2011-11-11) 1 commit
+ - Improve error message when creating a too long OtpErlangAtom (334d636)
+
+* wc/fix-eunit-print-stacktrace (eunit) (2011-11-02) 1 commit
+ - fix eunit to print stacktrace correctly if test cases throw any exception (73b94a9)
+
+* ws/erl-xcomp-avr32 (otp) (2011-11-01) 1 commit
+ - Update xcomp config for AVR32/buildroot-v3.0.0 (e89c2af)
+
+------------------------------------------------------------
+[Dropped]
+
+* fm/posix-fallocate (erts, kernel) (2010-12-28) 1 commit
+ . Added file:allocate/2 (7b39f0f)
+Temporary dropped due to massive merge conflicts
+Needs rebase, and testfixes.
+
+* slf/dtrace (Makefile
+, dtrace, erts, kernel, otp) (2011-11-17) 4 commits
+ . Add DTrace support for OS X, Solaris, and Linux (via SystemTap), 4/4 (2913fb9)
+ . Add DTrace support for OS X, Solaris, and Linux (via SystemTap), 3/4 (ccf25b8)
+ . Add DTrace support for OS X, Solaris, and Linux (via SystemTap), 2/4 (6bf92ea)
+ . Add DTrace support for OS X, Solaris, and Linux (via SystemTap), 1/4 (538fee7) 
+Temporary dropped, Needs some work
+
+* jn/gen_stream (stdlib) (2011-04-15) 2 commits
+ . Update gen_stream tests to conform with common_test standard (ce84daf)
+ . Add gen_stream behaviour (6a089a4)
+Technical board decision:
+ Code is ok, but the functionality is not general enough to be included in OTP.
+ It can without problems be maintained outside of OTP. 
+
+* ms/epmd-IPv6-node-reg (erts, kernel) (2011-06-03) 1 commit
+ . epmd: support IPv6 node registration (5523b21)
+Crashing windows
+
+
+
