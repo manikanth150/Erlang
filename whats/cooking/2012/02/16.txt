@@ -1,0 +1,193 @@
+From - Thu Feb 16 15:21:26 2012
+Date: Thu Feb 16 15:21:26 2012
+To: erlang patches <erlang-patches@erlang.org>
+Subject: What's cooking in erlang/otp (2012-02-16)
+X-dev-at: 5abac56e443827f755d079873623f42aa74b551e
+
+
+------------------------------------------------------------
+[Graduated]
+
+* ahs/fix-gb_trees-doc (stdlib) (2011-12-14) 1 commit
+ + Put gb_trees documentation into alphabetical order (fe6ea2f)
+
+* av/maint-memsup (os_mon) (2011-11-08) 1 commit
+ + Fix segmentation fault in memsup (a95ebdd)
+
+* jz/error-logic-efile_sendfile (erts) (2011-11-29) 1 commit
+ + erts: minor fix for unnecessary condition (6581e8b)
+
+* jz/erts-remove-unused-var (erts) (2011-12-14) 1 commit
+ + erts: Remove unused variable (bafa0e7)
+
+* jz/reduce-smp-locking-time-range (erts) (2011-12-09) 1 commit
+ + erts: reduce smp locking time range in erts_garbage_collect (481c7b9)
+
+* jz/sendfile_chunk_size (erts) (2011-11-29) 1 commit
+ + erts: change SENDFILE_CHUNK_SIZE from signed to unsigned (a94aded)
+
+* pg/fix-ssl_tls_dist_proxy-setup-loop (ssl) (2012-01-29) 1 commit
+ + Fix setup loop of SSL TLS dist proxy (b37d044)
+
+* rc/spell-registered (erts, jinterface, ssl, stdlib) (2011-10-31) 1 commit
+ + Correct spelling of "registered" in various places in the source code (bc330f6)
+
+* rj/doc-monospace-css (erl_docgen) (2012-01-14) 1 commit
+ + Set `font-family: Courier, monospace' in OTP doc CSS (ae32e94)
+
+* rj/fix-binary-doc-spec (stdlib) (2012-02-05) 1 commit
+ + Fix the type spec from the doc of binary:part/3 (b9f1047)
+
+* rj/fix-compile-doc-typo (compiler) (2012-02-04) 1 commit
+ + Fix typo in `compile' doc: unmatched parenthesis (62ca2e3)
+
+* rj/fix-sup-doc-typo (otp) (2012-02-08) 1 commit
+ + Fix typo in supervisor behaviour doc (425ccd6)
+
+* rj/spaces-xmerl-doc (xmerl) (2012-01-12) 1 commit
+ + Add missing spaces in xmerl doc (7f389de)
+
+* ts/extend-specs-for-bifs (hipe) (2012-02-13) 1 commit
+ + Make dialyzer recognize the process_flag option sensitive (62004e9)
+
+* vd/java-string-bug (jinterface) (2011-11-13) 2 commits
+ + add test for Java string bug (e01d6f3)
+ + workaround for Java bug http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=6242664 (a30445c)
+
+* vd/jinterface-atom-message (jinterface) (2011-11-11) 1 commit
+ + Improve error message when creating a too long OtpErlangAtom (334d636)
+
+* ws/erl-xcomp-avr32 (otp) (2011-11-01) 1 commit
+ + Update xcomp config for AVR32/buildroot-v3.0.0 (e89c2af)
+
+* pg/ssl_dist-fixes (ssl) (2012-01-16) 1 commit
+ . Robustness and improvement to distribution over SSL (71e9aa2)
+
+* sg/fix-snmp_note_store-timer (snmp) (2011-11-08) 2 commits
+ . snmp: add regression test for GC timer (597ce3c)
+ . snmp: fix GC timer in snmp_note_store (09816ca)
+
+------------------------------------------------------------
+[New topics]
+
+* cv/update-localtime-configuration (erts) (2011-11-18) 1 commit
+ - erts: Fix localtime BIFs does not update system timezone configuration (c14ba7b)
+
+* dc/dch-fix-win32-escript (erts) (2011-11-25) 1 commit
+ - add escript win32 alternative invocation (thanks Pierre Rouleau) (a50b285)
+
+* jc/omit-undefined-start_phases (reltool) (2012-01-13) 1 commit
+ - Avoid creating an undefined start_phases entry when generating a release (700e7ee)
+
+* ks/compile_info-fix (compiler, hipe) (2012-01-16) 1 commit
+ - Fix discrepancy in compile_info (4aee64a)
+
+* mp/fix-assembler-comment-char-for-hipe-ppc (erts) (2012-01-17) 1 commit
+ - Fix assembler comment character for hipe on ppc (17ab3d9)
+
+* mz/odbc-support-param_query (odbc) (2011-12-19) 1 commit
+ - Add support for NULL value in odbc:param_query (c6e01fe)
+
+* pan/win32_testbuild (otp) (2012-01-31) 1 commit
+ - Set PATH correctly when building tests on win32 (4799b48)
+
+* ph/fix_enfile (erts, kernel) (2012-01-04) 1 commit
+ - Fix returned error from gen_tcp:accept/1,2 when running out of ports (949ee23)
+
+* rj/fix-gen_udp_tcp-leak (kernel) (2012-02-04) 1 commit
+ - Fix port leaking after controlling_process(Port, self()) (944a57a)
+
+* ta/docs15 (common_test, erts, otp) (2012-01-07) 3 commits
+ - Fix typos in ct getting_started_chapter.xml (e3c347c)
+ - Fix typos in driver.xml and erl_driver.xml (4136021)
+ - Fix typos in INSTALL-WIN32.md (1392462)
+
+* tab/fix-sctp-multihoming-IPv6 (erts, kernel) (2011-12-30) 1 commit
+ - Fix SCTP multihoming for IPv6 (05984ac)
+
+* tp/supervisor-pass-on-errors (stdlib) (2012-01-15) 1 commit
+ - Have supervisor send errors up the chain (c546f89)
+
+* ts/no_hipe_ceach (hipe) (2012-01-01) 1 commit
+ - Remove hipe_ceach from hipe.app.src to fix reltool-generated release startup (27d83b0)
+
+* ud/fix-return-do_get_disc_copy2 (mnesia) (2011-09-16) 1 commit
+ - Fixes value returned by mnesia_loader:do_get_disc_copy2/4 (a85fe55)
+
+------------------------------------------------------------
+[Stalled]
+
+* bw/efile_exists (erts) (2010-10-07) 1 commit
+ - prim_file:exists/{1,2} which is lightweight file existence check (2759905)
+
+Action expected from: Topic author
+
+------------------------------------------------------------
+[Cooking]
+
+* bg/temp-hipe-fixes (compiler, kernel) (2010-03-15) 5 commits
+ - Avoid crash by skipping compilation_SUITE:on_load/1 (497eae8)
+ - Inline less aggressively for native-code compilation (5a5fffe)
+ - seq_trace_SUITE: Don't native-compile (cac1991)
+ - Disable native code if on_load is used (7c3d056)
+ - andor_SUITE: Don't native-compile (8c513a4)
+
+This branch contains temporary workarounds to avoid failing test
+cases and is never intended to graduate.
+
+* bm/ssl_npn (ssl) (2011-12-10) 2 commits
+ - Update SSL docs for SSL Next Protocol Support (4d2ba8b)
+ - Support for SSL Next Protocol Negotiation * http://technotes.googlecode.com/git/nextprotoneg.html (1173de0)
+
+* hw/asn1rt_check-transform (asn1) (2011-10-15) 1 commit
+ - asn1rt_check: Fix transform_to_EXTERNAL1990 for binary input (6a69602)
+
+* mh/create_cookie_error_msg (kernel) (2011-09-15) 1 commit
+ - Specify file name and error on create_cookie failure (9319587)
+
+* mh/eunit_surefire-fixture-errors (eunit) (2011-03-10) 1 commit
+ - Include fixture setup and cleanup errors in Eunit Surefire report (7425075)
+
+* mh/run_erl-exit-status (erts) (2011-11-29) 1 commit
+ - run_erl.c: propagate exit status from child process (bd15706)
+
+* ta/prim_archive-reloading-mfa (erts, kernel, stdlib) (2011-10-19) 2 commits
+ - escript_SUITE: remove gratuitous space (3d89996)
+ - [erts,kernel,stdlib] fix escript/primary archive reloading (4ac74ce)
+
+* uw/extending_gen (stdlib) (2011-01-17) 1 commit
+ - Add plugin support for alternative name lookup (b042673)
+
+* wc/fix-eunit-print-stacktrace (eunit) (2011-11-02) 1 commit
+ - fix eunit to print stacktrace correctly if test cases throw any exception (73b94a9)
+
+* slf/dtrace (Makefile
+, dtrace, erts, kernel, otp) (2011-11-17) 4 commits
+ . Add DTrace support for OS X, Solaris, and Linux (via SystemTap), 4/4 (2913fb9)
+ . Add DTrace support for OS X, Solaris, and Linux (via SystemTap), 3/4 (ccf25b8)
+ . Add DTrace support for OS X, Solaris, and Linux (via SystemTap), 2/4 (6bf92ea)
+ . Add DTrace support for OS X, Solaris, and Linux (via SystemTap), 1/4 (538fee7)
+
+------------------------------------------------------------
+[Dropped]
+
+* fm/posix-fallocate (erts, kernel) (2010-12-28) 1 commit
+ . Added file:allocate/2 (7b39f0f)
+Temporary dropped due to massive merge conflicts
+Needs rebase, and testfixes.
+
+* ms/epmd-IPv6-node-reg (erts, kernel) (2011-06-03) 1 commit
+ . epmd: support IPv6 node registration (5523b21)
+Crashing windows
+
+* pg/add-os-pid-to-port-info (dialyzer, erts, hipe) (2010-08-19) 1 commit
+ . Extend erlang:port_info/1,2 to show the OS pid of a spawned process (336d1d1)
+Master-pu
+
+* rc/mnesia-lock-conflict-events (mnesia) (2011-11-28) 1 commit
+ . Generate mnesia events for conflicting locks (f4d94ae)
+Can be added as a handler, Not included in OTP
+
+
+
+
