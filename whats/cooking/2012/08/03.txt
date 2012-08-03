@@ -1,0 +1,402 @@
+From - Fri Aug  3 12:12:18 2012
+Date: Fri Aug  3 12:12:18 2012
+To: erlang patches <erlang-patches@erlang.org>
+Subject: What's cooking in erlang/otp (2012-08-03)
+X-dev-at: ee51d735f05514a784d808be9604703d70561731
+
+
+------------------------------------------------------------
+[Graduated to Master]
+
+* jv/filelib_recursion_wildcard (stdlib) (2012-02-20) 1 commit
+ . Allow ** in filelib:wildcard (964649b)
+
+[Graduated]
+
+* at/fix_asn1_typo (asn1) (2012-05-17) 1 commit
+ + Fix typo error in selected decode function (24367b7)
+
+* dc/dch-fix-win32-escript (erts) (2011-11-25) 1 commit
+ + add escript win32 alternative invocation (thanks Pierre Rouleau) (a50b285)
+
+* jc/omit-undefined-start_phases () (2012-01-13) 0 commits
+
+* jn/inets_sup_start_link (inets) (2012-03-05) 1 commit
+ + Add inets_sup:start_link/0 (7b9b7c1)
+
+* jv/forms-source (compiler) (2012-03-23) 1 commit
+ + Allow the source to be set when compiling forms (2d785c0)
+
+* jv/on_load_docs (otp) (2012-02-20) 2 commits
+ + Fix a typo on documentation. desciption -> description. (4bbff5f)
+ + Mention on_load on module attributes section. (645e39f)
+
+* ks/compile_info-fix (compiler, hipe) (2012-01-16) 1 commit
+ + Fix discrepancy in compile_info (34f7610)
+
+* mh/create_cookie_error_msg (kernel) (2011-09-15) 1 commit
+ + Specify file name and error on create_cookie failure (9319587)
+
+* mh/remove-compilation-error-regexp (tools) (2012-06-08) 1 commit
+ + Remove Erlang-specific compilation error regexp (a87a969)
+
+* mpe/hipe_arm-remove-dead-code () (2012-05-09) 0 commits
+
+
+* ms/correct-formating-in-exit (erts, kernel, runtime_tools) (2012-05-08) 1 commit
+ + Correct formating in exit error messages (408e776)
+
+* ph/fix_enfile () (2012-01-04) 0 commits
+
+* ps/inet6-less-build-fix (erts) (2012-02-15) 1 commit
+ + Add missing HAVE_IN6 && AF_INET6 ifdef (4f3dd18)
+
+* rj/add-space-spec_proc-doc (otp) (2012-02-14) 1 commit
+ + Add missing white space in Special Process doc (ab83345)
+
+* rj/fix-eprof-doc (tools) (2012-06-01) 1 commit
+ + Fix nonsense of eprof doc (0c01a34)
+
+* rj/fix-et-doc (et) (2012-06-05) 1 commit
+ + Fix typo in ET doc (80b57b1)
+
+* rj/fix-gen_udp_tcp-leak () (2012-02-04) 0 commits
+
+* rj/fix-misc-doc-typos (otp, stdlib) (2012-02-15) 1 commit
+ + Fix a code snippet and two typos in the doc (67c16b4)
+
+* ja/jl-httpc-doc-elaborate (inets) (2012-06-08) 1 commit
+ . Elaborate on timeouts in the httpc documentation (1bc041b)
+
+* pg/ssl_dist-fixes (ssl) (2012-01-16) 1 commit
+ . Robustness and improvement to distribution over SSL (71e9aa2)
+
+* sa/dialyzer-contract-variables (dialyzer, hipe) (2012-04-23) 3 commits
+ + Correct handling of type names in contracts (56e3930)
+ + Don't rewrite unchanged PLT (3ab2dd6)
+ + Fix crash related to contract checking (20412ad)
+
+* sa/dialyzer-parallel (dialyzer, erts, typer) (2012-03-28) 54 commits
+ + Logfile-like statistics (enabled with --resources) (49c6574)
+ + Anonymous SCCtoPID ETS table (12b8ce0)
+ + Anonymous time server (5c52ff6)
+ + Regulate all kinds of running workers up to the number of schedulers (720b65d)
+ + Relocate start and stop of timing server (4e1ed3a)
+ + Better names for callgaph ETS tables (24c2c72)
+ + Remove needless conversion (d24d65f)
+ + Fix types and specs (76b7c72)
+ + Inline a function in dialyzer_worker (19f4b40)
+ + Remove unused function (4920bb6)
+ + Change --time to --statistics and include more info (4a1fa04)
+ + Better reflect side-effect based code in dialyzer_callgraph (49ccc5d)
+
+* slf/dtrace-nif-N-probes (runtime_tools) (2012-05-08) 2 commits
+ + Remove crufty scaffolding code (978cdb3)
+ + Add 1024 separate USDT probes to dyntrace.erl and dyntrace.c (44c68a7)
+
+* slf/dyntrace-comment-and-func-cleanup (runtime_tools) (2012-04-02) 1 commit
+ + dyntrace.erl comment cleanup and unused function removal (78b3cb7)
+
+* sz/dtrace-message-send-fix (erts) (2012-05-09) 1 commit
+ + DTrace bug in message-send (d032e09)
+
+* ta/docs-maint (common_test, erts, otp) (2012-01-07) 3 commits
+ + Fix typos in ct getting_started_chapter.xml (1eca92e)
+ + Fix typos in driver.xml and erl_driver.xml (1588a1d)
+ + Fix typos in INSTALL-WIN32.md (7cdb7fe)
+
+* ta/prim_archive-reloading (erts, kernel, stdlib) (2011-10-19) 2 commits
+ + escript_SUITE: remove gratuitous space (7875e98)
+ + [erts,kernel,stdlib] fix escript/primary archive reloading (449a093)
+
+* tab/fix-indentation-records-emacs (tools) (2012-02-11) 1 commit
+ + Fix indentation of record fields in Emacs (ad5f78a)
+
+* tc/rpc-call-fix (kernel) (2012-05-02) 1 commit
+ + Fix rpc:call/5 for local calls with a finite Timeout (b991b99)
+
+* ts/no_hipe_ceach (hipe) (2012-01-01) 1 commit
+ + Remove hipe_ceach from hipe.app.src to fix reltool-generated release startup (27d83b0)
+
+* ud/fix-return-do_get_disc_copy2 (mnesia) (2011-09-16) 1 commit
+ + Fixes value returned by mnesia_loader:do_get_disc_copy2/4 (a85fe55)
+
+* uw/extending_gen (stdlib) (2011-01-17) 1 commit
+
+ + Add plugin support for alternative name lookup (b042673)
+* ta/archive-script (erts, stdlib) (2012-05-01) 3 commits
+ . escript: add test for ./archive_script workarounds (269778a)
+ . erts: work around prim archive list_dir error (Co-Authored-by: Shunichi Shinohara) (0766132)
+ . erts: work around prim archive read_file_info error (Co-Authored-by: Tuncer Ayaz) (87f6c54)
+
+* slf/dtrace (Makefile
+, dtrace, erts, kernel, otp) (2011-11-17) 4 commits
+ . Add DTrace support for OS X, Solaris, and Linux (via SystemTap), 4/4 (2913fb9)
+ . Add DTrace support for OS X, Solaris, and Linux (via SystemTap), 3/4 (ccf25b8)
+ . Add DTrace support for OS X, Solaris, and Linux (via SystemTap), 2/4 (6bf92ea)
+ . Add DTrace support for OS X, Solaris, and Linux (via SystemTap), 1/4 (538fee7)
+
+* ta/docs15 (common_test, erts, otp) (2012-01-07) 3 commits
+ . Fix typos in ct getting_started_chapter.xml (e3c347c)
+ . Fix typos in driver.xml and erl_driver.xml (4136021)
+ . Fix typos in INSTALL-WIN32.md (1392462)
+
+
+
+------------------------------------------------------------
+[New topics]
+
+
+------------------------------------------------------------
+[Stalled]
+
+* bg/temp-hipe-fixes (compiler, kernel) (2010-03-15) 5 commits
+ - Avoid crash by skipping compilation_SUITE:on_load/1 (497eae8)
+ - Inline less aggressively for native-code compilation (5a5fffe)
+ - seq_trace_SUITE: Don't native-compile (cac1991)
+ - Disable native code if on_load is used (7c3d056)
+ - andor_SUITE: Don't native-compile (8c513a4)
+
+This branch contains temporary workarounds to avoid failing test
+cases and is never intended to graduate.
+
+* cv/update-localtime-configuration (erts) (2011-11-18) 1 commit
+ . erts: Fix localtime BIFs does not update system timezone configuration (c14ba7b)
+
+Action expected from: Topic author
+
+* fm/posix-fallocate (erts, kernel) (2010-12-28) 1 commit
+ . Added file:allocate/2 (7b39f0f)
+
+Action expected from: Topic author
+
+* mh/run_erl-exit-status (erts) (2011-11-29) 1 commit
+ . run_erl.c: propagate exit status from child process (bd15706)
+
+Action expected from: Topic author
+
+------------------------------------------------------------
+[Cooking]
+
+* hw/asn1rt_check-transform (asn1) (2011-10-15) 1 commit
+ - asn1rt_check: Fix transform_to_EXTERNAL1990 for binary input (6a69602)
+
+* mp/fix-assembler-comment-char-for-hipe-ppc (erts) (2012-01-17) 1 commit
+ - Fix assembler comment character for hipe on ppc (17ab3d9)
+
+* mz/odbc-support-param_query (odbc) (2011-12-19) 1 commit
+ - Add support for NULL value in odbc:param_query (c6e01fe)
+
+* tab/fix-sctp-multihoming-IPv6 (erts, kernel) (2012-05-10) 4 commits
+ - Allow mixed IPv4 and IPv6 addresses to sctp_bindx (4552cb6)
+ - Add checks for in6addr_any and in6addr_loopback (c8ccd95)
+ - Fix SCTP multihoming (e87b966)
+ - inet_drv.c: Set sockaddr lengths in inet_set_[f]address (6d464a1)
+
+* tp/supervisor-pass-on-errors (sasl, stdlib) (2012-07-22) 2 commits
+ - Have supervisor send errors up the chain (16d298e)
+ - Test supervisor pass through error (a9e03ff)
+
+* af/feature-crypto-ripemd160 (crypto) (2012-07-27) 1 commit
+ - Add RIPEMD-160 hash function(s) to the crypto module (eff7eea)
+
+* bp/fix_mnesia_index_drop (mnesia) (2012-06-18) 2 commits
+ - Prevent index from being corrupted if a nonexistent item is deleted (0fcdb6f)
+ - Add tests showing that trying to delete non-existing object may corrupt the table index (8490cb63)
+
+* fma/gb_difference (stdlib) (2012-04-11) 4 commits
+ - andalso, not and (cb368d0)
+ - No need to qualify the function (6da0bd0)
+ - gb_sets:fold/3, not lists:foldl/3. (3d3538d)
+ - Sane gb_sets:difference/2 and gb_sets:is_subset/2 (fe3f833)
+
+* gp/make_erlang_mode_elpa_friendly (tools) (2012-02-14) 1 commit
+ - Make erlang-mode more compatible with package.el (59d3e59)
+
+* hm/wx-silent_start (wx) (2012-06-12) 1 commit
+ - Enable silent start of wx (571ba06)
+
+* jkl/erlsrv-graceful-shutdown (erts) (2012-07-31) 1 commit
+ - erlsrv: gracefully stop emulator on Windows shutdown (0398508)
+
+* jkl/fix-filename-nativename (stdlib) (2012-06-23) 2 commits
+ - Fix filename:nativename/1 on Win32 (6a22e6b)
+ - Add filename:nativename/1 binary argument test to suite (f2b8bdc)
+
+* kr/r15_ssh_test_ipv6_fix (ssh) (2012-06-25) 1 commit
+ - Fix lib/src/test/ssh_basic_SUITE.erl to fix IPv6 option typos (a33b8c3)
+
+* mh/doc-now-vs-timestamp (erts) (2012-07-25) 1 commit
+ - Doc fix: link from erlang:now/0 to os:timestamp/0 (6c6e745)
+
+* mpe/hipe_arm-fix-compile-warning (erts) (2012-05-08) 1 commit
+ - hipe_arm.c: remove dead code (d05d8e4)
+
+* msp/double_middle_endian (erl_interface, erts, odbc, otp, wx) (2012-07-20) 3 commits
+ - Revise the autoconf tests for double middle endianness. (eba4d24)
+ - Add test for floating-point output to float_SUITE. (cab9edd)
+ - Unbreak floating point on middle-endian machines. (933e701)
+
+* nk/jinterface-fix_compressed_binary (jinterface) (2012-06-12) 2 commits
+ - add (de)compress roundtrip tests with larger values (a835771)
+ - fix reading compressed binary terms from Java (a963b81)
+
+* nox/compile-column-numbers (compiler, stdlib) (2012-06-10) 7 commits
+ - Fix messages ordering with column numbers (d932ad5)
+ - Fix type compile:err_info/0 (198ef4b)
+ - Test column number reporting in error_SUITE (c98bc0e)
+ - Fix printing of errors with column numbers (5af6bd4)
+ - Create a new "column" option in compile (f6dc9c0)
+ - Allow setting of initial position in epp (26ad68f)
+ - Export type erl_scan:location/0 (78553dc)
+
+* pg/fix-zip-multidisk (stdlib) (2012-06-18) 1 commit
+ - Fix bug where zip archives wrongly have a first disk number set to 1 (da11eb7)
+
+* pgö/escape-control-chars-tv (observer) (2012-06-14) 3 commits
+ - Fix Table Viewer search crash on new|changed|deleted rows (5d299de)
+ - Escape control characters in Table Viewer (f530bdb)
+ - Fix Table Viewer crash after a 'Found' -> 'Not found' search sequence (12db9a2)
+
+* pgö/observer-edit-table-row (observer) (2012-06-29) 2 commits
+ - Make Table Viewer search a bit faster (913aba2)
+ - Edit table row in a multiline text dialog (e223525)
+
+* psi/fix-clever-mktime (erts) (2012-07-14) 1 commit
+ - Fix use of "clever" mktime (99f6356)
+
+* psi/fix-leap-seconds (erts) (2012-07-14) 1 commit
+ - Fix support for leap seconds-aware timezones (9043843)
+
+* rc/fix-MP-compiler-flag (compiler, erts) (2012-03-08) 1 commit
+ - Fix the erlc -MP flag (6dc4227)
+
+* sal/float_to_list_2 (erts, hipe, stdlib) (2012-05-24) 2 commits
+ - Added type definition for float_to_list/2 (f9ddbed)
+ - Implement float_to_list/2 accepting a list of formatting options (9fdc4af)
+
+* ssh/ssl_connection-handle_alert (ssl) (2012-08-03) 1 commit
+ - fix bug in ssl_connection (d78a157)
+
+* sze/improve-interoperability-SSH-clients (ssh) (2012-07-20) 1 commit
+ - Improve interoperability with SSH clients (9a73dd6)
+
+* sze/snmp_generic-split_index (snmp) (2012-07-04) 1 commit
+ - fix snmp_generic:split_index_to_keys/2 (8f1a00e)
+
+* sze/ssh-auth_methods (ssh) (2012-08-01) 1 commit
+ - SSH: Make "auth_methods" server option re-usable (d808864)
+
+* sze/usmUserTable (snmp) (2012-07-23) 1 commit
+ - semantic fixes to SNMP-USER-BASED-SM_MIB (dd34659)
+
+* sze/vacmAccessTable (snmp) (2012-07-31) 1 commit
+ - fix walk over vacmAccessTable (b0f5251)
+
+* sze/vacmAccessTable-RowStatus-handling (snmp) (2012-07-31) 1 commit
+ - Errors in vacmAccessTable RowStatus handling (a75ecd1)
+
+* sze/verify-tabe-row-index (snmp) (2012-07-04) 1 commit
+ - verify table row index constraints in SNMP set requests (031bbaf)
+
+* ta/docsmaint (common_test, compiler, erts, inets, kernel, reltool, ssl, tools) (2012-04-10) 2 commits
+ - Fix various doc typos for R15B02 (541e986)
+ - Fix various code typos for R15B02 (8af5bd5)
+
+* ta/observer-app (observer) (2012-07-03) 1 commit
+ - observer: fix app file (Noticed-by: Motiejus Jakstys) (d763d58)
+
+* tja/fix-base (compiler) (2012-08-02) 1 commit
+ - sys_pre_expand: Fix BASE never being set (18943e7)
+
+* uw/release_handler-find_script (sasl) (2012-05-01) 1 commit
+ - release_handler:find_script/4 to use 're' matching in .appup scripts (4752892)
+
+* bm/ssl_npn (ssl) (2011-12-10) 2 commits
+ . Update SSL docs for SSL Next Protocol Support (4d2ba8b)
+ . Support for SSL Next Protocol Negotiation * http://technotes.googlecode.com/git/nextprotoneg.html (1173de0)
+
+------------------------------------------------------------
+[Master-pu]
+
+* jf/fix_sctp_peeloff_active_true (erts) (2012-07-20) 1 commit
+ . Set new peeled off SCTP socket to nonblocking socket (7adbaf8)
+
+* bd/odbc_extended_errors (odbc) (2012-07-25) 1 commit
+ . Add extended_errors option to ODBC (b8143e9)
+
+* jh/incomplete_packet_asn1 (asn1) (2012-07-24) 5 commits
+ . Add a test case for {error, incomplete} (0cd2ad0)
+ . Update documentation (8fb53cb)
+ . Add case clause for {error, incomplete} in per encode modules (ab678b9)
+ . Fix bug when undec-rest option is false (010bb43)
+ . Modify asn1 generated decode/2 functions to return {error,incomplete} (ee95fc8)
+
+* rc/break-out-asserts (eunit, stdlib) (2012-05-19) 1 commit
+ . Break out the assert macros in eunit.hrl to stdlib/include/assert.hrl (a5ecb2d)
+
+* ta/docsmaster (erts, otp) (2012-07-20) 2 commits
+ . Fix various typos in HOWTO/ for R16 (bffc0a7)
+ . Fix various comment typos for R16 (ad8e903)
+
+* vs/re_back_reference (stdlib) (2012-04-04) 1 commit
+ . extend re back reference syntax with \g escape sequence (264e667)
+
+* wc/bind_port_to_scheduler (erts) (2012-07-06) 2 commits
+ . Bind port to owner process's scheduler if owner is bound to a scheduler (787ff90)
+ . Change pollset implementation to use one pollset for each scheduler (121afd0)
+
+* wc/pollset_per_scheduler (erts) (2012-07-06) 1 commit
+ . Change pollset implementation to use one pollset for each scheduler (121afd0)
+
+Under consideration
+
+------------------------------------------------------------
+[Dropped]
+
+
+* bi/ssh_cli-tty_geometry (ssh) (2012-05-04) 1 commit
+ . Fix 2 second delay after eval in shell running under ssh_cli (2a5ef29)
+
+More of a quickfix, Dropped untill a proper fix is submitted.
+
+* bw/efile_exists (erts) (2010-10-07) 1 commit
+ . prim_file:exists/{1,2} which is lightweight file existence check (2759905)
+
+Outdated
+
+* fma/gb-delete_any (stdlib) (2012-06-18) 6 commits
+ . Using exceptions in deletions for gb_{sets,trees} when key is missing (da626bd)
+ . Merge branch 'master' into gb_delete_any (3b19930)
+ . Fix gb_sets:delete_1/2 (92930ec)
+ . Consistent naming in gb_sets and gb_trees (8b79bfe)
+ . Fix gb_trees:delete_1/2, syntax fix in gb_sets (1a15a7f)
+ . Fixed gb_{sets,trees}:delete_any/2 to traverse the tree once (abab896)
+
+Rejected breaks the documentation which says that it does nothing if the key is not present.
+
+* mh/eunit_surefire-fixture-errors (eunit) (2011-03-10) 1 commit
+ . Include fixture setup and cleanup errors in Eunit Surefire report (7425075)
+
+included by Richard Carlsson
+
+* ms/epmd-IPv6-node-reg (erts, kernel) (2011-06-03) 1 commit
+ . epmd: support IPv6 node registration (5523b21)
+
+Crashing windows, no action taken
+
+* pg/add-os-pid-to-port-info (dialyzer, erts, hipe) (2010-08-19) 1 commit
+ . Extend erlang:port_info/1,2 to show the OS pid of a spawned process (336d1d1)
+
+Fixed in another way by OTP
+
+* rc/mnesia-lock-conflict-events (mnesia) (2011-11-28) 1 commit
+ . Generate mnesia events for conflicting locks (f4d94ae)
+
+Not wanted by OTP
+
+* wc/fix-eunit-print-stacktrace (eunit) (2011-11-02) 1 commit
+ . fix eunit to print stacktrace correctly if test cases throw any exception (73b94a9)
+Fixed by Richard Carlsson in another branch
+
+
