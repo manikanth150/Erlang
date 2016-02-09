@@ -115,6 +115,8 @@ ethr_native_dw_atomic_addr(ethr_native_dw_atomic_t *var)
     return (ethr_sint_t *) ETHR_DW_NATMC_MEM__(var);
 }
 
+#if !ETHR_AT_LEAST_GCC_VSN__(5, 0, 0)
+
 #if ETHR_SIZEOF_PTR == 4 && defined(__PIC__) && __PIC__
 /*
  * When position independent code is used in 32-bit mode, the EBX register
@@ -138,6 +140,7 @@ ethr_native_dw_atomic_addr(ethr_native_dw_atomic_t *var)
 #  endif
 #endif
 
+#endif /* < gcc-5.0 */
 
 #define ETHR_HAVE_ETHR_NATIVE_DW_ATOMIC_CMPXCHG_MB
 
